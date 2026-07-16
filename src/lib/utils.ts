@@ -5,9 +5,9 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function formatCurrency(amount: number): string {
-  return new Intl.NumberFormat("en-US", {
+  return new Intl.NumberFormat("en-ZA", {
     style: "currency",
-    currency: "USD",
+    currency: "ZAR",
     maximumFractionDigits: 0,
   }).format(amount);
 }
@@ -15,7 +15,7 @@ export function formatCurrency(amount: number): string {
 export function formatDate(value: Date | string | null | undefined): string {
   if (!value) return "Flexible";
   const d = typeof value === "string" ? new Date(value) : value;
-  return new Intl.DateTimeFormat("en-US", {
+  return new Intl.DateTimeFormat("en-ZA", {
     month: "short",
     day: "numeric",
     year: "numeric",

@@ -114,12 +114,12 @@ body {
   font-optical-sizing: auto;
 }
 
-/* Bold accent used in headlines (display face has no italic style) */
+/* Editorial italic accent for headline spans (Fraunces has true italics) */
 .accent-italic {
   font-family: var(--font-display);
-  font-style: normal;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -0.005em;
   color: var(--color-brand);
 }
 
@@ -129,7 +129,7 @@ body {
 }
 .card-hover:hover {
   border-color: var(--color-line-strong);
-  box-shadow: 0 14px 30px -18px rgb(23 24 26 / 0.3);
+  box-shadow: 0 14px 30px -18px rgb(42 31 40 / 0.28);
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {

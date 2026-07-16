@@ -69,7 +69,7 @@ export default async function JobsPage({
           <EmptyState
             icon={Briefcase}
             title="No jobs yet"
-            description="Post your first beauty job and watch the bids roll in from professionals near you."
+            description="Post your first job and let pros near you compete for the booking."
             action={
               <Link href="/dashboard/jobs/new">
                 <Button>Post your first job</Button>
@@ -134,7 +134,7 @@ export default async function JobsPage({
         <EmptyState
           icon={Compass}
           title="The board is quiet"
-          description="No open jobs right now. New posts land daily, so check back soon."
+          description="No open jobs this second. New posts land all day — check back soon."
         />
       ) : (
         <>

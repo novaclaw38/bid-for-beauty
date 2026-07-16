@@ -35,7 +35,7 @@ async function main() {
           email: "ava@glossdemo.com",
           passwordHash: demoPassword,
           bio: "Planning a September wedding and always testing new looks.",
-          location: "Brooklyn Heights",
+          location: "Melville",
           avatarHue: 14,
         },
         {
@@ -44,7 +44,7 @@ async function main() {
           email: "rachel@glossdemo.com",
           passwordHash: demoPassword,
           bio: "Product designer. Nail art enthusiast.",
-          location: "Midtown East",
+          location: "Rosebank",
           avatarHue: 210,
         },
         {
@@ -53,7 +53,7 @@ async function main() {
           email: "danielle@glossdemo.com",
           passwordHash: demoPassword,
           bio: "Runner, mom of two, protective-style loyalist.",
-          location: "Jersey City",
+          location: "Midrand",
           avatarHue: 150,
         },
         {
@@ -62,7 +62,7 @@ async function main() {
           email: "morgan@glossdemo.com",
           passwordHash: demoPassword,
           bio: "Startup founder. Minimal time, maximal grooming standards.",
-          location: "SoHo",
+          location: "Braamfontein",
           avatarHue: 230,
         },
         {
@@ -71,7 +71,7 @@ async function main() {
           email: "natalie@glossdemo.com",
           passwordHash: demoPassword,
           bio: "Skincare is my personality at this point.",
-          location: "Greenpoint",
+          location: "Linden",
           avatarHue: 95,
         },
         {
@@ -80,7 +80,7 @@ async function main() {
           email: "simone@glossdemo.com",
           passwordHash: demoPassword,
           bio: "Natural hair journey since 2019.",
-          location: "Prospect Heights",
+          location: "Greenside",
           avatarHue: 265,
         },
         {
@@ -89,7 +89,7 @@ async function main() {
           email: "grace@glossdemo.com",
           passwordHash: demoPassword,
           bio: "Marathon training = constant need for bodywork.",
-          location: "Tribeca",
+          location: "Parktown North",
           avatarHue: 340,
         },
         {
@@ -98,7 +98,7 @@ async function main() {
           email: "vanessa@glossdemo.com",
           passwordHash: demoPassword,
           bio: "Lash girl forever.",
-          location: "Upper West Side",
+          location: "Parkhurst",
           avatarHue: 45,
         },
       ])
@@ -114,7 +114,7 @@ async function main() {
           email: "amara@glossdemo.com",
           passwordHash: demoPassword,
           bio: "Braider & natural hair specialist with 9 years behind the chair. Silk press queen, knotless authority.",
-          location: "Brooklyn, NY",
+          location: "Randburg, Johannesburg",
           specialties: ["hair"],
           rating: "4.9",
           jobsCompleted: 214,
@@ -126,7 +126,7 @@ async function main() {
           email: "sofia@glossdemo.com",
           passwordHash: demoPassword,
           bio: "Gel-X and hand-painted nail art. Former editorial nail tech for fashion week.",
-          location: "Astoria, Queens",
+          location: "Fourways, Johannesburg",
           specialties: ["nails"],
           rating: "4.8",
           jobsCompleted: 167,
@@ -138,7 +138,7 @@ async function main() {
           email: "jade@glossdemo.com",
           passwordHash: demoPassword,
           bio: "Makeup artist for editorial, bridal, and camera-ready glam. Kit is 100% cruelty-free.",
-          location: "Chinatown, Manhattan",
+          location: "Rosebank, Johannesburg",
           specialties: ["makeup"],
           rating: "4.9",
           jobsCompleted: 188,
@@ -150,7 +150,7 @@ async function main() {
           email: "elena@glossdemo.com",
           passwordHash: demoPassword,
           bio: "Licensed esthetician. Hydrafacial certified, dermaplaning, and barrier-repair focused treatments.",
-          location: "Upper East Side",
+          location: "Houghton, Johannesburg",
           specialties: ["skincare"],
           rating: "4.7",
           jobsCompleted: 143,
@@ -162,7 +162,7 @@ async function main() {
           email: "maya@glossdemo.com",
           passwordHash: demoPassword,
           bio: "Licensed massage therapist. Deep tissue, sports recovery, and prenatal. I bring the table to you.",
-          location: "Williamsburg",
+          location: "Melville, Johannesburg",
           specialties: ["massage"],
           rating: "4.8",
           jobsCompleted: 201,
@@ -174,7 +174,7 @@ async function main() {
           email: "tiana@glossdemo.com",
           passwordHash: demoPassword,
           bio: "Lash artist & microblading tech. Wake-up-ready faces since 2018.",
-          location: "Harlem",
+          location: "Soweto, Johannesburg",
           specialties: ["brows-lashes"],
           rating: "4.9",
           jobsCompleted: 176,
@@ -186,7 +186,7 @@ async function main() {
           email: "marcus@glossdemo.com",
           passwordHash: demoPassword,
           bio: "Master barber. Fades, beard sculpting, and hot towel finishes. House calls across the city.",
-          location: "Bed-Stuy",
+          location: "Bryanston, Johannesburg",
           specialties: ["barbering"],
           rating: "4.8",
           jobsCompleted: 232,
@@ -198,7 +198,7 @@ async function main() {
           email: "priya@glossdemo.com",
           passwordHash: demoPassword,
           bio: "Hair & makeup duo for South Asian and fusion weddings. 60+ bridal parties glamified.",
-          location: "Long Island City",
+          location: "Midrand, Gauteng",
           specialties: ["hair", "makeup"],
           rating: "4.6",
           jobsCompleted: 98,
@@ -210,7 +210,7 @@ async function main() {
           email: "chloe@glossdemo.com",
           passwordHash: demoPassword,
           bio: "BIAB & structured manicures. Nail health first, art second — actually, both first.",
-          location: "West Village",
+          location: "Parkhurst, Johannesburg",
           specialties: ["nails"],
           rating: "4.7",
           jobsCompleted: 121,
@@ -222,7 +222,7 @@ async function main() {
           email: "isabella@glossdemo.com",
           passwordHash: demoPassword,
           bio: "Holistic esthetician & massage therapist. Gua sha, lymphatic drainage, and calm energy.",
-          location: "Park Slope",
+          location: "Emmarentia, Johannesburg",
           specialties: ["skincare", "massage"],
           rating: "4.8",
           jobsCompleted: 154,
@@ -256,11 +256,11 @@ async function main() {
       clientId: ava.id,
       title: "Bridal updo for bride + 4 bridesmaids",
       description:
-        "September wedding at a loft venue in Dumbo. I want a soft, romantic low bun for me and coordinated textured updos for my four bridesmaids (mixed hair types: 2A, 3B, 3C, 4A, 4C). Trial run preferred a week before. We'll be getting ready on-site from 8am.",
+        "September wedding at a loft venue in Maboneng. I want a soft, romantic low bun for me and coordinated textured updos for my four bridesmaids (mixed hair types: 2A, 3B, 3C, 4A, 4C). Trial run preferred a week before. We'll be getting ready on-site from 8am.",
       category: "hair",
-      budgetMin: 380,
-      budgetMax: 650,
-      location: "Dumbo, Brooklyn",
+      budgetMin: 5700,
+      budgetMax: 9750,
+      location: "Maboneng, Johannesburg",
       preferredDate: inFuture(21),
       status: "open",
       createdAt: ago(0, 6),
@@ -271,9 +271,9 @@ async function main() {
       description:
         "Medium almond Gel-X extensions with a chrome/glazed finish and a couple of hand-painted accents. I have reference photos ready. Prefer an evening slot after 6pm if possible.",
       category: "nails",
-      budgetMin: 85,
-      budgetMax: 140,
-      location: "Midtown East, Manhattan",
+      budgetMin: 1275,
+      budgetMax: 2100,
+      location: "Rosebank, Johannesburg",
       preferredDate: inFuture(4),
       status: "open",
       createdAt: ago(1, 3),
@@ -282,11 +282,11 @@ async function main() {
       clientId: morgan.id,
       title: "Editorial glam for portfolio shoot",
       description:
-        "Studio photoshoot for my founder portfolio — two looks (clean corporate + bold editorial). Shoot runs 3 hours in SoHo. Need camera-proof skin and someone comfortable making touch-ups between setups.",
+        "Studio photoshoot for my founder portfolio — two looks (clean corporate + bold editorial). Shoot runs 3 hours in Braamfontein. Need camera-proof skin and someone comfortable making touch-ups between setups.",
       category: "makeup",
-      budgetMin: 150,
-      budgetMax: 260,
-      location: "SoHo, Manhattan",
+      budgetMin: 2250,
+      budgetMax: 3900,
+      location: "Braamfontein, Johannesburg",
       preferredDate: inFuture(2),
       status: "awarded",
       createdAt: ago(4, 5),
@@ -297,9 +297,9 @@ async function main() {
       description:
         "Marathon training is wrecking my calves and hips. Looking for a therapist who can do weekly 90-minute deep tissue sessions at my apartment, Sunday evenings preferred. Recurring booking for the right fit.",
       category: "massage",
-      budgetMin: 130,
-      budgetMax: 190,
-      location: "Tribeca, Manhattan",
+      budgetMin: 1950,
+      budgetMax: 2850,
+      location: "Parktown North, Johannesburg",
       preferredDate: inFuture(5),
       status: "open",
       createdAt: ago(0, 2),
@@ -310,9 +310,9 @@ async function main() {
       description:
         "4B/4C natural, shoulder length. Want a silk press with a light dusting trim — no big chop. Heat protectant is a must, and I'd love tips on making it last.",
       category: "hair",
-      budgetMin: 90,
-      budgetMax: 150,
-      location: "Prospect Heights, Brooklyn",
+      budgetMin: 1350,
+      budgetMax: 2250,
+      location: "Greenside, Johannesburg",
       preferredDate: ago(3),
       status: "completed",
       createdAt: ago(9, 7),
@@ -323,9 +323,9 @@ async function main() {
       description:
         "Full volume set, D-curl, cat-eye map. I'm a side sleeper so retention matters — looking for an artist whose work genuinely lasts 3+ weeks.",
       category: "brows-lashes",
-      budgetMin: 130,
-      budgetMax: 200,
-      location: "Upper West Side, Manhattan",
+      budgetMin: 1950,
+      budgetMax: 3000,
+      location: "Parkhurst, Johannesburg",
       preferredDate: inFuture(3),
       status: "open",
       createdAt: ago(2, 4),
@@ -336,9 +336,9 @@ async function main() {
       description:
         "Mid skin fade, beard lineup and hot towel finish at my place before a board meeting week. Clippers-only on top, keeping length. Early morning slot (7am) strongly preferred.",
       category: "barbering",
-      budgetMin: 60,
-      budgetMax: 95,
-      location: "SoHo, Manhattan",
+      budgetMin: 900,
+      budgetMax: 1425,
+      location: "Braamfontein, Johannesburg",
       preferredDate: inFuture(1),
       status: "awarded",
       createdAt: ago(3, 8),
@@ -349,9 +349,9 @@ async function main() {
       description:
         "First time combining both. My skin is dehydrated with some congestion around the T-zone. Looking for a licensed esthetician who can walk me through aftercare.",
       category: "skincare",
-      budgetMin: 140,
-      budgetMax: 220,
-      location: "Greenpoint, Brooklyn",
+      budgetMin: 2100,
+      budgetMax: 3300,
+      location: "Linden, Johannesburg",
       preferredDate: inFuture(6),
       status: "open",
       createdAt: ago(1, 9),
@@ -360,11 +360,11 @@ async function main() {
       clientId: ava.id,
       title: "Wedding makeup trial + day-of",
       description:
-        "Natural-glam bridal makeup with a trial beforehand. I cry easily, so waterproof everything. Day-of application at the venue (Dumbo) starting 9am, ceremony at 4pm — possible touch-up kit add-on.",
+        "Natural-glam bridal makeup with a trial beforehand. I cry easily, so waterproof everything. Day-of application at the venue (Maboneng) starting 9am, ceremony at 4pm — possible touch-up kit add-on.",
       category: "makeup",
-      budgetMin: 320,
-      budgetMax: 550,
-      location: "Dumbo, Brooklyn",
+      budgetMin: 4800,
+      budgetMax: 8250,
+      location: "Maboneng, Johannesburg",
       preferredDate: inFuture(20),
       status: "open",
       createdAt: ago(3, 2),
@@ -375,9 +375,9 @@ async function main() {
       description:
         "Soak off my current acrylics (they've grown out 4 weeks) and rebuild with a BIAB overlay in a sheer nude. My natural nails need rehab, not another harsh set.",
       category: "nails",
-      budgetMin: 70,
-      budgetMax: 120,
-      location: "Prospect Heights, Brooklyn",
+      budgetMin: 1050,
+      budgetMax: 1800,
+      location: "Greenside, Johannesburg",
       preferredDate: inFuture(2),
       status: "open",
       createdAt: ago(0, 11),
@@ -388,9 +388,9 @@ async function main() {
       description:
         "Small knotless box braids, waist length, in a natural black. I have a sensitive scalp so no tight tension. Can provide the hair or add it to the quote — your call.",
       category: "hair",
-      budgetMin: 200,
-      budgetMax: 340,
-      location: "Jersey City, NJ",
+      budgetMin: 3000,
+      budgetMax: 5100,
+      location: "Midrand, Gauteng",
       preferredDate: inFuture(7),
       status: "awarded",
       createdAt: ago(6, 4),
@@ -401,9 +401,9 @@ async function main() {
       description:
         "Two 60-minute massages back-to-back at our apartment for a low-key anniversary evening. Relaxation-focused, medium pressure. Table(s) and setup need to be provided by the therapist.",
       category: "massage",
-      budgetMin: 220,
-      budgetMax: 340,
-      location: "Tribeca, Manhattan",
+      budgetMin: 3300,
+      budgetMax: 5100,
+      location: "Parktown North, Johannesburg",
       preferredDate: ago(6),
       status: "completed",
       createdAt: ago(12, 6),
@@ -412,11 +412,11 @@ async function main() {
       clientId: rachel.id,
       title: "Microblading touch-up (6-month)",
       description:
-        "My initial microblading from February needs its refresh. Same artist moved out of state, so I need someone new who's comfortable working over existing pigment. Photos available.",
+        "My initial microblading from February needs its refresh. Same artist moved to Cape Town, so I need someone new who's comfortable working over existing pigment. Photos available.",
       category: "brows-lashes",
-      budgetMin: 150,
-      budgetMax: 260,
-      location: "Midtown East, Manhattan",
+      budgetMin: 2250,
+      budgetMax: 3900,
+      location: "Rosebank, Johannesburg",
       preferredDate: inFuture(8),
       status: "open",
       createdAt: ago(5, 1),
@@ -427,9 +427,9 @@ async function main() {
       description:
         "Looking for an esthetician open to a monthly recurring facial arrangement at a flat rate. Pausing this for now — reposting next season when my schedule settles.",
       category: "skincare",
-      budgetMin: 100,
-      budgetMax: 160,
-      location: "Upper West Side, Manhattan",
+      budgetMin: 1500,
+      budgetMax: 2400,
+      location: "Parkhurst, Johannesburg",
       preferredDate: inFuture(10),
       status: "cancelled",
       createdAt: ago(8, 3),
@@ -440,9 +440,9 @@ async function main() {
       description:
         "Both need back-to-school cuts — one wants a taper, the other just a clean-up. House call would be amazing since getting them to a shop is chaos. Saturday morning preferred.",
       category: "barbering",
-      budgetMin: 50,
-      budgetMax: 90,
-      location: "Jersey City, NJ",
+      budgetMin: 750,
+      budgetMax: 1350,
+      location: "Midrand, Gauteng",
       preferredDate: inFuture(4),
       status: "open",
       createdAt: ago(0, 4),
@@ -467,7 +467,7 @@ async function main() {
     {
       jobTitle: "Bridal updo for bride + 4 bridesmaids",
       proEmail: "amara",
-      amount: 585,
+      amount: 8775,
       hoursAfterJob: 2,
       status: "pending",
       message:
@@ -476,16 +476,16 @@ async function main() {
     {
       jobTitle: "Bridal updo for bride + 4 bridesmaids",
       proEmail: "priya",
-      amount: 620,
+      amount: 9300,
       hoursAfterJob: 4,
       status: "pending",
       message:
-        "Hi Ava — bridal hair is my bread and butter (60+ parties, including mixed-texture parties like yours). Price includes the trial, travel to Dumbo, and a touch-up kit for you.",
+        "Hi Ava — bridal hair is my bread and butter (60+ parties, including mixed-texture parties like yours). Price includes the trial, travel to Maboneng, and a touch-up kit for you.",
     },
     {
       jobTitle: "Bridal updo for bride + 4 bridesmaids",
       proEmail: "jade",
-      amount: 540,
+      amount: 8100,
       hoursAfterJob: 5,
       status: "pending",
       message:
@@ -495,26 +495,26 @@ async function main() {
     {
       jobTitle: "Gel-X full set with chrome art",
       proEmail: "sofia",
-      amount: 125,
+      amount: 1875,
       hoursAfterJob: 3,
       status: "pending",
       message:
-        "Glazed chrome is literally my signature — I did the chrome looks for two NYFW shows this year. Evening slots are no problem, I keep Tuesdays and Thursdays open late.",
+        "Glazed chrome is literally my signature — I did the chrome looks for two SA Fashion Week shows this year. Evening slots are no problem, I keep Tuesdays and Thursdays open late.",
     },
     {
       jobTitle: "Gel-X full set with chrome art",
       proEmail: "chloe",
-      amount: 110,
+      amount: 1650,
       hoursAfterJob: 6,
       status: "pending",
       message:
-        "Hi Rachel! Medium almond Gel-X with a glazed finish is a 2-hour appointment at my West Village studio. Send the reference photos and I'll confirm the design before you book.",
+        "Hi Rachel! Medium almond Gel-X with a glazed finish is a 2-hour appointment at my Parkhurst studio. Send the reference photos and I'll confirm the design before you book.",
     },
     // Editorial glam (awarded to jade)
     {
       jobTitle: "Editorial glam for portfolio shoot",
       proEmail: "jade",
-      amount: 235,
+      amount: 3525,
       hoursAfterJob: 5,
       status: "accepted",
       message:
@@ -523,7 +523,7 @@ async function main() {
     {
       jobTitle: "Editorial glam for portfolio shoot",
       proEmail: "priya",
-      amount: 250,
+      amount: 3750,
       hoursAfterJob: 8,
       status: "declined",
       message:
@@ -532,7 +532,7 @@ async function main() {
     {
       jobTitle: "Editorial glam for portfolio shoot",
       proEmail: "chloe",
-      amount: 190,
+      amount: 2850,
       hoursAfterJob: 10,
       status: "declined",
       message:
@@ -542,7 +542,7 @@ async function main() {
     {
       jobTitle: "90-min deep tissue at home, weekly",
       proEmail: "maya",
-      amount: 175,
+      amount: 2625,
       hoursAfterJob: 1,
       status: "pending",
       message:
@@ -551,7 +551,7 @@ async function main() {
     {
       jobTitle: "90-min deep tissue at home, weekly",
       proEmail: "isabella",
-      amount: 165,
+      amount: 2475,
       hoursAfterJob: 3,
       status: "pending",
       message:
@@ -560,7 +560,7 @@ async function main() {
     {
       jobTitle: "90-min deep tissue at home, weekly",
       proEmail: "marcus",
-      amount: 150,
+      amount: 2250,
       hoursAfterJob: 6,
       status: "pending",
       message:
@@ -570,7 +570,7 @@ async function main() {
     {
       jobTitle: "Silk press + trim for natural hair",
       proEmail: "amara",
-      amount: 135,
+      amount: 2025,
       hoursAfterJob: 4,
       status: "accepted",
       message:
@@ -579,17 +579,17 @@ async function main() {
     {
       jobTitle: "Silk press + trim for natural hair",
       proEmail: "priya",
-      amount: 145,
+      amount: 2175,
       hoursAfterJob: 9,
       status: "declined",
       message:
-        "Would love to take care of you — press, dusting trim, and a scalp treatment add-on included. I can come to Prospect Heights Saturday.",
+        "Would love to take care of you — press, dusting trim, and a scalp treatment add-on included. I can come to Greenside Saturday.",
     },
     // Volume lashes (open)
     {
       jobTitle: "Volume lash extensions, full set",
       proEmail: "tiana",
-      amount: 185,
+      amount: 2775,
       hoursAfterJob: 4,
       status: "pending",
       message:
@@ -598,16 +598,16 @@ async function main() {
     {
       jobTitle: "Volume lash extensions, full set",
       proEmail: "jade",
-      amount: 160,
+      amount: 2400,
       hoursAfterJob: 12,
       status: "pending",
       message:
-        "I do lash sets alongside my makeup work. Full volume, D-curl, sealed with a retention bonder. Studio in Chinatown or I can travel to the UWS.",
+        "I do lash sets alongside my makeup work. Full volume, D-curl, sealed with a retention bonder. Studio in Rosebank or I can travel to Parkhurst.",
     },
     {
       jobTitle: "Volume lash extensions, full set",
       proEmail: "elena",
-      amount: 175,
+      amount: 2625,
       hoursAfterJob: 20,
       status: "withdrawn",
       message:
@@ -617,16 +617,16 @@ async function main() {
     {
       jobTitle: "Skin fade + beard sculpt, house call",
       proEmail: "marcus",
-      amount: 90,
+      amount: 1350,
       hoursAfterJob: 2,
       status: "accepted",
       message:
-        "7am house calls are my thing — I'm downtown by 6:45 live. Fade, beard sculpt, hot towel, out the door by 7:45. I'll text when I'm 10 min away.",
+        "7am house calls are my thing — I'm in Braamfontein by 6:45 live. Fade, beard sculpt, hot towel, out the door by 7:45. I'll text when I'm 10 min away.",
     },
     {
       jobTitle: "Skin fade + beard sculpt, house call",
       proEmail: "amara",
-      amount: 85,
+      amount: 1275,
       hoursAfterJob: 7,
       status: "declined",
       message:
@@ -636,7 +636,7 @@ async function main() {
     {
       jobTitle: "Hydrafacial + dermaplaning session",
       proEmail: "elena",
-      amount: 205,
+      amount: 3075,
       hoursAfterJob: 3,
       status: "pending",
       message:
@@ -645,7 +645,7 @@ async function main() {
     {
       jobTitle: "Hydrafacial + dermaplaning session",
       proEmail: "isabella",
-      amount: 190,
+      amount: 2850,
       hoursAfterJob: 8,
       status: "pending",
       message:
@@ -655,16 +655,16 @@ async function main() {
     {
       jobTitle: "Wedding makeup trial + day-of",
       proEmail: "jade",
-      amount: 495,
+      amount: 7425,
       hoursAfterJob: 6,
       status: "pending",
       message:
-        "Waterproof is my default, not an upgrade — tear-proof lash strips, setting seals, and a mini touch-up kit for your clutch. Trial at my Chinatown studio, day-of at your venue by 8:45am sharp.",
+        "Waterproof is my default, not an upgrade — tear-proof lash strips, setting seals, and a mini touch-up kit for your clutch. Trial at my Rosebank studio, day-of at your venue by 8:45am sharp.",
     },
     {
       jobTitle: "Wedding makeup trial + day-of",
       proEmail: "priya",
-      amount: 520,
+      amount: 7800,
       hoursAfterJob: 11,
       status: "pending",
       message:
@@ -674,7 +674,7 @@ async function main() {
     {
       jobTitle: "Acrylic removal + BIAB overlay",
       proEmail: "chloe",
-      amount: 105,
+      amount: 1575,
       hoursAfterJob: 5,
       status: "pending",
       message:
@@ -683,17 +683,17 @@ async function main() {
     {
       jobTitle: "Acrylic removal + BIAB overlay",
       proEmail: "sofia",
-      amount: 95,
+      amount: 1425,
       hoursAfterJob: 9,
       status: "pending",
       message:
-        "I do soak-off + BIAB rebuilds weekly. No drilling trauma, promise. Can fit you in this week after 5pm in Astoria, or I travel within Brooklyn for a small fee.",
+        "I do soak-off + BIAB rebuilds weekly. No drilling trauma, promise. Can fit you in this week after 5pm in Fourways, or I travel within the northern suburbs for a small fee.",
     },
     // Knotless braids (awarded to amara)
     {
       jobTitle: "Knotless box braids, waist length",
       proEmail: "amara",
-      amount: 300,
+      amount: 4500,
       hoursAfterJob: 3,
       status: "accepted",
       message:
@@ -702,7 +702,7 @@ async function main() {
     {
       jobTitle: "Knotless box braids, waist length",
       proEmail: "priya",
-      amount: 325,
+      amount: 4875,
       hoursAfterJob: 8,
       status: "declined",
       message:
@@ -712,7 +712,7 @@ async function main() {
     {
       jobTitle: "Couples massage for our anniversary",
       proEmail: "maya",
-      amount: 310,
+      amount: 4650,
       hoursAfterJob: 4,
       status: "accepted",
       message:
@@ -721,17 +721,17 @@ async function main() {
     {
       jobTitle: "Couples massage for our anniversary",
       proEmail: "isabella",
-      amount: 295,
+      amount: 4425,
       hoursAfterJob: 9,
       status: "declined",
       message:
-        "I can bring calming energy and a table to Tribeca — back-to-back 60s with a 10-minute reset between. Add aromatherapy if you'd like.",
+        "I can bring calming energy and a table to Parktown North — back-to-back 60s with a 10-minute reset between. Add aromatherapy if you'd like.",
     },
     // Microblading touch-up (open)
     {
       jobTitle: "Microblading touch-up (6-month)",
       proEmail: "tiana",
-      amount: 225,
+      amount: 3375,
       hoursAfterJob: 5,
       status: "pending",
       message:
@@ -740,7 +740,7 @@ async function main() {
     {
       jobTitle: "Microblading touch-up (6-month)",
       proEmail: "elena",
-      amount: 240,
+      amount: 3600,
       hoursAfterJob: 26,
       status: "pending",
       message:
@@ -750,7 +750,7 @@ async function main() {
     {
       jobTitle: "Monthly facial membership trial",
       proEmail: "elena",
-      amount: 145,
+      amount: 2175,
       hoursAfterJob: 6,
       status: "pending",
       message:
@@ -759,7 +759,7 @@ async function main() {
     {
       jobTitle: "Monthly facial membership trial",
       proEmail: "isabella",
-      amount: 130,
+      amount: 1950,
       hoursAfterJob: 15,
       status: "pending",
       message:
@@ -769,7 +769,7 @@ async function main() {
     {
       jobTitle: "Haircuts for my two boys (5 and 8)",
       proEmail: "marcus",
-      amount: 75,
+      amount: 1125,
       hoursAfterJob: 2,
       status: "pending",
       message:
@@ -778,7 +778,7 @@ async function main() {
     {
       jobTitle: "Haircuts for my two boys (5 and 8)",
       proEmail: "amara",
-      amount: 85,
+      amount: 1275,
       hoursAfterJob: 7,
       status: "pending",
       message:

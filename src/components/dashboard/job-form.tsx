@@ -179,7 +179,7 @@ export function JobForm({
       </Field>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Budget from ($)" htmlFor="budget-min">
+        <Field label="Budget from (R)" htmlFor="budget-min">
           <Input
             id="budget-min"
             type="number"
@@ -187,10 +187,10 @@ export function JobForm({
             inputMode="numeric"
             value={values.budgetMin}
             onChange={(e) => set("budgetMin", e.target.value)}
-            placeholder="80"
+            placeholder="1200"
           />
         </Field>
-        <Field label="Budget to ($)" htmlFor="budget-max">
+        <Field label="Budget to (R)" htmlFor="budget-max">
           <Input
             id="budget-max"
             type="number"
@@ -198,7 +198,7 @@ export function JobForm({
             inputMode="numeric"
             value={values.budgetMax}
             onChange={(e) => set("budgetMax", e.target.value)}
-            placeholder="150"
+            placeholder="2250"
           />
         </Field>
       </div>
@@ -209,7 +209,7 @@ export function JobForm({
             id="job-location"
             value={values.location}
             onChange={(e) => set("location", e.target.value)}
-            placeholder="e.g. Williamsburg, Brooklyn"
+            placeholder="e.g. Parkhurst, Johannesburg"
             maxLength={160}
           />
         </Field>

@@ -1,4 +1,4 @@
-import { Gavel } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function Logo({
@@ -12,8 +12,8 @@ export function Logo({
 }) {
   return (
     <span className={cn("inline-flex items-center gap-2.5", className)}>
-      <span className="flex size-8 items-center justify-center rounded-[10px] bg-brand text-brand-ink shadow-[0_6px_16px_-6px_rgb(239_71_112/0.7)]">
-        <Gavel className="size-4" />
+      <span className="flex size-8 items-center justify-center rounded-[11px] bg-brand text-brand-ink shadow-[0_6px_16px_-6px_color-mix(in_srgb,var(--color-brand)_70%,transparent)]">
+        <Sparkles className="size-[17px]" strokeWidth={2.25} />
       </span>
       {!compact ? (
         <span

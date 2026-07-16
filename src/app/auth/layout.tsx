@@ -1,4 +1,5 @@
 import { Star } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Logo } from "@/components/logo";
@@ -29,14 +30,31 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
       </div>
 
       {/* Visual side */}
-      <div className="grain dots-light relative hidden overflow-hidden bg-night lg:flex lg:flex-col lg:justify-between lg:p-14">
-        <div className="relative flex justify-end">
+      <div className="relative hidden overflow-hidden bg-night lg:flex lg:flex-col lg:justify-between lg:p-14">
+        <Image
+          src="/img/auth-beauty.jpg"
+          alt=""
+          fill
+          sizes="55vw"
+          className="object-cover object-center"
+          priority
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-r from-night/95 via-night/80 to-night/45"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-t from-night/85 via-transparent to-night/40"
+        />
+        <div className="grain absolute inset-0" />
+        <div className="relative z-10 flex justify-end">
           <span className="rounded-full px-4 py-1.5 text-xs font-medium text-cream/60 ring-1 ring-cream/15">
-            NYC · Brooklyn · Queens · Hoboken
+            Joburg · Sandton · Rosebank · Fourways
           </span>
         </div>
 
-        <div className="relative max-w-lg">
+        <div className="relative z-10 max-w-lg">
           <div className="flex items-center gap-1">
             {Array.from({ length: 5 }).map((_, i) => (
               <Star key={i} className="size-4 fill-gold text-gold" />
@@ -54,12 +72,12 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
             <Avatar name="Ava Whitfield" hue={14} size="lg" />
             <div>
               <p className="text-sm font-semibold text-cream">Ava Whitfield</p>
-              <p className="text-xs text-cream/50">Bride · Brooklyn Heights</p>
+              <p className="text-xs text-cream/50">Bride · Melville</p>
             </div>
           </div>
         </div>
 
-        <div className="relative grid grid-cols-3 gap-3">
+        <div className="relative z-10 grid grid-cols-3 gap-3">
           {[
             { k: "12 min", v: "median first bid" },
             { k: "0 fees", v: "for posting jobs" },

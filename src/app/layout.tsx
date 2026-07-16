@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Bricolage_Grotesque, Inter } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import { Providers } from "@/components/providers";
 import "./globals.css";
 
@@ -10,10 +10,11 @@ const inter = Inter({
   display: "swap",
 });
 
-const displayFace = Bricolage_Grotesque({
+const displayFace = Fraunces({
   subsets: ["latin"],
   variable: "--font-display-face",
-  axes: ["opsz", "wdth"],
+  axes: ["opsz", "SOFT", "WONK"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 

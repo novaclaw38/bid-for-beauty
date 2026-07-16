@@ -70,7 +70,7 @@ export default async function MyBidsPage({
         <EmptyState
           icon={Gavel}
           title="No bids yet"
-          description="Head to the job board and place your first bid. Your pipeline lives here."
+          description="Nothing bid yet. Find a job on the board and make your first offer."
           action={
             <Link href="/dashboard/jobs">
               <Button>Browse open jobs</Button>
@@ -110,8 +110,8 @@ export default async function MyBidsPage({
           {filtered.length === 0 ? (
             <EmptyState
               icon={Gavel}
-              title="Nothing in this bucket"
-              description="No bids with this status yet."
+              title="Nothing here yet"
+              description="No bids with this status — try another tab."
             />
           ) : (
             <div className="space-y-3">

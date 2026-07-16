@@ -10,6 +10,7 @@ import {
   Search,
   Star,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { CategoryTile } from "@/components/category-icon";
 import { JobCard } from "@/components/job-card";
@@ -115,30 +116,30 @@ export default async function LandingPage() {
         <div className="dots pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(60%_60%_at_50%_30%,black,transparent)]" />
         <div className="relative mx-auto grid max-w-6xl gap-14 px-4 pb-20 pt-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:pb-28 lg:pt-24">
           <div>
-            <Reveal>
+            <Reveal immediate>
               <span className="inline-flex items-center gap-2 rounded-full bg-surface px-3.5 py-1.5 text-xs font-medium text-ink-2 ring-1 ring-line">
-                <span className="size-1.5 animate-pulse rounded-full bg-sage" />
+                <span className="size-1.5 animate-pulse rounded-full bg-success" />
                 {openStats?.count ?? 0} jobs open for bids right now
               </span>
             </Reveal>
-            <Reveal delay={0.06}>
+            <Reveal immediate delay={0.06}>
               <h1 className="mt-6 font-display text-5xl font-medium leading-[1.04] tracking-tight text-ink sm:text-6xl lg:text-[4.4rem]">
                 Beauty pros <span className="accent-italic">bid</span> for your
                 booking.
               </h1>
             </Reveal>
-            <Reveal delay={0.12}>
+            <Reveal immediate delay={0.12}>
               <p className="mt-6 max-w-md text-[17px] leading-relaxed text-ink-2">
                 Post the hair, nails, makeup, or skincare job you need, with
                 your budget attached. Vetted professionals come to you with
                 their best offers. Compare, pick, glow.
               </p>
             </Reveal>
-            <Reveal delay={0.18}>
+            <Reveal immediate delay={0.18}>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Link
                   href="/auth/signup?role=client"
-                  className="inline-flex h-12 items-center gap-2 rounded-full bg-brand px-6 text-[15px] font-medium text-brand-ink shadow-[0_14px_30px_-10px_rgb(239_71_112/0.6)] transition-all hover:bg-brand-deep active:scale-[0.98]"
+                  className="inline-flex h-12 items-center gap-2 rounded-full bg-brand px-6 text-[15px] font-medium text-brand-ink shadow-[0_14px_30px_-10px_color-mix(in_srgb,var(--color-brand)_60%,transparent)] transition-all hover:bg-brand-deep active:scale-[0.98]"
                 >
                   Post a job for free
                   <ArrowRight className="size-4" />
@@ -151,10 +152,10 @@ export default async function LandingPage() {
                 </Link>
               </div>
             </Reveal>
-            <Reveal delay={0.24}>
+            <Reveal immediate delay={0.24}>
               <div className="mt-10 flex items-center gap-6 text-sm text-ink-3">
                 <span className="flex items-center gap-1.5">
-                  <BadgeCheck className="size-4 text-sage" />
+                  <BadgeCheck className="size-4 text-success" />
                   Vetted pros
                 </span>
                 <span className="flex items-center gap-1.5">
@@ -169,14 +170,38 @@ export default async function LandingPage() {
             </Reveal>
           </div>
 
-          {/* Floating live cards */}
+          {/* Editorial hero visual: photo anchor + live proof cards overlapping */}
           <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-            <div className="absolute -left-10 -top-8 hidden size-40 rounded-full bg-brand-soft/70 blur-2xl lg:block" />
+            {/* Disciplined decoration: soft dual-tone wash behind the frame (no blob) */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -inset-x-8 -top-10 -bottom-8 hidden lg:block [mask-image:radial-gradient(70%_70%_at_55%_40%,black,transparent)]"
+              style={{
+                background:
+                  "radial-gradient(38% 44% at 25% 18%, color-mix(in srgb, var(--color-brand) 24%, transparent), transparent 70%), radial-gradient(42% 40% at 88% 82%, color-mix(in srgb, var(--color-lilac) 28%, transparent), transparent 70%)",
+              }}
+            />
+            {/* Editorial portrait */}
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-line/70 shadow-[0_44px_90px_-44px_rgb(42_31_40/0.5)]">
+              <Image
+                src="/img/hero-hair.jpg"
+                alt="A client showing off her fresh balayage against a soft pink wall"
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 46vw"
+                className="object-cover"
+              />
+              <div
+                aria-hidden
+                className="absolute inset-0 bg-gradient-to-t from-night/30 via-transparent to-brand/10"
+              />
+            </div>
+
             {heroJob ? (
-              <Reveal delay={0.1} className="relative">
+              <Reveal immediate delay={0.12} className="relative z-10 -mt-24 mr-auto w-[88%] sm:w-[76%]">
                 <Link
                   href={`/dashboard/jobs/${heroJob.job.id}`}
-                  className="block rounded-3xl border border-line bg-surface p-6 shadow-[0_30px_70px_-30px_rgb(23_24_26/0.35)]"
+                  className="block rounded-2xl border border-line bg-surface/95 p-5 shadow-[0_30px_70px_-30px_rgb(42_31_40/0.45)] backdrop-blur-sm"
                 >
                   <div className="flex items-center justify-between">
                     <span className="inline-flex items-center gap-2 rounded-full bg-success-soft px-3 py-1 text-xs font-medium text-success">
@@ -218,10 +243,11 @@ export default async function LandingPage() {
 
             {latestBid ? (
               <Reveal
-                delay={0.22}
-                className="relative ml-auto mt-[-14px] w-[86%] animate-float-slow sm:mt-[-24px]"
+                immediate
+                delay={0.24}
+                className="relative z-10 ml-auto mt-[-18px] w-[82%] animate-float-slow sm:w-[70%]"
               >
-                <div className="rounded-2xl border border-line bg-night p-4 text-cream shadow-[0_24px_50px_-24px_rgb(33_26_21/0.6)]">
+                <div className="rounded-2xl border border-night-line bg-night p-4 text-cream shadow-[0_24px_50px_-24px_rgb(36_24_38/0.6)]">
                   <div className="flex items-center gap-3">
                     <Avatar
                       name={latestBid.pro.name}
@@ -349,7 +375,7 @@ export default async function LandingPage() {
               },
             ].map((s, i) => (
               <Reveal key={s.step} delay={0.08 * i}>
-                <div className="group relative h-full rounded-3xl border border-line bg-surface p-7 transition-all hover:-translate-y-1 hover:shadow-[0_24px_50px_-24px_rgb(23_24_26/0.28)]">
+                <div className="group relative h-full rounded-3xl border border-line bg-surface p-7 transition-all hover:-translate-y-1 hover:shadow-[0_24px_50px_-24px_rgb(42_31_40/0.28)]">
                   <div className="flex items-center justify-between">
                     <span className="flex size-11 items-center justify-center rounded-2xl bg-brand-soft text-brand">
                       <s.icon className="size-5" />
@@ -405,7 +431,7 @@ export default async function LandingPage() {
         <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {CATEGORIES.map((cat, i) => (
             <Reveal key={cat.value} delay={0.05 * i}>
-              <div className="group flex h-full items-center gap-3.5 rounded-2xl border border-line bg-surface p-4 transition-all hover:-translate-y-0.5 hover:border-line-strong hover:shadow-[0_18px_36px_-20px_rgb(23_24_26/0.3)]">
+              <div className="group flex h-full items-center gap-3.5 rounded-2xl border border-line bg-surface p-4 transition-all hover:-translate-y-0.5 hover:border-line-strong hover:shadow-[0_18px_36px_-20px_rgb(42_31_40/0.3)]">
                 <CategoryTile value={cat.value} color={cat.color} />
                 <div>
                   <p className="text-sm font-semibold text-ink">{cat.label}</p>

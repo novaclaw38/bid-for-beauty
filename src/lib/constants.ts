@@ -1,11 +1,11 @@
 export const CATEGORIES = [
-  { value: "hair", label: "Hair & Styling", color: "#B4542F" },
-  { value: "nails", label: "Nails", color: "#A34054" },
-  { value: "makeup", label: "Makeup", color: "#8C4A6E" },
-  { value: "skincare", label: "Skincare & Facials", color: "#5C7A52" },
-  { value: "massage", label: "Massage & Body", color: "#3E6B6F" },
-  { value: "brows-lashes", label: "Brows & Lashes", color: "#8A6D2F" },
-  { value: "barbering", label: "Barbering", color: "#4A5568" },
+  { value: "hair", label: "Hair & Styling", color: "#C96B86" },
+  { value: "nails", label: "Nails", color: "#B0577E" },
+  { value: "makeup", label: "Makeup", color: "#9B6AA6" },
+  { value: "skincare", label: "Skincare & Facials", color: "#6F9A72" },
+  { value: "massage", label: "Massage & Body", color: "#5C8F97" },
+  { value: "brows-lashes", label: "Brows & Lashes", color: "#B98A4A" },
+  { value: "barbering", label: "Barbering", color: "#7B7392" },
 ] as const;
 
 export type CategoryValue = (typeof CATEGORIES)[number]["value"];

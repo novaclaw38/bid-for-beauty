@@ -237,7 +237,7 @@ export function ProBidSection({
           description="Adjust your rate or sharpen your pitch. The client sees the latest version."
         >
           <form onSubmit={saveEdit} className="space-y-4">
-            <Field label="Your rate ($)" htmlFor="edit-amount">
+            <Field label="Your rate (R)" htmlFor="edit-amount">
               <Input
                 id="edit-amount"
                 type="number"
@@ -293,7 +293,7 @@ export function ProBidSection({
       </div>
 
       <form onSubmit={placeBid} className="mt-5 space-y-4">
-        <Field label="Your rate ($)" htmlFor="bid-amount">
+        <Field label="Your rate (R)" htmlFor="bid-amount">
           <Input
             id="bid-amount"
             type="number"

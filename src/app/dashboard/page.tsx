@@ -76,7 +76,7 @@ async function ClientOverview({ userId, name }: { userId: string; name: string }
     <div>
       <PageHeader
         title={`Welcome back, ${firstName}`}
-        description="Here's what's happening across your posted jobs."
+        description="A live look at your open jobs and the pros bidding on them."
         action={
           <Link href="/dashboard/jobs/new">
             <Button>
@@ -91,7 +91,7 @@ async function ClientOverview({ userId, name }: { userId: string; name: string }
         <EmptyState
           icon={Sparkles}
           title="Post your first job"
-          description="Describe the beauty service you need, set your budget, and let professionals compete for your booking."
+          description="Tell us the look you're after and your budget. Vetted pros come to you with their best offer."
           action={
             <Link href="/dashboard/jobs/new">
               <Button>
@@ -247,8 +247,8 @@ async function ProOverview({
   return (
     <div>
       <PageHeader
-        title={`Back on the grind, ${firstName}`}
-        description="Fresh jobs matching your specialties, plus your bid pipeline."
+        title={`Let's fill your calendar, ${firstName}`}
+        description="New jobs in your specialties, and every bid you've got in play."
         action={
           <Link href="/dashboard/jobs">
             <Button>
@@ -299,7 +299,7 @@ async function ProOverview({
             <EmptyState
               icon={Compass}
               title="No open jobs right now"
-              description="New jobs land daily. Check back soon, or broaden your specialties in your profile."
+              description="The board refreshes all day. Widen your specialties in your profile to catch more."
             />
           ) : (
             <div className="grid gap-3.5 sm:grid-cols-2">
@@ -326,7 +326,7 @@ async function ProOverview({
             <EmptyState
               icon={Gavel}
               title="No bids yet"
-              description="When you bid on jobs, they'll show up here with live status."
+              description="Place a bid and track it here — pending, won, or passed over."
               action={
                 <Link href="/dashboard/jobs">
                   <Button variant="secondary">Browse open jobs</Button>

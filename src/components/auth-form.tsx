@@ -193,7 +193,7 @@ export function AuthForm({
                 id="location"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                placeholder="e.g. Williamsburg, Brooklyn"
+                placeholder="e.g. Parkhurst, Johannesburg"
               />
             </Field>
 
