@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display-face), ui-sans-serif, system-ui, sans-serif;
+
+  /* ── Warm neutral base (never pure #000/#fff; plum-warmed, not gray) ── */
+  --color-paper: #faf6f4;
+  --color-cream: #f3ebe9;
+  --color-surface: #ffffff;
+  --color-ink: #2a1f28;
+  --color-ink-2: #6b5c66;
+  --color-ink-3: #9a8b93;
+  --color-line: #ece2e4;
+  --color-line-strong: #ddccd1;
+
+  /* ── Primary accent: soft dusty rose ── */
+  --color-brand: #d76a8a;
+  --color-brand-deep: #b34e6e;
+  --color-brand-soft: #fbe6ec;
+  --color-brand-ink: #fff6f8;
+
+  /* ── Secondary accent: soft lilac ── */
+  --color-lilac: #b9a3d4;
+  --color-lilac-soft: #efe9f6;
+  --color-lilac-deep: #7c63a3;
+
+  /* ── Dark anchor surfaces (footer / CTA / sidebar): deep aubergine ── */
+  --color-night: #241826;
+  --color-night-2: #2f2233;
+  --color-night-3: #4a3a4f;
+  --color-night-line: #3a2c3f;
+
+  /* ── Semantic status tokens (warm-tuned to the pastel system) ── */
+  --color-success: #4f8368;
+  --color-success-soft: #eaf3ee;
+  --color-warning: #b7791f;
+  --color-warning-soft: #fbf3e3;
+  --color-warning-ink: #96660f;
+  --color-danger: #bb4a58;
+  --color-danger-soft: #fbeaec;
+  --color-neutral: #8a7a86;
+  --color-neutral-soft: #f2edf1;
+
+  --color-gold: #c99a3f; /* ratings/stars only, distinct from warning */
+}
+
+/*
+  RADIUS CONVENTION (Tailwind's default rounded-* scale, applied by
+  hand-written convention rather than a dedicated token):
+  - rounded-full     → pills, chips, buttons, avatars
+  - rounded-xl       → form controls (input/select/textarea), small icon tiles
+  - rounded-2xl      → cards, panels, list rows (the default "panel" radius)
+  - rounded-3xl      → reserved for hero/CTA-band large containers ONLY,
+                       never a standard dashboard panel
+  - rounded-[2.5rem] → landing-page CTA band, one-off
+*/
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: var(--color-brand-soft);
+  color: var(--color-brand-deep);
+}
+
+/* Subtle dot texture for hero / feature areas */
+.dots {
+  background-image: radial-gradient(rgb(42 31 40 / 0.10) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+.dots-light {
+  background-image: radial-gradient(rgb(250 246 244 / 0.12) 1px, transparent 1.2px);
+  background-size: 20px 20px;
+}
+
+/* Fine grain overlay */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='linear' slope='0.05'/></feComponentTransfer></filter><rect width='180' height='180' filter='url(%23n)'/></svg>");
+  background-size: 180px 180px;
+}
+
+/* Thin elegant scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-line-strong);
+  border-radius: 8px;
+  border: 2px solid var(--color-paper);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ink-3);
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+}
+
+/* Bold accent used in headlines (display face has no italic style) */
+.accent-italic {
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-brand);
+}
+
+/* Shared hoverable list-row lift, used across dashboard row cards */
+.card-hover {
+  transition: all 0.2s;
+}
+.card-hover:hover {
+  border-color: var(--color-line-strong);
+  box-shadow: 0 14px 30px -18px rgb(23 24 26 / 0.3);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0.55;
+  cursor: pointer;
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.animate-float-slow {
+  animation: float-slow 7s ease-in-out infinite;
+}

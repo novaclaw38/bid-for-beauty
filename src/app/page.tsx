@@ -1,0 +1,491 @@
+import { desc, eq, sql } from "drizzle-orm";
+import {
+  ArrowRight,
+  BadgeCheck,
+  Calendar,
+  CircleDollarSign,
+  Gavel,
+  MapPin,
+  MousePointerClick,
+  Search,
+  Star,
+} from "lucide-react";
+import Link from "next/link";
+import { CategoryTile } from "@/components/category-icon";
+import { JobCard } from "@/components/job-card";
+import { Logo } from "@/components/logo";
+import { Reveal } from "@/components/reveal";
+import { Avatar } from "@/components/ui/avatar";
+import { db } from "@/db";
+import { bids, jobs, users } from "@/db/schema";
+import { CATEGORIES, categoryLabel } from "@/lib/constants";
+import { toJobCardData, toProSummary } from "@/lib/serialize";
+import { formatCurrency } from "@/lib/utils";
+
+export const dynamic = "force-dynamic";
+
+export default async function LandingPage() {
+  const openJobRows = await db
+    .select({ job: jobs, client: users })
+    .from(jobs)
+    .innerJoin(users, eq(jobs.clientId, users.id))
+    .where(eq(jobs.status, "open"))
+    .orderBy(desc(jobs.createdAt))
+    .limit(6);
+
+  const counts = await db
+    .select({ jobId: bids.jobId, count: sql<number>`count(*)::int` })
+    .from(bids)
+    .groupBy(bids.jobId);
+  const countMap = new Map(counts.map((c) => [c.jobId, c.count]));
+
+  const [openStats] = await db
+    .select({ count: sql<number>`count(*)::int` })
+    .from(jobs)
+    .where(eq(jobs.status, "open"));
+  const [proStats] = await db
+    .select({ count: sql<number>`count(*)::int` })
+    .from(users)
+    .where(eq(users.role, "professional"));
+  const [doneStats] = await db
+    .select({ count: sql<number>`count(*)::int` })
+    .from(jobs)
+    .where(eq(jobs.status, "completed"));
+
+  const categoryCounts = await db
+    .select({ category: jobs.category, count: sql<number>`count(*)::int` })
+    .from(jobs)
+    .where(eq(jobs.status, "open"))
+    .groupBy(jobs.category);
+  const catCountMap = new Map(categoryCounts.map((c) => [c.category, c.count]));
+
+  const latestBidRows = await db
+    .select({ bid: bids, pro: users, job: jobs })
+    .from(bids)
+    .innerJoin(users, eq(bids.proId, users.id))
+    .innerJoin(jobs, eq(bids.jobId, jobs.id))
+    .orderBy(desc(bids.createdAt))
+    .limit(1);
+  const latestBid = latestBidRows[0];
+
+  const heroJob = openJobRows[0];
+  const cards = openJobRows.map((r) =>
+    toJobCardData(r.job, r.client, countMap.get(r.job.id) ?? 0),
+  );
+
+  return (
+    <div className="min-h-screen">
+      {/* ── Nav ─────────────────────────────────────── */}
+      <header className="sticky top-0 z-40 border-b border-line/70 bg-paper/85 backdrop-blur-md">
+        <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
+          <Link href="/" aria-label="Bid for Beauty home">
+            <Logo />
+          </Link>
+          <div className="hidden items-center gap-7 text-sm text-ink-2 md:flex">
+            <a href="#jobs" className="transition-colors hover:text-ink">
+              Live jobs
+            </a>
+            <a href="#how" className="transition-colors hover:text-ink">
+              How it works
+            </a>
+            <a href="#categories" className="transition-colors hover:text-ink">
+              Categories
+            </a>
+          </div>
+          <div className="flex items-center gap-2.5">
+            <Link
+              href="/auth/login"
+              className="hidden h-10 items-center rounded-full px-4 text-sm font-medium text-ink-2 transition-colors hover:text-ink sm:inline-flex"
+            >
+              Sign in
+            </Link>
+            <Link
+              href="/auth/signup"
+              className="inline-flex h-10 items-center gap-1.5 rounded-full bg-ink px-4 text-sm font-medium text-cream transition-colors hover:bg-night-2"
+            >
+              Get started
+              <ArrowRight className="size-4" />
+            </Link>
+          </div>
+        </nav>
+      </header>
+
+      {/* ── Hero ────────────────────────────────────── */}
+      <section className="relative overflow-hidden">
+        <div className="dots pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(60%_60%_at_50%_30%,black,transparent)]" />
+        <div className="relative mx-auto grid max-w-6xl gap-14 px-4 pb-20 pt-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:pb-28 lg:pt-24">
+          <div>
+            <Reveal>
+              <span className="inline-flex items-center gap-2 rounded-full bg-surface px-3.5 py-1.5 text-xs font-medium text-ink-2 ring-1 ring-line">
+                <span className="size-1.5 animate-pulse rounded-full bg-sage" />
+                {openStats?.count ?? 0} jobs open for bids right now
+              </span>
+            </Reveal>
+            <Reveal delay={0.06}>
+              <h1 className="mt-6 font-display text-5xl font-medium leading-[1.04] tracking-tight text-ink sm:text-6xl lg:text-[4.4rem]">
+                Beauty pros <span className="accent-italic">bid</span> for your
+                booking.
+              </h1>
+            </Reveal>
+            <Reveal delay={0.12}>
+              <p className="mt-6 max-w-md text-[17px] leading-relaxed text-ink-2">
+                Post the hair, nails, makeup, or skincare job you need, with
+                your budget attached. Vetted professionals come to you with
+                their best offers. Compare, pick, glow.
+              </p>
+            </Reveal>
+            <Reveal delay={0.18}>
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <Link
+                  href="/auth/signup?role=client"
+                  className="inline-flex h-12 items-center gap-2 rounded-full bg-brand px-6 text-[15px] font-medium text-brand-ink shadow-[0_14px_30px_-10px_rgb(239_71_112/0.6)] transition-all hover:bg-brand-deep active:scale-[0.98]"
+                >
+                  Post a job for free
+                  <ArrowRight className="size-4" />
+                </Link>
+                <Link
+                  href="/auth/signup?role=pro"
+                  className="inline-flex h-12 items-center gap-2 rounded-full bg-surface px-6 text-[15px] font-medium text-ink ring-1 ring-line-strong transition-all hover:bg-paper hover:ring-ink-3"
+                >
+                  I&apos;m a professional
+                </Link>
+              </div>
+            </Reveal>
+            <Reveal delay={0.24}>
+              <div className="mt-10 flex items-center gap-6 text-sm text-ink-3">
+                <span className="flex items-center gap-1.5">
+                  <BadgeCheck className="size-4 text-sage" />
+                  Vetted pros
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <CircleDollarSign className="size-4 text-gold" />
+                  No platform fees
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <Star className="size-4 text-brand" />
+                  4.8 avg rating
+                </span>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Floating live cards */}
+          <div className="relative mx-auto w-full max-w-md lg:max-w-none">
+            <div className="absolute -left-10 -top-8 hidden size-40 rounded-full bg-brand-soft/70 blur-2xl lg:block" />
+            {heroJob ? (
+              <Reveal delay={0.1} className="relative">
+                <Link
+                  href={`/dashboard/jobs/${heroJob.job.id}`}
+                  className="block rounded-3xl border border-line bg-surface p-6 shadow-[0_30px_70px_-30px_rgb(23_24_26/0.35)]"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="inline-flex items-center gap-2 rounded-full bg-success-soft px-3 py-1 text-xs font-medium text-success">
+                      <span className="size-1.5 animate-pulse rounded-full bg-success" />
+                      Open for bids
+                    </span>
+                    <span className="text-xs text-ink-3">
+                      {countMap.get(heroJob.job.id) ?? 0} bids so far
+                    </span>
+                  </div>
+                  <h3 className="mt-4 font-display text-xl font-semibold leading-snug">
+                    {heroJob.job.title}
+                  </h3>
+                  <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-ink-3">
+                    <span className="inline-flex items-center gap-1.5">
+                      <MapPin className="size-3.5" />
+                      {heroJob.job.location}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5">
+                      <Calendar className="size-3.5" />
+                      Budget {formatCurrency(heroJob.job.budgetMin)}–
+                      {formatCurrency(heroJob.job.budgetMax)}
+                    </span>
+                  </div>
+                  <div className="mt-5 flex items-center gap-2.5 border-t border-line pt-4">
+                    <Avatar
+                      name={heroJob.client.name}
+                      hue={heroJob.client.avatarHue}
+                      size="sm"
+                    />
+                    <div className="text-xs">
+                      <p className="font-medium text-ink">{heroJob.client.name}</p>
+                      <p className="text-ink-3">Posted this job</p>
+                    </div>
+                  </div>
+                </Link>
+              </Reveal>
+            ) : null}
+
+            {latestBid ? (
+              <Reveal
+                delay={0.22}
+                className="relative ml-auto mt-[-14px] w-[86%] animate-float-slow sm:mt-[-24px]"
+              >
+                <div className="rounded-2xl border border-line bg-night p-4 text-cream shadow-[0_24px_50px_-24px_rgb(33_26_21/0.6)]">
+                  <div className="flex items-center gap-3">
+                    <Avatar
+                      name={latestBid.pro.name}
+                      hue={latestBid.pro.avatarHue}
+                      size="md"
+                    />
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-[13px] font-medium">
+                        {latestBid.pro.name}{" "}
+                        <span className="font-normal text-cream/60">
+                          placed a bid
+                        </span>
+                      </p>
+                      <p className="truncate text-[11.5px] text-cream/55">
+                        on “{latestBid.job.title}”
+                      </p>
+                    </div>
+                    <span className="font-display text-lg font-semibold text-cream">
+                      {formatCurrency(latestBid.bid.amount)}
+                    </span>
+                  </div>
+                  {(() => {
+                    const pro = toProSummary(latestBid.pro);
+                    return (
+                      <div className="mt-3 flex items-center gap-3 border-t border-cream/10 pt-3 text-[11px] text-cream/60">
+                        <span className="inline-flex items-center gap-1">
+                          <Star className="size-3 text-gold" />
+                          {pro.rating ?? "New"}
+                        </span>
+                        <span>{pro.jobsCompleted} jobs done</span>
+                        <span className="truncate">
+                          {pro.specialties.map(categoryLabel).join(" · ")}
+                        </span>
+                      </div>
+                    );
+                  })()}
+                </div>
+              </Reveal>
+            ) : null}
+          </div>
+        </div>
+
+        {/* Stats strip */}
+        <div className="relative border-y border-line bg-surface/70">
+          <div className="mx-auto grid max-w-6xl grid-cols-3 divide-x divide-line px-4 sm:px-6">
+            {[
+              { value: String(openStats?.count ?? 0), label: "Open jobs" },
+              { value: String(proStats?.count ?? 0), label: "Vetted pros" },
+              { value: String(doneStats?.count ?? 0), label: "Jobs completed" },
+            ].map((s) => (
+              <div key={s.label} className="py-6 text-center sm:py-8">
+                <p className="font-display text-3xl font-semibold text-ink sm:text-4xl">
+                  {s.value}
+                </p>
+                <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.14em] text-ink-3">
+                  {s.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Live jobs ───────────────────────────────── */}
+      <section id="jobs" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-28">
+        <Reveal>
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
+                The board
+              </p>
+              <h2 className="mt-3 font-display text-3xl font-medium tracking-tight text-ink sm:text-[2.6rem]">
+                Fresh jobs, <span className="accent-italic">live</span> right now
+              </h2>
+            </div>
+            <Link
+              href="/auth/signup"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-brand transition-colors hover:text-brand-deep"
+            >
+              Sign up to bid on these
+              <ArrowRight className="size-4" />
+            </Link>
+          </div>
+        </Reveal>
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {cards.slice(0, 6).map((job, i) => (
+            <Reveal key={job.id} delay={0.05 * i}>
+              <JobCard job={job} className="h-full" />
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* ── How it works ────────────────────────────── */}
+      <section id="how" className="border-y border-line bg-cream/60">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-28">
+          <Reveal>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
+              How it works
+            </p>
+            <h2 className="mt-3 max-w-xl font-display text-3xl font-medium tracking-tight text-ink sm:text-[2.6rem]">
+              Three steps to your{" "}
+              <span className="accent-italic">best self</span>
+            </h2>
+          </Reveal>
+          <div className="mt-12 grid gap-4 md:grid-cols-3">
+            {[
+              {
+                icon: MousePointerClick,
+                step: "01",
+                title: "Post your job",
+                body: "Describe what you need: a knotless install, bridal glam, or a lash fill. Set your budget range and preferred date.",
+              },
+              {
+                icon: Search,
+                step: "02",
+                title: "Compare the bids",
+                body: "Professionals send offers with their price and pitch. Stack up ratings, specialties, and rates side by side.",
+              },
+              {
+                icon: Gavel,
+                step: "03",
+                title: "Award the winner",
+                body: "Accept the bid you love. The job is booked, the pro is locked in, and everyone else is politely released.",
+              },
+            ].map((s, i) => (
+              <Reveal key={s.step} delay={0.08 * i}>
+                <div className="group relative h-full rounded-3xl border border-line bg-surface p-7 transition-all hover:-translate-y-1 hover:shadow-[0_24px_50px_-24px_rgb(23_24_26/0.28)]">
+                  <div className="flex items-center justify-between">
+                    <span className="flex size-11 items-center justify-center rounded-2xl bg-brand-soft text-brand">
+                      <s.icon className="size-5" />
+                    </span>
+                    <span className="font-display text-4xl font-light text-line-strong transition-colors group-hover:text-brand/40">
+                      {s.step}
+                    </span>
+                  </div>
+                  <h3 className="mt-5 font-display text-xl font-semibold text-ink">
+                    {s.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-2">{s.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={0.1}>
+            <div className="mt-6 flex flex-col items-start justify-between gap-4 rounded-3xl border border-line bg-surface p-7 sm:flex-row sm:items-center">
+              <div className="flex items-start gap-4">
+                <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-ink text-cream">
+                  <CircleDollarSign className="size-5" />
+                </span>
+                <div>
+                  <h3 className="font-display text-lg font-semibold text-ink">
+                    For professionals: the board is your pipeline
+                  </h3>
+                  <p className="mt-1 text-sm leading-relaxed text-ink-2">
+                    Browse fresh jobs in your specialty, bid what your work is
+                    worth, and fill your calendar without cold DMs.
+                  </p>
+                </div>
+              </div>
+              <Link
+                href="/auth/signup?role=pro"
+                className="inline-flex h-11 shrink-0 items-center gap-2 rounded-full bg-ink px-5 text-sm font-medium text-cream transition-colors hover:bg-night-2"
+              >
+                Start bidding
+                <ArrowRight className="size-4" />
+              </Link>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── Categories ──────────────────────────────── */}
+      <section id="categories" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-28">
+        <Reveal>
+          <h2 className="font-display text-3xl font-medium tracking-tight text-ink sm:text-[2.6rem]">
+            Every kind of <span className="accent-italic">glow up</span>
+          </h2>
+        </Reveal>
+        <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+          {CATEGORIES.map((cat, i) => (
+            <Reveal key={cat.value} delay={0.05 * i}>
+              <div className="group flex h-full items-center gap-3.5 rounded-2xl border border-line bg-surface p-4 transition-all hover:-translate-y-0.5 hover:border-line-strong hover:shadow-[0_18px_36px_-20px_rgb(23_24_26/0.3)]">
+                <CategoryTile value={cat.value} color={cat.color} />
+                <div>
+                  <p className="text-sm font-semibold text-ink">{cat.label}</p>
+                  <p className="text-xs text-ink-3">
+                    {catCountMap.get(cat.value) ?? 0} open job
+                    {(catCountMap.get(cat.value) ?? 0) === 1 ? "" : "s"}
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+          <Reveal delay={0.35}>
+            <Link
+              href="/auth/signup"
+              className="group flex h-full items-center justify-center gap-2 rounded-2xl border border-dashed border-line-strong bg-paper p-4 text-sm font-medium text-ink-2 transition-colors hover:border-brand hover:text-brand"
+            >
+              Post yours
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── CTA ─────────────────────────────────────── */}
+      <section className="px-4 pb-20 sm:px-6 lg:pb-28">
+        <Reveal>
+          <div className="grain dots-light relative mx-auto max-w-6xl overflow-hidden rounded-[2.5rem] bg-night px-6 py-16 text-center sm:px-12 sm:py-24">
+            <div className="relative">
+              <h2 className="mx-auto max-w-2xl font-display text-4xl font-medium tracking-tight text-cream sm:text-5xl">
+                Ready when <span className="accent-italic">you</span> are.
+              </h2>
+              <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-cream/60">
+                Join the marketplace where beauty jobs find their perfect pro,
+                and pros find their next favorite client.
+              </p>
+              <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+                <Link
+                  href="/auth/signup?role=client"
+                  className="inline-flex h-12 items-center gap-2 rounded-full bg-brand px-6 text-[15px] font-medium text-brand-ink transition-all hover:bg-brand-deep active:scale-[0.98]"
+                >
+                  Post your first job
+                  <ArrowRight className="size-4" />
+                </Link>
+                <Link
+                  href="/auth/signup?role=pro"
+                  className="inline-flex h-12 items-center gap-2 rounded-full px-6 text-[15px] font-medium text-cream ring-1 ring-cream/25 transition-all hover:bg-cream/10"
+                >
+                  Bid on jobs
+                </Link>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* ── Footer ──────────────────────────────────── */}
+      <footer className="border-t border-night-line bg-night text-cream/60">
+        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-4 py-10 sm:flex-row sm:items-center sm:px-6">
+          <div>
+            <Logo dark />
+            <p className="mt-3 max-w-xs text-xs leading-relaxed text-cream/40">
+              The beauty bidding marketplace. Demo accounts:{" "}
+              <span className="text-cream/70">ava@glossdemo.com</span> (client) ·{" "}
+              <span className="text-cream/70">amara@glossdemo.com</span> (pro).
+              Password <span className="text-cream/70">demo1234</span>
+            </p>
+          </div>
+          <div className="flex items-center gap-6 text-sm">
+            <a href="#jobs" className="transition-colors hover:text-cream">
+              Live jobs
+            </a>
+            <a href="#how" className="transition-colors hover:text-cream">
+              How it works
+            </a>
+            <Link href="/auth/login" className="transition-colors hover:text-cream">
+              Sign in
+            </Link>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
