@@ -96,7 +96,7 @@ function SidebarContent({ user, onNavigate }: { user: SessionUser; onNavigate?: 
                 "group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all",
                 active
                   ? "bg-cream/[0.08] text-cream ring-1 ring-inset ring-cream/10"
-                  : "text-cream/50 hover:bg-cream/[0.04] hover:text-cream/85",
+                  : "text-cream/60 hover:bg-cream/[0.04] hover:text-cream/85",
               )}
             >
               <item.icon
@@ -116,7 +116,7 @@ function SidebarContent({ user, onNavigate }: { user: SessionUser; onNavigate?: 
           <Avatar name={user.name} hue={user.avatarHue} size="md" />
           <div className="min-w-0 flex-1">
             <p className="truncate text-[13px] font-semibold text-cream">{user.name}</p>
-            <p className="truncate text-[11px] text-cream/45">{user.email}</p>
+            <p className="truncate text-[11px] text-cream/60">{user.email}</p>
           </div>
           <button
             onClick={signOut}

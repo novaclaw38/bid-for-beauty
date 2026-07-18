@@ -111,7 +111,7 @@ export default async function MyBidsPage({
             <EmptyState
               icon={Gavel}
               title="Nothing here yet"
-              description="No bids with this status — try another tab."
+              description="No bids with this status. Try another tab."
             />
           ) : (
             <div className="space-y-3">

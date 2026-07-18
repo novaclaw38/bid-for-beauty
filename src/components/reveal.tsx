@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 
 export function Reveal({
@@ -22,10 +22,19 @@ export function Reveal({
    */
   immediate?: boolean;
 }) {
+  const reduceMotion = useReducedMotion();
   const target = { opacity: 1, y: 0 };
   const trigger = immediate
     ? { animate: target }
     : { whileInView: target, viewport: { once: true, margin: "-60px" } };
+
+  if (reduceMotion) {
+    return (
+      <motion.div initial={{ opacity: 1, y: 0 }} animate={target} className={className}>
+        {children}
+      </motion.div>
+    );
+  }
 
   return (
     <motion.div

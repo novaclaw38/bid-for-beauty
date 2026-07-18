@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import { toast } from "sonner";
+import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Field, Input } from "@/components/ui/field";
 import { CATEGORIES } from "@/lib/constants";
@@ -112,7 +113,7 @@ export function AuthForm({
               className={cn(
                 "rounded-2xl border p-4 text-left transition-all",
                 role === option.value
-                  ? "border-brand bg-brand-soft/60 shadow-[0_8px_20px_-10px_rgb(239_71_112/0.5)]"
+                  ? "border-brand bg-brand-soft/60 shadow-[0_8px_20px_-10px_color-mix(in_srgb,var(--color-brand)_55%,transparent)]"
                   : "border-line bg-surface hover:border-line-strong",
               )}
             >
@@ -236,26 +237,32 @@ export function AuthForm({
       </form>
 
       {isLogin && (
-        <div className="mt-6 rounded-2xl border border-dashed border-line-strong bg-cream/50 p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-ink-3">
+        <div className="mt-6 rounded-2xl border border-brand-soft bg-brand-soft/40 p-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-deep">
             Try a demo account
           </p>
           <div className="mt-3 grid grid-cols-2 gap-2">
             <button
               type="button"
               onClick={() => fillDemo("ava")}
-              className="rounded-xl bg-surface px-3 py-2.5 text-left ring-1 ring-line transition-all hover:ring-brand"
+              className="flex items-center gap-2.5 rounded-xl bg-surface px-3 py-2.5 text-left ring-1 ring-line transition-all hover:ring-brand"
             >
-              <p className="text-xs font-semibold text-ink">Ava · Client</p>
-              <p className="text-[11px] text-ink-3">Posts jobs, picks bids</p>
+              <Avatar name="Ava Whitfield" hue={14} size="sm" />
+              <span>
+                <p className="text-xs font-semibold text-ink">Ava · Client</p>
+                <p className="text-[11px] text-ink-3">Posts jobs, picks bids</p>
+              </span>
             </button>
             <button
               type="button"
               onClick={() => fillDemo("amara")}
-              className="rounded-xl bg-surface px-3 py-2.5 text-left ring-1 ring-line transition-all hover:ring-brand"
+              className="flex items-center gap-2.5 rounded-xl bg-surface px-3 py-2.5 text-left ring-1 ring-line transition-all hover:ring-brand"
             >
-              <p className="text-xs font-semibold text-ink">Amara · Pro</p>
-              <p className="text-[11px] text-ink-3">Bids on hair jobs</p>
+              <Avatar name="Amara Okafor" hue={20} size="sm" />
+              <span>
+                <p className="text-xs font-semibold text-ink">Amara · Pro</p>
+                <p className="text-[11px] text-ink-3">Bids on hair jobs</p>
+              </span>
             </button>
           </div>
           <p className="mt-2.5 text-[11px] text-ink-3">

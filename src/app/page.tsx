@@ -247,12 +247,13 @@ export default async function LandingPage() {
                 delay={0.24}
                 className="relative z-10 ml-auto mt-[-18px] w-[82%] animate-float-slow sm:w-[70%]"
               >
-                <div className="rounded-2xl border border-night-line bg-night p-4 text-cream shadow-[0_24px_50px_-24px_rgb(36_24_38/0.6)]">
+                <div className="rounded-2xl border border-lilac/25 bg-night p-4 text-cream shadow-[0_24px_50px_-24px_rgb(36_24_38/0.6)]">
                   <div className="flex items-center gap-3">
                     <Avatar
                       name={latestBid.pro.name}
                       hue={latestBid.pro.avatarHue}
                       size="md"
+                      className="ring-2 ring-lilac/40 ring-offset-2 ring-offset-night"
                     />
                     <div className="min-w-0 flex-1">
                       <p className="truncate text-[13px] font-medium">
@@ -261,7 +262,7 @@ export default async function LandingPage() {
                           placed a bid
                         </span>
                       </p>
-                      <p className="truncate text-[11.5px] text-cream/55">
+                      <p className="truncate text-[11.5px] text-cream/65">
                         on “{latestBid.job.title}”
                       </p>
                     </div>
@@ -272,7 +273,7 @@ export default async function LandingPage() {
                   {(() => {
                     const pro = toProSummary(latestBid.pro);
                     return (
-                      <div className="mt-3 flex items-center gap-3 border-t border-cream/10 pt-3 text-[11px] text-cream/60">
+                      <div className="mt-3 flex items-center gap-3 border-t border-lilac/15 pt-3 text-[11px] text-cream/60">
                         <span className="inline-flex items-center gap-1">
                           <Star className="size-3 text-gold" />
                           {pro.rating ?? "New"}
@@ -492,7 +493,7 @@ export default async function LandingPage() {
         <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-4 py-10 sm:flex-row sm:items-center sm:px-6">
           <div>
             <Logo dark />
-            <p className="mt-3 max-w-xs text-xs leading-relaxed text-cream/40">
+            <p className="mt-3 max-w-xs text-xs leading-relaxed text-cream/60">
               The beauty bidding marketplace. Demo accounts:{" "}
               <span className="text-cream/70">ava@glossdemo.com</span> (client) ·{" "}
               <span className="text-cream/70">amara@glossdemo.com</span> (pro).

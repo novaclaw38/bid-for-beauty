@@ -7,12 +7,15 @@ export function StatCard({
   value,
   hint,
   tone = "brand",
+  emphasize = false,
 }: {
   icon: LucideIcon;
   label: string;
   value: string | number;
   hint?: string;
   tone?: "brand" | "sage" | "gold" | "ink";
+  /** Fills the whole card in the tone color, for the one stat that most needs a glance. */
+  emphasize?: boolean;
 }) {
   const tones = {
     brand: "bg-brand-soft text-brand",
@@ -20,14 +23,38 @@ export function StatCard({
     gold: "bg-warning-soft text-warning-ink",
     ink: "bg-ink/[0.07] text-ink",
   };
+  const emphasizedCard = {
+    brand: "border-brand/20 bg-brand-soft",
+    sage: "border-success/20 bg-success-soft",
+    gold: "border-warning/20 bg-warning-soft",
+    ink: "border-ink/15 bg-ink/[0.05]",
+  };
+  const emphasizedIcon = {
+    brand: "bg-brand text-brand-ink",
+    sage: "bg-success text-success-soft",
+    gold: "bg-warning text-warning-soft",
+    ink: "bg-ink text-cream",
+  };
   return (
-    <div className="rounded-2xl border border-line bg-surface p-5">
+    <div
+      className={cn(
+        "rounded-2xl border p-5",
+        emphasize ? emphasizedCard[tone] : "border-line bg-surface",
+      )}
+    >
       <div className="flex items-center justify-between">
-        <p className="text-[12.5px] font-medium text-ink-3">{label}</p>
+        <p
+          className={cn(
+            "text-[12.5px] font-medium",
+            emphasize ? "text-ink-2" : "text-ink-3",
+          )}
+        >
+          {label}
+        </p>
         <span
           className={cn(
             "flex size-8 items-center justify-center rounded-lg",
-            tones[tone],
+            emphasize ? emphasizedIcon[tone] : tones[tone],
           )}
         >
           <Icon className="size-4" />

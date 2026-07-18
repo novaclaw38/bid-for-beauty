@@ -9,12 +9,12 @@ export function Providers() {
       gap={8}
       toastOptions={{
         style: {
-          background: "#121214",
-          color: "#efece7",
-          border: "1px solid #2c2c30",
+          background: "var(--color-night)",
+          color: "var(--color-cream)",
+          border: "1px solid var(--color-night-line)",
           borderRadius: "14px",
           fontSize: "13.5px",
-          boxShadow: "0 16px 40px -12px rgb(23 24 26 / 0.45)",
+          boxShadow: "0 16px 40px -12px rgb(36 24 38 / 0.45)",
         },
       }}
     />

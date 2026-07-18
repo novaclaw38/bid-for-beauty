@@ -72,7 +72,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
             <Avatar name="Ava Whitfield" hue={14} size="lg" />
             <div>
               <p className="text-sm font-semibold text-cream">Ava Whitfield</p>
-              <p className="text-xs text-cream/50">Bride · Melville</p>
+              <p className="text-xs text-cream/60">Bride · Melville</p>
             </div>
           </div>
         </div>
@@ -88,7 +88,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
               className="rounded-2xl bg-cream/[0.06] p-4 ring-1 ring-cream/10 backdrop-blur"
             >
               <p className="font-display text-xl font-semibold text-cream">{s.k}</p>
-              <p className="mt-0.5 text-[11px] text-cream/50">{s.v}</p>
+              <p className="mt-0.5 text-[11px] text-cream/60">{s.v}</p>
             </div>
           ))}
         </div>

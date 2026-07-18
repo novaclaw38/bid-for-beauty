@@ -134,7 +134,7 @@ export default async function JobsPage({
         <EmptyState
           icon={Compass}
           title="The board is quiet"
-          description="No open jobs this second. New posts land all day — check back soon."
+          description="No open jobs this second. New posts land all day, so check back soon."
         />
       ) : (
         <>

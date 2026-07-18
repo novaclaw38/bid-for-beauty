@@ -209,7 +209,7 @@ async function main() {
           name: "Chloe Fontaine",
           email: "chloe@glossdemo.com",
           passwordHash: demoPassword,
-          bio: "BIAB & structured manicures. Nail health first, art second — actually, both first.",
+          bio: "BIAB & structured manicures. Nail health first, art second - actually, both first.",
           location: "Parkhurst, Johannesburg",
           specialties: ["nails"],
           rating: "4.7",
@@ -282,7 +282,7 @@ async function main() {
       clientId: morgan.id,
       title: "Editorial glam for portfolio shoot",
       description:
-        "Studio photoshoot for my founder portfolio — two looks (clean corporate + bold editorial). Shoot runs 3 hours in Braamfontein. Need camera-proof skin and someone comfortable making touch-ups between setups.",
+        "Studio photoshoot for my founder portfolio - two looks (clean corporate + bold editorial). Shoot runs 3 hours in Braamfontein. Need camera-proof skin and someone comfortable making touch-ups between setups.",
       category: "makeup",
       budgetMin: 2250,
       budgetMax: 3900,
@@ -308,7 +308,7 @@ async function main() {
       clientId: simone.id,
       title: "Silk press + trim for natural hair",
       description:
-        "4B/4C natural, shoulder length. Want a silk press with a light dusting trim — no big chop. Heat protectant is a must, and I'd love tips on making it last.",
+        "4B/4C natural, shoulder length. Want a silk press with a light dusting trim - no big chop. Heat protectant is a must, and I'd love tips on making it last.",
       category: "hair",
       budgetMin: 1350,
       budgetMax: 2250,
@@ -321,7 +321,7 @@ async function main() {
       clientId: vanessa.id,
       title: "Volume lash extensions, full set",
       description:
-        "Full volume set, D-curl, cat-eye map. I'm a side sleeper so retention matters — looking for an artist whose work genuinely lasts 3+ weeks.",
+        "Full volume set, D-curl, cat-eye map. I'm a side sleeper so retention matters - looking for an artist whose work genuinely lasts 3+ weeks.",
       category: "brows-lashes",
       budgetMin: 1950,
       budgetMax: 3000,
@@ -360,7 +360,7 @@ async function main() {
       clientId: ava.id,
       title: "Wedding makeup trial + day-of",
       description:
-        "Natural-glam bridal makeup with a trial beforehand. I cry easily, so waterproof everything. Day-of application at the venue (Maboneng) starting 9am, ceremony at 4pm — possible touch-up kit add-on.",
+        "Natural-glam bridal makeup with a trial beforehand. I cry easily, so waterproof everything. Day-of application at the venue (Maboneng) starting 9am, ceremony at 4pm - possible touch-up kit add-on.",
       category: "makeup",
       budgetMin: 4800,
       budgetMax: 8250,
@@ -386,7 +386,7 @@ async function main() {
       clientId: danielle.id,
       title: "Knotless box braids, waist length",
       description:
-        "Small knotless box braids, waist length, in a natural black. I have a sensitive scalp so no tight tension. Can provide the hair or add it to the quote — your call.",
+        "Small knotless box braids, waist length, in a natural black. I have a sensitive scalp so no tight tension. Can provide the hair or add it to the quote - your call.",
       category: "hair",
       budgetMin: 3000,
       budgetMax: 5100,
@@ -425,7 +425,7 @@ async function main() {
       clientId: vanessa.id,
       title: "Monthly facial membership trial",
       description:
-        "Looking for an esthetician open to a monthly recurring facial arrangement at a flat rate. Pausing this for now — reposting next season when my schedule settles.",
+        "Looking for an esthetician open to a monthly recurring facial arrangement at a flat rate. Pausing this for now - reposting next season when my schedule settles.",
       category: "skincare",
       budgetMin: 1500,
       budgetMax: 2400,
@@ -438,7 +438,7 @@ async function main() {
       clientId: danielle.id,
       title: "Haircuts for my two boys (5 and 8)",
       description:
-        "Both need back-to-school cuts — one wants a taper, the other just a clean-up. House call would be amazing since getting them to a shop is chaos. Saturday morning preferred.",
+        "Both need back-to-school cuts - one wants a taper, the other just a clean-up. House call would be amazing since getting them to a shop is chaos. Saturday morning preferred.",
       category: "barbering",
       budgetMin: 750,
       budgetMax: 1350,
@@ -471,7 +471,7 @@ async function main() {
       hoursAfterJob: 2,
       status: "pending",
       message:
-        "Congratulations! I've done 40+ bridal parties and work across all textures — 4C included, no upcharge surprises. Quote covers trial + day-of for all five, and I'll bring an assistant so we're done by 11am.",
+        "Congratulations! I've done 40+ bridal parties and work across all textures - 4C included, no upcharge surprises. Quote covers trial + day-of for all five, and I'll bring an assistant so we're done by 11am.",
     },
     {
       jobTitle: "Bridal updo for bride + 4 bridesmaids",
@@ -480,7 +480,7 @@ async function main() {
       hoursAfterJob: 4,
       status: "pending",
       message:
-        "Hi Ava — bridal hair is my bread and butter (60+ parties, including mixed-texture parties like yours). Price includes the trial, travel to Maboneng, and a touch-up kit for you.",
+        "Hi Ava - bridal hair is my bread and butter (60+ parties, including mixed-texture parties like yours). Price includes the trial, travel to Maboneng, and a touch-up kit for you.",
     },
     {
       jobTitle: "Bridal updo for bride + 4 bridesmaids",
@@ -489,7 +489,7 @@ async function main() {
       hoursAfterJob: 5,
       status: "pending",
       message:
-        "I primarily do makeup but regularly style for shoots and weddings. I could do a soft glam + hair bundle with your makeup post and save you on both — happy to share my bridal portfolio.",
+        "I primarily do makeup but regularly style for shoots and weddings. I could do a soft glam + hair bundle with your makeup post and save you on both - happy to share my bridal portfolio.",
     },
     // Gel-X (open)
     {
@@ -499,7 +499,7 @@ async function main() {
       hoursAfterJob: 3,
       status: "pending",
       message:
-        "Glazed chrome is literally my signature — I did the chrome looks for two SA Fashion Week shows this year. Evening slots are no problem, I keep Tuesdays and Thursdays open late.",
+        "Glazed chrome is literally my signature - I did the chrome looks for two SA Fashion Week shows this year. Evening slots are no problem, I keep Tuesdays and Thursdays open late.",
     },
     {
       jobTitle: "Gel-X full set with chrome art",
@@ -536,7 +536,7 @@ async function main() {
       hoursAfterJob: 10,
       status: "declined",
       message:
-        "Offering since I occasionally assist MUAs on set — I could cover the corporate look at a lower rate if budget is tight.",
+        "Offering since I occasionally assist MUAs on set - I could cover the corporate look at a lower rate if budget is tight.",
     },
     // Deep tissue (open)
     {
@@ -546,7 +546,7 @@ async function main() {
       hoursAfterJob: 1,
       status: "pending",
       message:
-        "Sports recovery is my specialty — I work with three marathoners on the same Sunday evening rotation. Table, sheets, and oils all included; I'd love to set you up recurring.",
+        "Sports recovery is my specialty - I work with three marathoners on the same Sunday evening rotation. Table, sheets, and oils all included; I'd love to set you up recurring.",
     },
     {
       jobTitle: "90-min deep tissue at home, weekly",
@@ -555,7 +555,7 @@ async function main() {
       hoursAfterJob: 3,
       status: "pending",
       message:
-        "Hi Grace, I combine deep tissue with cupping for runners — great for calf and hip tightness. Rate is per session, with a discount if you book a 6-pack upfront.",
+        "Hi Grace, I combine deep tissue with cupping for runners - great for calf and hip tightness. Rate is per session, with a discount if you book a 6-pack upfront.",
     },
     {
       jobTitle: "90-min deep tissue at home, weekly",
@@ -564,7 +564,7 @@ async function main() {
       hoursAfterJob: 6,
       status: "pending",
       message:
-        "Not my main lane but I've done sports massage for years — placing a lower bid in case the specialists book out. Licensed and insured.",
+        "Not my main lane but I've done sports massage for years - placing a lower bid in case the specialists book out. Licensed and insured.",
     },
     // Silk press (completed by amara)
     {
@@ -583,7 +583,7 @@ async function main() {
       hoursAfterJob: 9,
       status: "declined",
       message:
-        "Would love to take care of you — press, dusting trim, and a scalp treatment add-on included. I can come to Greenside Saturday.",
+        "Would love to take care of you - press, dusting trim, and a scalp treatment add-on included. I can come to Greenside Saturday.",
     },
     // Volume lashes (open)
     {
@@ -593,7 +593,7 @@ async function main() {
       hoursAfterJob: 4,
       status: "pending",
       message:
-        "Side sleeper — say less. I use lightweight 0.05 fibers and a retention-focused isolation technique; my volume clients average 3-4 weeks. Cat-eye D-curl mapped to your eye shape at consult.",
+        "Side sleeper - say less. I use lightweight 0.05 fibers and a retention-focused isolation technique; my volume clients average 3-4 weeks. Cat-eye D-curl mapped to your eye shape at consult.",
     },
     {
       jobTitle: "Volume lash extensions, full set",
@@ -611,7 +611,7 @@ async function main() {
       hoursAfterJob: 20,
       status: "withdrawn",
       message:
-        "Lash-certified esthetician here — booking my first quote, then realized my calendar conflicts next week. Withdrawing so you get accurate bids, but free for fills later this month!",
+        "Lash-certified esthetician here - booking my first quote, then realized my calendar conflicts next week. Withdrawing so you get accurate bids, but free for fills later this month!",
     },
     // Skin fade (awarded to marcus)
     {
@@ -621,7 +621,7 @@ async function main() {
       hoursAfterJob: 2,
       status: "accepted",
       message:
-        "7am house calls are my thing — I'm in Braamfontein by 6:45 live. Fade, beard sculpt, hot towel, out the door by 7:45. I'll text when I'm 10 min away.",
+        "7am house calls are my thing - I'm in Braamfontein by 6:45 live. Fade, beard sculpt, hot towel, out the door by 7:45. I'll text when I'm 10 min away.",
     },
     {
       jobTitle: "Skin fade + beard sculpt, house call",
@@ -630,7 +630,7 @@ async function main() {
       hoursAfterJob: 7,
       status: "declined",
       message:
-        "I take select barbering clients — could do the fade and beard at your place, though my earliest slot is 8am.",
+        "I take select barbering clients - could do the fade and beard at your place, though my earliest slot is 8am.",
     },
     // Hydrafacial (open)
     {
@@ -649,7 +649,7 @@ async function main() {
       hoursAfterJob: 8,
       status: "pending",
       message:
-        "Combining both is great as long as we go gentle — I'd do dermaplane first, then a hydrating Hydrafacial pass. I finish every session with gua sha lymphatic work, on the house.",
+        "Combining both is great as long as we go gentle - I'd do dermaplane first, then a hydrating Hydrafacial pass. I finish every session with gua sha lymphatic work, on the house.",
     },
     // Wedding makeup (open)
     {
@@ -659,7 +659,7 @@ async function main() {
       hoursAfterJob: 6,
       status: "pending",
       message:
-        "Waterproof is my default, not an upgrade — tear-proof lash strips, setting seals, and a mini touch-up kit for your clutch. Trial at my Rosebank studio, day-of at your venue by 8:45am sharp.",
+        "Waterproof is my default, not an upgrade - tear-proof lash strips, setting seals, and a mini touch-up kit for your clutch. Trial at my Rosebank studio, day-of at your venue by 8:45am sharp.",
     },
     {
       jobTitle: "Wedding makeup trial + day-of",
@@ -678,7 +678,7 @@ async function main() {
       hoursAfterJob: 5,
       status: "pending",
       message:
-        "BIAB is my whole philosophy — gentle e-file removal, nail rehab assessment, then a structured overlay that lets your natural nail grow under protection. Sheer nude shades on deck.",
+        "BIAB is my whole philosophy - gentle e-file removal, nail rehab assessment, then a structured overlay that lets your natural nail grow under protection. Sheer nude shades on deck.",
     },
     {
       jobTitle: "Acrylic removal + BIAB overlay",
@@ -697,7 +697,7 @@ async function main() {
       hoursAfterJob: 3,
       status: "accepted",
       message:
-        "Knotless, small, waist length — about 7 hours with two break pauses. Zero tension technique for sensitive scalps (feed-in, not anchored). I'll supply the hair; photo of the exact bundle sent before I buy.",
+        "Knotless, small, waist length - about 7 hours with two break pauses. Zero tension technique for sensitive scalps (feed-in, not anchored). I'll supply the hair; photo of the exact bundle sent before I buy.",
     },
     {
       jobTitle: "Knotless box braids, waist length",
@@ -725,7 +725,7 @@ async function main() {
       hoursAfterJob: 9,
       status: "declined",
       message:
-        "I can bring calming energy and a table to Parktown North — back-to-back 60s with a 10-minute reset between. Add aromatherapy if you'd like.",
+        "I can bring calming energy and a table to Parktown North - back-to-back 60s with a 10-minute reset between. Add aromatherapy if you'd like.",
     },
     // Microblading touch-up (open)
     {
@@ -735,7 +735,7 @@ async function main() {
       hoursAfterJob: 5,
       status: "pending",
       message:
-        "Working over existing pigment is fine as long as it's faded ~50% — I'll judge from your photos first. Touch-up includes mapping check, color refresh, and a 6-week perfecting session.",
+        "Working over existing pigment is fine as long as it's faded ~50% - I'll judge from your photos first. Touch-up includes mapping check, color refresh, and a 6-week perfecting session.",
     },
     {
       jobTitle: "Microblading touch-up (6-month)",
@@ -746,7 +746,7 @@ async function main() {
       message:
         "Licensed PMU artist. If the old pigment has warm undertones I'll neutralize before refreshing, so results-age clean. Consult photos welcome.",
     },
-    // Monthly facial (cancelled job — bids left hanging)
+    // Monthly facial (cancelled job - bids left hanging)
     {
       jobTitle: "Monthly facial membership trial",
       proEmail: "elena",
@@ -754,7 +754,7 @@ async function main() {
       hoursAfterJob: 6,
       status: "pending",
       message:
-        "Love this idea — I have a few monthly clients on a flat rate. We'd rotate hydrating, clarifying, and lifting facials seasonally.",
+        "Love this idea - I have a few monthly clients on a flat rate. We'd rotate hydrating, clarifying, and lifting facials seasonally.",
     },
     {
       jobTitle: "Monthly facial membership trial",
@@ -763,7 +763,7 @@ async function main() {
       hoursAfterJob: 15,
       status: "pending",
       message:
-        "Flat monthly works for me — 60-min custom facial each visit, first one discounted so you can test the fit.",
+        "Flat monthly works for me - 60-min custom facial each visit, first one discounted so you can test the fit.",
     },
     // Kids haircuts (open)
     {
@@ -773,7 +773,7 @@ async function main() {
       hoursAfterJob: 2,
       status: "pending",
       message:
-        "Dad of three — wiggly kids are my specialty. Taper for the big one, clean-up for the little guy, both done in about 45 minutes at your place. Saturday 9am works.",
+        "Dad of three - wiggly kids are my specialty. Taper for the big one, clean-up for the little guy, both done in about 45 minutes at your place. Saturday 9am works.",
     },
     {
       jobTitle: "Haircuts for my two boys (5 and 8)",
@@ -782,7 +782,7 @@ async function main() {
       hoursAfterJob: 7,
       status: "pending",
       message:
-        "I do kids' cuts at home with cartoons-friendly patience. Both boys in one visit, and I'll clean up the space after — no hair left behind.",
+        "I do kids' cuts at home with cartoons-friendly patience. Both boys in one visit, and I'll clean up the space after - no hair left behind.",
     },
   ];
 
@@ -821,7 +821,7 @@ async function main() {
   const jobCount = insertedJobs.length;
   const bidCount = insertedBids.length;
   console.log(
-    `Seeded ${18} users, ${jobCount} jobs, ${bidCount} bids. Demo login: ava@glossdemo.com / amara@glossdemo.com — password: demo1234`,
+    `Seeded ${18} users, ${jobCount} jobs, ${bidCount} bids. Demo login: ava@glossdemo.com / amara@glossdemo.com - password: demo1234`,
   );
 
   // Sanity: print latest job titles

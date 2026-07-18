@@ -18,7 +18,7 @@ export function JobCard({
     <Link
       href={`/dashboard/jobs/${job.id}`}
       className={cn(
-        "group relative flex flex-col rounded-2xl border border-line bg-surface p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-line-strong hover:shadow-[0_20px_44px_-20px_rgb(23_24_26/0.25)]",
+        "group relative flex flex-col rounded-2xl border border-line bg-surface p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-line-strong hover:shadow-[0_20px_44px_-20px_rgb(42_31_40/0.25)]",
         className,
       )}
     >

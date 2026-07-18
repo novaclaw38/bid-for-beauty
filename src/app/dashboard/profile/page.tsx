@@ -74,7 +74,7 @@ export default async function ProfilePage() {
           {user.role === "professional" && (
             <div className="dots relative overflow-hidden rounded-2xl bg-night p-5 text-cream">
               <div className="relative">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-cream/50">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-cream/60">
                   Your reputation
                 </p>
                 <div className="mt-4 grid grid-cols-2 gap-3">
@@ -83,17 +83,17 @@ export default async function ProfilePage() {
                     <p className="mt-2 font-display text-2xl font-semibold">
                       {user.rating ?? "New"}
                     </p>
-                    <p className="text-[11px] text-cream/50">Avg rating</p>
+                    <p className="text-[11px] text-cream/60">Avg rating</p>
                   </div>
                   <div className="rounded-xl bg-cream/[0.07] p-3.5 ring-1 ring-cream/10">
                     <Medal className="size-4 text-brand" />
                     <p className="mt-2 font-display text-2xl font-semibold">
                       {user.jobsCompleted}
                     </p>
-                    <p className="text-[11px] text-cream/50">Jobs done</p>
+                    <p className="text-[11px] text-cream/60">Jobs done</p>
                   </div>
                 </div>
-                <p className="mt-3.5 text-[11.5px] leading-relaxed text-cream/45">
+                <p className="mt-3.5 text-[11.5px] leading-relaxed text-cream/60">
                   Ratings grow automatically as you complete awarded jobs.
                 </p>
               </div>

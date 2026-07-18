@@ -51,7 +51,7 @@ export default async function NewJobPage() {
         <aside className="space-y-3">
           <div className="dots relative overflow-hidden rounded-2xl bg-night p-6 text-cream">
             <div className="relative">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-cream/50">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-cream/60">
                 Posting playbook
               </p>
               <p className="mt-2 font-display text-xl font-semibold leading-snug">

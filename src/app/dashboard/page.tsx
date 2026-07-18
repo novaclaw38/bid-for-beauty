@@ -110,6 +110,7 @@ async function ClientOverview({ userId, name }: { userId: string; name: string }
               label="Bids to review"
               value={pendingBidCount}
               tone="gold"
+              emphasize={pendingBidCount > 0}
             />
             <StatCard icon={BadgeCheck} label="In progress" value={awardedCount} tone="brand" />
             <StatCard icon={Trophy} label="Completed" value={completedCount} tone="ink" />
@@ -260,7 +261,13 @@ async function ProOverview({
       />
 
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-        <StatCard icon={Hourglass} label="Pending bids" value={pending} tone="gold" />
+        <StatCard
+          icon={Hourglass}
+          label="Pending bids"
+          value={pending}
+          tone="gold"
+          emphasize={pending > 0}
+        />
         <StatCard icon={Trophy} label="Won" value={won} tone="sage" />
         <StatCard
           icon={Compass}
@@ -326,7 +333,7 @@ async function ProOverview({
             <EmptyState
               icon={Gavel}
               title="No bids yet"
-              description="Place a bid and track it here — pending, won, or passed over."
+              description="Place a bid and track it here: pending, won, or passed over."
               action={
                 <Link href="/dashboard/jobs">
                   <Button variant="secondary">Browse open jobs</Button>
