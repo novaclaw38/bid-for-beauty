@@ -1,5 +1,13 @@
+import { setDefaultResultOrder } from "node:dns";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
+
+// The database host advertises both AAAA and A records. On a network without
+// working IPv6 egress, Node tries the AAAA addresses first and every new
+// connection stalls until it times out (ETIMEDOUT), which surfaces as
+// intermittent 500s on any request that touches the database. Preferring IPv4
+// keeps connection setup on the route that actually works.
+setDefaultResultOrder("ipv4first");
 
 const databaseUrl = process.env.DATABASE_URL;
 

@@ -22,14 +22,18 @@ export const PATCH = withAuth(async (req: Request) => {
     return jsonError("One or more photos don't belong to you.", 403);
   }
 
-  await Promise.all(
-    orderedIds.map((id, index) =>
-      db
+  // One transaction so a reorder is all-or-nothing: a partial failure partway
+  // through would otherwise leave positions inconsistent (duplicates or gaps).
+  // Sequential updates on a single pooled connection also avoid opening one
+  // connection per photo.
+  await db.transaction(async (tx) => {
+    for (const [index, id] of orderedIds.entries()) {
+      await tx
         .update(proPhotos)
         .set({ position: index })
-        .where(and(eq(proPhotos.id, id), eq(proPhotos.proId, user.id))),
-    ),
-  );
+        .where(and(eq(proPhotos.id, id), eq(proPhotos.proId, user.id)));
+    }
+  });
 
   return Response.json({ ok: true });
 });
