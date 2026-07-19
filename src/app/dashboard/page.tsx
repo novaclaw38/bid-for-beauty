@@ -149,7 +149,7 @@ async function ClientOverview({ userId, name }: { userId: string; name: string }
                         <span className="text-xs text-ink-3">
                           {countMap.get(job.id) ?? 0} bid
                           {(countMap.get(job.id) ?? 0) === 1 ? "" : "s"} ·{" "}
-                          {formatCurrency(job.budgetMin)}–{formatCurrency(job.budgetMax)}
+                          {formatCurrency(job.budgetMin)}-{formatCurrency(job.budgetMax)}
                         </span>
                       </div>
                     </div>

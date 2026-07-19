@@ -144,7 +144,7 @@ export default async function MyBidsPage({
                       {formatCurrency(bid.amount)}
                     </p>
                     <p className="text-[11px] text-ink-3">
-                      budget {formatCurrency(job.budgetMin)}–
+                      budget {formatCurrency(job.budgetMin)}-
                       {formatCurrency(job.budgetMax)} · {categoryLabel(job.category)}
                     </p>
                   </div>

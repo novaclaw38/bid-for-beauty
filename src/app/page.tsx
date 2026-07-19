@@ -21,7 +21,7 @@ import { db } from "@/db";
 import { bids, jobs, users } from "@/db/schema";
 import { CATEGORIES, categoryLabel } from "@/lib/constants";
 import { toJobCardData, toProSummary } from "@/lib/serialize";
-import { formatCurrency } from "@/lib/utils";
+import { cn, formatCurrency } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
@@ -152,22 +152,6 @@ export default async function LandingPage() {
                 </Link>
               </div>
             </Reveal>
-            <Reveal immediate delay={0.24}>
-              <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2.5 text-sm text-ink-3">
-                <span className="flex items-center gap-1.5">
-                  <BadgeCheck aria-hidden className="size-4 text-success" />
-                  Vetted pros
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <CircleDollarSign aria-hidden className="size-4 text-gold" />
-                  No platform fees
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Star aria-hidden className="size-4 text-brand" />
-                  4.8 avg rating
-                </span>
-              </div>
-            </Reveal>
           </div>
 
           {/* Editorial hero visual: photo anchor + live proof cards overlapping */}
@@ -222,7 +206,7 @@ export default async function LandingPage() {
                     </span>
                     <span className="inline-flex items-center gap-1.5">
                       <Calendar className="size-3.5" />
-                      Budget {formatCurrency(heroJob.job.budgetMin)}–
+                      Budget {formatCurrency(heroJob.job.budgetMin)}-
                       {formatCurrency(heroJob.job.budgetMax)}
                     </span>
                   </div>
@@ -302,8 +286,26 @@ export default async function LandingPage() {
           </div>
         </div>
 
+        {/* Trust strip */}
+        <div className="relative border-t border-line">
+          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-2.5 px-4 py-4 text-sm text-ink-3 sm:px-6">
+            <span className="flex items-center gap-1.5">
+              <BadgeCheck aria-hidden className="size-4 text-success" />
+              Vetted pros
+            </span>
+            <span className="flex items-center gap-1.5">
+              <CircleDollarSign aria-hidden className="size-4 text-gold" />
+              No platform fees
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Star aria-hidden className="size-4 text-brand" />
+              4.8 avg rating
+            </span>
+          </div>
+        </div>
+
         {/* Stats strip */}
-        <div className="relative border-y border-line bg-surface/70">
+        <div className="relative border-b border-line bg-surface/70">
           <div className="mx-auto grid max-w-6xl grid-cols-3 divide-x divide-line px-4 sm:px-6">
             {[
               { value: String(openStats?.count ?? 0), label: "Open jobs" },
@@ -365,41 +367,72 @@ export default async function LandingPage() {
               <span className="accent-italic">best self</span>
             </h2>
           </Reveal>
-          <div className="mt-12 grid gap-4 md:grid-cols-3">
+          <div className="mt-12 grid gap-4 md:grid-cols-2">
             {[
               {
                 icon: MousePointerClick,
                 step: "01",
                 title: "Post your job",
                 body: "Describe what you need: a knotless install, bridal glam, or a lash fill. Set your budget range and preferred date.",
+                featured: true,
               },
               {
                 icon: Search,
                 step: "02",
                 title: "Compare the bids",
                 body: "Professionals send offers with their price and pitch. Stack up ratings, specialties, and rates side by side.",
+                featured: false,
               },
               {
                 icon: Gavel,
                 step: "03",
                 title: "Award the winner",
                 body: "Accept the bid you love. The job is booked, the pro is locked in, and everyone else is politely released.",
+                featured: false,
               },
             ].map((s, i) => (
-              <Reveal key={s.step} delay={0.08 * i}>
-                <div className="group relative h-full rounded-3xl border border-line bg-surface p-7 transition-all hover:-translate-y-1 hover:shadow-[0_24px_50px_-24px_rgb(42_31_40/0.28)]">
-                  <div className="flex items-center justify-between">
-                    <span className="flex size-11 items-center justify-center rounded-2xl bg-brand-soft text-brand">
+              <Reveal
+                key={s.step}
+                delay={0.08 * i}
+                className={s.featured ? "md:col-span-2" : undefined}
+              >
+                <div
+                  className={cn(
+                    "group relative h-full rounded-3xl border p-7 transition-all hover:-translate-y-1 hover:shadow-[0_24px_50px_-24px_rgb(42_31_40/0.28)]",
+                    s.featured
+                      ? "border-brand/20 bg-brand-soft md:flex md:items-center md:gap-8"
+                      : "border-line bg-surface",
+                  )}
+                >
+                  <div className={cn("flex items-center justify-between", s.featured && "md:shrink-0")}>
+                    <span
+                      className={cn(
+                        "flex size-11 items-center justify-center rounded-2xl",
+                        s.featured ? "bg-brand text-brand-ink" : "bg-brand-soft text-brand",
+                      )}
+                    >
                       <s.icon className="size-5" />
                     </span>
-                    <span className="font-display text-4xl font-light text-line-strong transition-colors group-hover:text-brand/40">
+                    <span
+                      className={cn(
+                        "font-display text-4xl font-light transition-colors group-hover:text-brand/40",
+                        s.featured ? "text-brand/30 md:hidden" : "text-line-strong",
+                      )}
+                    >
                       {s.step}
                     </span>
                   </div>
-                  <h3 className="mt-5 font-display text-xl font-semibold text-ink">
-                    {s.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-2">{s.body}</p>
+                  <div className={s.featured ? "mt-5 md:mt-0" : undefined}>
+                    <h3
+                      className={cn(
+                        "font-display text-xl font-semibold text-ink",
+                        s.featured && "md:text-2xl",
+                      )}
+                    >
+                      {s.title}
+                    </h3>
+                    <p className="mt-2 max-w-md text-sm leading-relaxed text-ink-2">{s.body}</p>
+                  </div>
                 </div>
               </Reveal>
             ))}
@@ -425,7 +458,7 @@ export default async function LandingPage() {
                 href="/auth/signup?role=pro"
                 className="inline-flex h-11 shrink-0 items-center gap-2 rounded-full bg-ink px-5 text-sm font-medium text-cream transition-colors hover:bg-night-2"
               >
-                Start bidding
+                I&apos;m a professional
                 <ArrowRight className="size-4" />
               </Link>
             </div>
@@ -484,14 +517,14 @@ export default async function LandingPage() {
                   href="/auth/signup?role=client"
                   className="inline-flex h-12 items-center gap-2 rounded-full bg-brand px-6 text-[15px] font-medium text-brand-ink transition-all hover:bg-brand-deep active:scale-[0.98]"
                 >
-                  Post your first job
+                  Post a job for free
                   <ArrowRight className="size-4" />
                 </Link>
                 <Link
                   href="/auth/signup?role=pro"
                   className="inline-flex h-12 items-center gap-2 rounded-full px-6 text-[15px] font-medium text-cream ring-1 ring-cream/25 transition-all hover:bg-cream/10"
                 >
-                  Bid on jobs
+                  I&apos;m a professional
                 </Link>
               </div>
             </div>

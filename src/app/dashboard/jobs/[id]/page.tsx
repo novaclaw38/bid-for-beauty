@@ -74,7 +74,7 @@ export default async function JobDetailPage({
     {
       icon: Receipt,
       label: "Budget",
-      value: `${formatCurrency(job.budgetMin)} – ${formatCurrency(job.budgetMax)}`,
+      value: `${formatCurrency(job.budgetMin)} - ${formatCurrency(job.budgetMax)}`,
     },
     { icon: Timer, label: "Posted", value: timeAgo(job.createdAt) },
   ];
@@ -140,7 +140,7 @@ export default async function JobDetailPage({
               <BidBoard
                 bids={boardBids}
                 jobStatus={job.status}
-                currencyNote={`budget ${formatCurrency(job.budgetMin)}–${formatCurrency(job.budgetMax)}`}
+                currencyNote={`budget ${formatCurrency(job.budgetMin)}-${formatCurrency(job.budgetMax)}`}
               />
             ) : (
               <div className="flex items-center gap-3.5 rounded-2xl border border-dashed border-line-strong bg-surface/60 p-5">

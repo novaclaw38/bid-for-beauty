@@ -78,7 +78,7 @@ export function JobCard({
         </div>
         <p className="font-display text-[15px] font-semibold text-ink">
           {formatCurrency(job.budgetMin)}
-          <span className="mx-1 text-ink-3">–</span>
+          <span className="mx-1 text-ink-3">-</span>
           {formatCurrency(job.budgetMax)}
         </p>
       </div>

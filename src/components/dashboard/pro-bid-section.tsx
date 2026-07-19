@@ -291,7 +291,7 @@ export function ProBidSection({
         <div>
           <h3 className="text-sm font-semibold text-ink">Place your bid</h3>
           <p className="text-[11.5px] text-ink-3">
-            Client budget: {formatCurrency(budgetMin)}–{formatCurrency(budgetMax)}
+            Client budget: {formatCurrency(budgetMin)}-{formatCurrency(budgetMax)}
           </p>
         </div>
       </div>
