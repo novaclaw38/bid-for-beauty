@@ -208,6 +208,7 @@ export function ProBidSection({
               variant="secondary"
               size="sm"
               className="flex-1"
+              disabled={busy}
               onClick={() => {
                 setAmount(String(myBid.amount));
                 setMessage(myBid.message);

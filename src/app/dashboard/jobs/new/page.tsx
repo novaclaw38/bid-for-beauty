@@ -43,7 +43,7 @@ export default async function NewJobPage() {
         description="Describe what you need and let professionals come to you with their best offers."
       />
 
-      <div className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.6fr_1fr]">
         <div className="rounded-2xl border border-line bg-surface p-6 sm:p-8">
           <JobForm mode="create" />
         </div>

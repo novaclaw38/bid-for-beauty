@@ -7,7 +7,7 @@ import { Avatar } from "@/components/ui/avatar";
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="grid min-h-screen lg:grid-cols-[1fr_1.1fr]">
+    <div className="grid min-h-screen grid-cols-1 lg:grid-cols-[1fr_1.1fr]">
       {/* Form side */}
       <div className="flex flex-col px-5 py-6 sm:px-10 lg:px-14">
         <div className="flex items-center justify-between">

@@ -89,7 +89,7 @@ export function JobForm({
       return "Describe the job in a bit more detail (30+ characters).";
     const min = Number(values.budgetMin);
     const max = Number(values.budgetMax);
-    if (!Number.isFinite(min) || min < 10) return "Minimum budget must be at least $10.";
+    if (!Number.isFinite(min) || min < 10) return "Minimum budget must be at least R10.";
     if (!Number.isFinite(max) || max < min)
       return "Maximum budget must be greater than the minimum.";
     if (values.location.trim().length < 2) return "Add a location.";

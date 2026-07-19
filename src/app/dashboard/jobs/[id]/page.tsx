@@ -98,7 +98,7 @@ export default async function JobDetailPage({
         {job.title}
       </h1>
 
-      <div className="mt-6 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
+      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[1.6fr_1fr]">
         {/* Left column */}
         <div className="space-y-6">
           {/* Meta grid */}
