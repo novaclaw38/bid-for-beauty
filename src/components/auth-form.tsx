@@ -7,6 +7,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Field, Input } from "@/components/ui/field";
+import { toggleChipClasses } from "@/components/ui/toggle-chip";
 import { CATEGORIES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
@@ -209,12 +210,7 @@ export function AuthForm({
                         type="button"
                         aria-pressed={active}
                         onClick={() => toggleSpecialty(cat.value)}
-                        className={cn(
-                          "rounded-full px-3.5 py-1.5 text-xs font-medium ring-1 ring-inset transition-all",
-                          active
-                            ? "bg-ink text-cream ring-ink"
-                            : "bg-surface text-ink-2 ring-line-strong hover:ring-ink-3",
-                        )}
+                        className={toggleChipClasses(active)}
                       >
                         {cat.label}
                       </button>

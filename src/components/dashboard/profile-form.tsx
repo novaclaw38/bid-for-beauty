@@ -96,14 +96,18 @@ export function ProfileForm({ user }: { user: SessionUser }) {
                 type="button"
                 aria-pressed={hue === h}
                 onClick={() => setHue(h)}
-                className={cn(
-                  "flex size-8 items-center justify-center rounded-full transition-transform hover:scale-110",
-                  hue === h && "ring-2 ring-ink ring-offset-2 ring-offset-surface",
-                )}
-                style={{ backgroundColor: `hsl(${h} 45% 55%)` }}
+                className="flex size-11 items-center justify-center rounded-full transition-transform hover:scale-110"
                 aria-label={`Hue ${h}`}
               >
-                {hue === h && <Check className="size-3.5 text-white" />}
+                <span
+                  className={cn(
+                    "flex size-8 items-center justify-center rounded-full",
+                    hue === h && "ring-2 ring-ink ring-offset-2 ring-offset-surface",
+                  )}
+                  style={{ backgroundColor: `hsl(${h} 45% 55%)` }}
+                >
+                  {hue === h && <Check className="size-3.5 text-white" />}
+                </span>
               </button>
             ))}
           </div>

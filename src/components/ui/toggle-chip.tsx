@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
  */
 export function toggleChipClasses(active: boolean, className?: string) {
   return cn(
-    "inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium ring-1 ring-inset transition-all",
+    "inline-flex min-h-11 items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium ring-1 ring-inset transition-all",
     active
       ? "bg-ink text-cream ring-ink"
       : "bg-surface text-ink-2 ring-line-strong hover:ring-ink-3",
