@@ -190,7 +190,7 @@ export function BidBoard({
                         </div>
                         {bid.pro.photos.length > 0 && (
                           <Link
-                            href={`/dashboard/pros/${bid.pro.id}`}
+                            href={`/pros/${bid.pro.id}`}
                             className="mt-2 flex items-center gap-1.5"
                             aria-label={`View ${bid.pro.name}'s work`}
                           >

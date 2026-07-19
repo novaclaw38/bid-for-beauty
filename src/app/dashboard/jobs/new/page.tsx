@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 export default async function NewJobPage() {
   const user = await getCurrentUser();
   if (!user) redirect("/auth/login");
-  if (user.role !== "client") redirect("/dashboard/jobs");
+  if (user.role !== "client") redirect("/dashboard/jobs?denied=post-job");
 
   const tips = [
     {

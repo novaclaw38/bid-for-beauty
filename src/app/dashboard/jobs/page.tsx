@@ -3,6 +3,7 @@ import { desc, eq, sql } from "drizzle-orm";
 import { Briefcase, CirclePlus, Compass, Telescope } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { DeniedToast } from "@/components/dashboard/denied-toast";
 import { JobsFilterBar } from "@/components/dashboard/jobs-filter-bar";
 import { PageHeader } from "@/components/dashboard/page-header";
 import { JobCard } from "@/components/job-card";
@@ -52,6 +53,7 @@ export default async function JobsPage({
 
     return (
       <div>
+        <DeniedToast />
         <PageHeader
           title="My Jobs"
           description="Every job you've posted. Track bids, award winners, and manage bookings."
@@ -125,6 +127,7 @@ export default async function JobsPage({
 
   return (
     <div>
+      <DeniedToast />
       <PageHeader
         title="Find Jobs"
         description="Open jobs from clients looking for pros like you. Bid well, bid honestly."

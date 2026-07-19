@@ -545,10 +545,16 @@ export default async function LandingPage() {
           <div>
             <Logo dark />
             <p className="mt-3 max-w-xs text-xs leading-relaxed text-cream/60">
-              The beauty bidding marketplace. Demo accounts:{" "}
-              <span className="text-cream/70">ava@glossdemo.com</span> (client) ·{" "}
-              <span className="text-cream/70">amara@glossdemo.com</span> (pro).
-              Password <span className="text-cream/70">demo1234</span>
+              The beauty bidding marketplace.
+              {process.env.NODE_ENV !== "production" ? (
+                <>
+                  {" "}
+                  Demo accounts:{" "}
+                  <span className="text-cream/70">ava@glossdemo.com</span> (client) ·{" "}
+                  <span className="text-cream/70">amara@glossdemo.com</span> (pro).
+                  Password <span className="text-cream/70">demo1234</span>
+                </>
+              ) : null}
             </p>
           </div>
           <div className="flex items-center gap-6 text-sm">
