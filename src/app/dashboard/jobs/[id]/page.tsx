@@ -1,4 +1,4 @@
-import { desc, eq } from "drizzle-orm";
+import { desc, eq, inArray } from "drizzle-orm";
 import {
   ArrowLeft,
   Calendar,
@@ -15,7 +15,7 @@ import { ProBidSection } from "@/components/dashboard/pro-bid-section";
 import { Avatar } from "@/components/ui/avatar";
 import { CategoryPill, JobStatusPill } from "@/components/ui/pill";
 import { db } from "@/db";
-import { bids, jobs, users } from "@/db/schema";
+import { bids, jobs, proPhotos, users } from "@/db/schema";
 import { getCurrentUser } from "@/lib/auth";
 import { toClientSummary, toJobCardData, toProSummary } from "@/lib/serialize";
 import { formatCurrency, formatDate, timeAgo } from "@/lib/utils";
@@ -51,6 +51,22 @@ export default async function JobDetailPage({
     .where(eq(bids.jobId, job.id))
     .orderBy(desc(bids.createdAt));
 
+  const proIds = [...new Set(bidRows.map((b) => b.pro.id))];
+  const photoRows =
+    proIds.length > 0
+      ? await db
+          .select({ proId: proPhotos.proId, url: proPhotos.url })
+          .from(proPhotos)
+          .where(inArray(proPhotos.proId, proIds))
+          .orderBy(proPhotos.position)
+      : [];
+  const photosByPro = new Map<string, string[]>();
+  for (const row of photoRows) {
+    const list = photosByPro.get(row.proId) ?? [];
+    if (list.length < 3) list.push(row.url);
+    photosByPro.set(row.proId, list);
+  }
+
   const activeBidCount = bidRows.filter(
     (b) => b.bid.status === "pending" || b.bid.status === "accepted",
   ).length;
@@ -65,7 +81,7 @@ export default async function JobDetailPage({
     status: bid.status,
     createdAt: bid.createdAt.toISOString(),
     createdAgo: timeAgo(bid.createdAt),
-    pro: toProSummary(pro),
+    pro: toProSummary(pro, photosByPro.get(pro.id) ?? []),
   }));
 
   const meta = [

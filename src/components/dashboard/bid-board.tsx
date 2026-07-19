@@ -2,6 +2,8 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { Award, Hourglass, Star, ThumbsDown, ThumbsUp } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
@@ -186,6 +188,22 @@ export function BidBoard({
                             </span>
                           )}
                         </div>
+                        {bid.pro.photos.length > 0 && (
+                          <Link
+                            href={`/dashboard/pros/${bid.pro.id}`}
+                            className="mt-2 flex items-center gap-1.5"
+                            aria-label={`View ${bid.pro.name}'s work`}
+                          >
+                            {bid.pro.photos.map((url, i) => (
+                              <span
+                                key={i}
+                                className="relative size-8 overflow-hidden rounded-lg border border-line"
+                              >
+                                <Image src={url} alt="" fill sizes="32px" className="object-cover" />
+                              </span>
+                            ))}
+                          </Link>
+                        )}
                       </div>
                     </div>
                     <div className="text-right">
