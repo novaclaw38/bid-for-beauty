@@ -18,7 +18,6 @@ Out of scope (explicitly deferred):
 - Editing user profile content as an admin
 - Any bid-level admin actions beyond what force-cancelling the parent job covers
 - A dedicated audit-log page (the overview page's recent-activity feed is enough at this scale)
-- Automated tests (no test infra exists in this repo yet; verified manually — see Testing)
 
 ## Access control
 
@@ -87,9 +86,11 @@ All three follow the existing `withAuth`/`jsonError` pattern from `src/lib/api.t
 
 ## Testing
 
-No Playwright/Vitest suite exists in this repo. Verification is manual, against the dev database:
-1. Promote a test user to `role = "admin"` directly in the DB, confirm they land on `/dashboard/admin` and cannot reach `/dashboard/jobs` etc.
+Playwright (`@playwright/test`) is now set up in this repo (`playwright.config.ts`, `e2e/`, `npm run test:e2e`). Coverage for this feature:
+1. Promote a test user to `role = "admin"` directly in the DB (seed/fixture), confirm they land on `/dashboard/admin` and cannot reach `/dashboard/jobs` etc.
 2. Suspend a test user, confirm their next authenticated request (e.g. loading `/dashboard`) is rejected; reinstate, confirm access returns.
 3. Force-cancel an open job as admin, confirm `jobs.status` flips and the job owner's UI reflects it.
 4. Mark a pending fee paid, and separately waive a different pending fee; confirm `platform_fee_status` and `platform_fee_paid_at`/note land correctly, and that each shows the right state on `/dashboard/admin/fees`.
 5. Confirm `admin_actions` gets one row per action above, and the overview page's recent-activity feed reflects them.
+
+These become real `e2e/admin-*.spec.ts` files during implementation rather than manual-only checks.
