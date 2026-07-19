@@ -29,6 +29,7 @@ export default async function JobsPage({
 }) {
   const user = await getCurrentUser();
   if (!user) redirect("/auth/login");
+  if (user.role === "admin") redirect("/dashboard/admin");
 
   const { f = "all", q = "" } = await searchParams;
 
