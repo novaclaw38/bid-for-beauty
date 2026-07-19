@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+import { asc, eq } from "drizzle-orm";
 import { BadgeCheck, Mail, Medal, Star } from "lucide-react";
 import { redirect } from "next/navigation";
+import { PhotoGallery } from "@/components/dashboard/photo-gallery";
 import { ProfileForm } from "@/components/dashboard/profile-form";
 import { PageHeader } from "@/components/dashboard/page-header";
 import { Pill } from "@/components/ui/pill";
+import { db } from "@/db";
+import { proPhotos } from "@/db/schema";
 import { getCurrentUser } from "@/lib/auth";
 import { toSessionUser } from "@/lib/serialize";
 import { formatDate } from "@/lib/utils";
@@ -14,6 +18,15 @@ export const dynamic = "force-dynamic";
 export default async function ProfilePage() {
   const user = await getCurrentUser();
   if (!user) redirect("/auth/login");
+
+  const photos =
+    user.role === "professional"
+      ? await db
+          .select({ id: proPhotos.id, url: proPhotos.url })
+          .from(proPhotos)
+          .where(eq(proPhotos.proId, user.id))
+          .orderBy(asc(proPhotos.position))
+      : [];
 
   return (
     <div>
@@ -101,6 +114,18 @@ export default async function ProfilePage() {
           )}
         </aside>
       </div>
+
+      {user.role === "professional" && (
+        <div className="mt-6 rounded-2xl border border-line bg-surface p-6 sm:p-8">
+          <p className="font-display text-lg font-semibold text-ink">Your work</p>
+          <p className="mt-1 text-sm leading-relaxed text-ink-2">
+            Photos clients see on your profile and next to your bids.
+          </p>
+          <div className="mt-5">
+            <PhotoGallery photos={photos} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
