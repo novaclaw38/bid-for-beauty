@@ -11,7 +11,9 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { BidBoard } from "@/components/dashboard/bid-board";
 import { JobAdmin } from "@/components/dashboard/job-admin";
+import { PlatformFeeCard } from "@/components/dashboard/platform-fee-card";
 import { ProBidSection } from "@/components/dashboard/pro-bid-section";
+import { SearchParamToast } from "@/components/dashboard/search-param-toast";
 import { Avatar } from "@/components/ui/avatar";
 import { CategoryPill, JobStatusPill } from "@/components/ui/pill";
 import { db } from "@/db";
@@ -97,6 +99,14 @@ export default async function JobDetailPage({
 
   return (
     <div>
+      <SearchParamToast
+        param="fee"
+        tone="info"
+        messages={{
+          submitted: "Payment submitted — we'll confirm shortly.",
+          cancelled: "Payment cancelled. You can try again anytime.",
+        }}
+      />
       <Link
         href="/dashboard/jobs"
         className="inline-flex items-center gap-1.5 text-[13px] font-medium text-ink-3 transition-colors hover:text-ink"
@@ -179,6 +189,21 @@ export default async function JobDetailPage({
         {/* Right column */}
         <div className="space-y-4">
           {isOwner && <JobAdmin job={cardData} />}
+          {isPro &&
+            !isOwner &&
+            myBidRow?.bid.status === "accepted" &&
+            myBidRow.bid.platformFeeStatus &&
+            myBidRow.bid.platformFeeAmount !== null && (
+              <PlatformFeeCard
+                bidId={myBidRow.bid.id}
+                jobId={job.id}
+                jobTitle={job.title}
+                feeAmount={myBidRow.bid.platformFeeAmount}
+                feeStatus={myBidRow.bid.platformFeeStatus}
+                proName={user.name}
+                proEmail={user.email}
+              />
+            )}
           {isPro && !isOwner && (
             <ProBidSection
               jobId={job.id}

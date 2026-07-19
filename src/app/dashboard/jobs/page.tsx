@@ -3,8 +3,8 @@ import { desc, eq, sql } from "drizzle-orm";
 import { Briefcase, CirclePlus, Compass, Telescope } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { DeniedToast } from "@/components/dashboard/denied-toast";
 import { JobsFilterBar } from "@/components/dashboard/jobs-filter-bar";
+import { SearchParamToast } from "@/components/dashboard/search-param-toast";
 import { PageHeader } from "@/components/dashboard/page-header";
 import { JobCard } from "@/components/job-card";
 import { Button } from "@/components/ui/button";
@@ -53,7 +53,7 @@ export default async function JobsPage({
 
     return (
       <div>
-        <DeniedToast />
+        <SearchParamToast param="denied" messages={{ "post-job": "Only clients can post jobs. Bid on one instead?" }} />
         <PageHeader
           title="My Jobs"
           description="Every job you've posted. Track bids, award winners, and manage bookings."
@@ -127,7 +127,7 @@ export default async function JobsPage({
 
   return (
     <div>
-      <DeniedToast />
+      <SearchParamToast param="denied" messages={{ "post-job": "Only clients can post jobs. Bid on one instead?" }} />
       <PageHeader
         title="Find Jobs"
         description="Open jobs from clients looking for pros like you. Bid well, bid honestly."

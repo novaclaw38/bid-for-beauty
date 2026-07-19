@@ -4,6 +4,7 @@ import { bids, jobs } from "@/db/schema";
 import { asInt, jsonError, readJson, withAuth } from "@/lib/api";
 import { requireUser } from "@/lib/auth";
 import { CATEGORIES } from "@/lib/constants";
+import { calculatePlatformFee } from "@/lib/payfast";
 
 const CATEGORY_VALUES = new Set(CATEGORIES.map((c) => c.value));
 
@@ -39,6 +40,23 @@ export const PATCH = withAuth(async (req: Request, { params }: Params) => {
         .update(jobs)
         .set({ status: "completed", updatedAt: new Date() })
         .where(eq(jobs.id, id));
+      if (job.awardedBidId) {
+        const [awardedBid] = await db
+          .select()
+          .from(bids)
+          .where(eq(bids.id, job.awardedBidId))
+          .limit(1);
+        if (awardedBid && awardedBid.platformFeeStatus === null) {
+          await db
+            .update(bids)
+            .set({
+              platformFeeAmount: calculatePlatformFee(awardedBid.amount),
+              platformFeeStatus: "pending",
+              updatedAt: new Date(),
+            })
+            .where(eq(bids.id, awardedBid.id));
+        }
+      }
       return Response.json({ ok: true, status: "completed" });
     }
     if (body.action === "cancel") {

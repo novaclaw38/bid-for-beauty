@@ -25,6 +25,10 @@ export const bidStatusEnum = pgEnum("bid_status", [
   "declined",
   "withdrawn",
 ]);
+export const platformFeeStatusEnum = pgEnum("platform_fee_status", [
+  "pending",
+  "paid",
+]);
 
 export const users = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -98,6 +102,12 @@ export const bids = pgTable(
     amount: integer("amount").notNull(),
     message: text("message").notNull(),
     status: bidStatusEnum("status").notNull().default("pending"),
+    // Platform success fee (5% of amount), owed once the job this bid won
+    // is marked completed. Null until the fee is created at that point.
+    platformFeeAmount: integer("platform_fee_amount"),
+    platformFeeStatus: platformFeeStatusEnum("platform_fee_status"),
+    payfastPaymentId: text("payfast_payment_id"),
+    platformFeePaidAt: timestamp("platform_fee_paid_at", { withTimezone: true }),
     createdAt: timestamp("created_at", { withTimezone: true })
       .notNull()
       .defaultNow(),
