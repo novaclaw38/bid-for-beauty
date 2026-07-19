@@ -151,6 +151,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
+/* Browser autofill (Chrome/Safari) paints its own background over inputs,
+   breaking the cream/surface palette the moment a field is autofilled. The
+   box-shadow trick swaps that fill for our surface color without touching
+   the (non-overridable) background-color autofill sets directly. */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--color-ink);
+  box-shadow: 0 0 0 1000px var(--color-surface) inset;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
 @keyframes float-slow {
   0%,
   100% {
