@@ -20,6 +20,21 @@ export function categoryColor(value: string): string {
   return CATEGORY_MAP.get(value as CategoryValue)?.color ?? "#78716C";
 }
 
+/** Editorial photo per category, used by the landing-page category grid. */
+export const CATEGORY_IMAGES: Record<CategoryValue, string> = {
+  hair: "/img/cat-hair.jpg",
+  nails: "/img/cat-nails.jpg",
+  makeup: "/img/cat-makeup.jpg",
+  skincare: "/img/cat-skincare.jpg",
+  massage: "/img/cat-massage.jpg",
+  "brows-lashes": "/img/cat-brows-lashes.jpg",
+  barbering: "/img/cat-barbering.jpg",
+};
+
+export function categoryImage(value: string): string | undefined {
+  return CATEGORY_IMAGES[value as CategoryValue];
+}
+
 export const JOB_STATUSES = ["open", "awarded", "completed", "cancelled"] as const;
 
 export const STATUS_META: Record<

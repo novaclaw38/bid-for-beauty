@@ -176,12 +176,102 @@ input:-webkit-autofill:focus {
   animation: float-slow 7s ease-in-out infinite;
 }
 
+/* Drives the <Marquee> track. The track renders its children twice, so a
+   -50% shift lands exactly on the duplicate and the loop seam is invisible. */
+@keyframes marquee-shift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Slow hue drift for the hero's ambient wash. */
+@keyframes aura-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.85;
+  }
+  33% {
+    transform: translate3d(3%, -4%, 0) scale(1.08);
+    opacity: 1;
+  }
+  66% {
+    transform: translate3d(-3%, 3%, 0) scale(0.96);
+    opacity: 0.9;
+  }
+}
+.animate-aura {
+  animation: aura-drift 18s ease-in-out infinite;
+}
+
+/* Sweeping sheen used on the CTA band and featured cards. */
+@keyframes sheen-sweep {
+  from {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  to {
+    transform: translateX(320%) skewX(-18deg);
+  }
+}
+.sheen::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 38%;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(255 255 255 / 0.16),
+    transparent
+  );
+  animation: sheen-sweep 6.5s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+.animate-twinkle {
+  animation: twinkle 3.4s ease-in-out infinite;
+}
+
+/* Photo tiles that bloom on hover (category grid, marquee cards). */
+.photo-zoom img {
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.photo-zoom:hover img {
+  transform: scale(1.07);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
   .animate-float-slow,
-  .animate-pulse {
+  .animate-pulse,
+  .animate-aura,
+  .animate-twinkle {
     animation: none;
+  }
+  .sheen::before {
+    animation: none;
+    opacity: 0;
+  }
+  .photo-zoom img,
+  .photo-zoom:hover img {
+    transition: none;
+    transform: none;
   }
 }

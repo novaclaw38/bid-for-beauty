@@ -15,11 +15,18 @@ import Link from "next/link";
 import { CategoryTile } from "@/components/category-icon";
 import { JobCard } from "@/components/job-card";
 import { Logo } from "@/components/logo";
+import {
+  CountUp,
+  Marquee,
+  Parallax,
+  ScrollProgress,
+  TiltCard,
+} from "@/components/motion-bits";
 import { Reveal } from "@/components/reveal";
 import { Avatar } from "@/components/ui/avatar";
 import { db } from "@/db";
 import { bids, jobs, users } from "@/db/schema";
-import { CATEGORIES, categoryLabel } from "@/lib/constants";
+import { CATEGORIES, categoryImage, categoryLabel } from "@/lib/constants";
 import { toJobCardData, toProSummary } from "@/lib/serialize";
 import { cn, formatCurrency } from "@/lib/utils";
 
@@ -81,8 +88,21 @@ export default async function LandingPage() {
     toJobCardData(r.job, r.client, countMap.get(r.job.id) ?? 0),
   );
 
+  // Editorial photo strip shown between the hero and the job board.
+  const strip = [
+    { src: "/img/editorial-florals.jpg", alt: "Blush ranunculus arranged around rose-gold makeup" },
+    { src: "/img/pro-nails-work.jpg", alt: "A nail technician shaping a client's nails" },
+    { src: "/img/salon-interior.jpg", alt: "A bright modern salon floor with styling chairs" },
+    { src: "/img/editorial-brushes.jpg", alt: "A jar of rose-gold makeup brushes" },
+    { src: "/img/cat-skincare.jpg", alt: "A clay mask being applied during a facial" },
+    { src: "/img/pro-makeup-artist.jpg", alt: "A makeup artist holding an eyeshadow palette" },
+    { src: "/img/nails-lilac.jpg", alt: "Lilac and silver manicure against a cream knit" },
+    { src: "/img/editorial-flatlay.jpg", alt: "Makeup products laid out on marble" },
+  ];
+
   return (
     <div className="min-h-screen">
+      <ScrollProgress />
       {/* ── Nav ─────────────────────────────────────── */}
       <header className="sticky top-0 z-40 border-b border-line/70 bg-paper/85 backdrop-blur-md">
         <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
@@ -166,27 +186,62 @@ export default async function LandingPage() {
             {/* Disciplined decoration: soft dual-tone wash behind the frame (no blob) */}
             <div
               aria-hidden
-              className="pointer-events-none absolute -inset-x-8 -top-10 -bottom-8 hidden lg:block [mask-image:radial-gradient(70%_70%_at_55%_40%,black,transparent)]"
+              className="animate-aura pointer-events-none absolute -inset-x-8 -top-10 -bottom-8 hidden lg:block [mask-image:radial-gradient(70%_70%_at_55%_40%,black,transparent)]"
               style={{
                 background:
                   "radial-gradient(38% 44% at 25% 18%, color-mix(in srgb, var(--color-brand) 24%, transparent), transparent 70%), radial-gradient(42% 40% at 88% 82%, color-mix(in srgb, var(--color-lilac) 28%, transparent), transparent 70%)",
               }}
             />
-            {/* Editorial portrait */}
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-line/70 shadow-[0_44px_90px_-44px_rgb(42_31_40/0.5)]">
-              <Image
-                src="/img/hero-hair.jpg"
-                alt="A client showing off her fresh balayage against a soft pink wall"
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 46vw"
-                className="object-cover"
-              />
-              <div
-                aria-hidden
-                className="absolute inset-0 bg-gradient-to-t from-night/30 via-transparent to-brand/10"
-              />
-            </div>
+
+            {/* Editorial portrait — drifts against scroll for depth */}
+            <Parallax strength={26}>
+              <TiltCard
+                max={5}
+                className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-line/70 shadow-[0_44px_90px_-44px_rgb(42_31_40/0.5)]"
+              >
+                <Image
+                  src="/img/hero-hair.jpg"
+                  alt="A client showing off her fresh balayage against a soft pink wall"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 46vw"
+                  className="object-cover"
+                />
+                <div
+                  aria-hidden
+                  className="absolute inset-0 bg-gradient-to-t from-night/30 via-transparent to-brand/10"
+                />
+              </TiltCard>
+            </Parallax>
+
+            {/* Secondary editorial inset — layers the hero into a collage */}
+            <Parallax
+              strength={-38}
+              className="pointer-events-none absolute -right-4 top-8 hidden w-32 lg:block xl:w-36"
+            >
+              <div className="overflow-hidden rounded-2xl border border-line/70 shadow-[0_26px_54px_-26px_rgb(42_31_40/0.5)]">
+                <Image
+                  src="/img/editorial-florals.jpg"
+                  alt=""
+                  aria-hidden
+                  width={280}
+                  height={280}
+                  sizes="150px"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            </Parallax>
+
+            {/* Sparkle accents */}
+            <span
+              aria-hidden
+              className="animate-twinkle pointer-events-none absolute -left-3 top-16 hidden size-2 rounded-full bg-brand lg:block"
+            />
+            <span
+              aria-hidden
+              className="animate-twinkle pointer-events-none absolute -left-6 top-32 hidden size-1.5 rounded-full bg-lilac lg:block"
+              style={{ animationDelay: "1.1s" }}
+            />
 
             {heroJob ? (
               <Reveal immediate delay={0.12} className="relative z-10 -mt-24 mr-auto w-[88%] sm:w-[76%]">
@@ -302,7 +357,7 @@ export default async function LandingPage() {
             </span>
             <span className="flex items-center gap-1.5">
               <CircleDollarSign aria-hidden className="size-4 text-gold" />
-              No platform fees
+              Free to post
             </span>
             <span className="flex items-center gap-1.5">
               <Star aria-hidden className="size-4 text-brand" />
@@ -315,13 +370,13 @@ export default async function LandingPage() {
         <div className="relative border-b border-line bg-surface/70">
           <div className="mx-auto grid max-w-6xl grid-cols-3 divide-x divide-line px-4 sm:px-6">
             {[
-              { value: String(openStats?.count ?? 0), label: "Open jobs" },
-              { value: String(proStats?.count ?? 0), label: "Vetted pros" },
-              { value: String(doneStats?.count ?? 0), label: "Jobs completed" },
+              { value: openStats?.count ?? 0, label: "Open jobs" },
+              { value: proStats?.count ?? 0, label: "Vetted pros" },
+              { value: doneStats?.count ?? 0, label: "Jobs completed" },
             ].map((s) => (
-              <div key={s.label} className="py-6 text-center sm:py-8">
-                <p className="font-display text-3xl font-semibold text-ink sm:text-4xl">
-                  {s.value}
+              <div key={s.label} className="group py-6 text-center sm:py-8">
+                <p className="font-display text-3xl font-semibold text-ink transition-colors group-hover:text-brand sm:text-4xl">
+                  <CountUp value={s.value} />
                 </p>
                 <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.14em] text-ink-3">
                   {s.label}
@@ -330,6 +385,26 @@ export default async function LandingPage() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* ── Editorial photo ticker ──────────────────── */}
+      <section aria-label="Work from the marketplace" className="border-b border-line py-6">
+        <Marquee speed={52}>
+          {strip.map((img) => (
+            <div
+              key={img.src}
+              className="photo-zoom relative h-36 w-52 shrink-0 overflow-hidden rounded-2xl border border-line/70 sm:h-44 sm:w-64"
+            >
+              <Image
+                src={img.src}
+                alt={img.alt}
+                fill
+                sizes="256px"
+                className="object-cover"
+              />
+            </div>
+          ))}
+        </Marquee>
       </section>
 
       {/* ── Live jobs ───────────────────────────────── */}
@@ -429,7 +504,7 @@ export default async function LandingPage() {
                       {s.step}
                     </span>
                   </div>
-                  <div className={s.featured ? "mt-5 md:mt-0" : undefined}>
+                  <div className={s.featured ? "mt-5 md:mt-0 md:flex-1" : undefined}>
                     <h3
                       className={cn(
                         "font-display text-xl font-semibold text-ink",
@@ -440,6 +515,19 @@ export default async function LandingPage() {
                     </h3>
                     <p className="mt-2 max-w-md text-sm leading-relaxed text-ink-2">{s.body}</p>
                   </div>
+                  {s.featured ? (
+                    <div className="photo-zoom mt-6 overflow-hidden rounded-2xl border border-brand/20 md:mt-0 md:w-64 md:shrink-0 lg:w-80">
+                      <Image
+                        src="/img/pro-makeup-artist.jpg"
+                        alt=""
+                        aria-hidden
+                        width={640}
+                        height={420}
+                        sizes="(max-width: 768px) 100vw, 320px"
+                        className="h-40 w-full object-cover md:h-44"
+                      />
+                    </div>
+                  ) : null}
                 </div>
               </Reveal>
             ))}
@@ -481,24 +569,57 @@ export default async function LandingPage() {
           </h2>
         </Reveal>
         <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-          {CATEGORIES.map((cat, i) => (
-            <Reveal key={cat.value} delay={0.05 * i}>
-              <div className="group flex h-full items-center gap-3.5 rounded-2xl border border-line bg-surface p-4 transition-all hover:-translate-y-0.5 hover:border-line-strong hover:shadow-[0_18px_36px_-20px_rgb(42_31_40/0.3)]">
-                <CategoryTile value={cat.value} color={cat.color} />
-                <div>
-                  <p className="text-sm font-semibold text-ink">{cat.label}</p>
-                  <p className="text-xs text-ink-3">
-                    {catCountMap.get(cat.value) ?? 0} open job
-                    {(catCountMap.get(cat.value) ?? 0) === 1 ? "" : "s"}
-                  </p>
+          {CATEGORIES.map((cat, i) => {
+            const count = catCountMap.get(cat.value) ?? 0;
+            const img = categoryImage(cat.value);
+            return (
+              <Reveal key={cat.value} delay={0.05 * i}>
+                <div className="photo-zoom group relative h-full min-h-44 overflow-hidden rounded-2xl border border-line transition-all hover:-translate-y-1 hover:border-line-strong hover:shadow-[0_26px_50px_-24px_rgb(42_31_40/0.42)]">
+                  {img ? (
+                    <Image
+                      src={img}
+                      alt=""
+                      aria-hidden
+                      fill
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                      className="object-cover"
+                    />
+                  ) : null}
+                  {/* Legibility scrim, warmed toward the category's own hue on hover */}
+                  <div
+                    aria-hidden
+                    className="absolute inset-0 bg-gradient-to-t from-night/85 via-night/45 to-night/10 transition-opacity"
+                  />
+                  <div
+                    aria-hidden
+                    className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                    style={{
+                      background: `linear-gradient(to top, ${cat.color}cc, transparent 65%)`,
+                    }}
+                  />
+                  <div className="relative flex h-full flex-col justify-between p-4">
+                    <CategoryTile
+                      value={cat.value}
+                      color={cat.color}
+                      className="bg-cream/90 backdrop-blur-sm"
+                    />
+                    <div>
+                      <p className="font-display text-[15px] font-semibold text-cream">
+                        {cat.label}
+                      </p>
+                      <p className="text-xs text-cream/70">
+                        {count} open job{count === 1 ? "" : "s"}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </Reveal>
-          ))}
+              </Reveal>
+            );
+          })}
           <Reveal delay={0.35}>
             <Link
               href="/auth/signup"
-              className="group flex h-full items-center justify-center gap-2 rounded-2xl border border-dashed border-line-strong bg-paper p-4 text-sm font-medium text-ink-2 transition-colors hover:border-brand hover:text-brand"
+              className="group flex h-full min-h-44 items-center justify-center gap-2 rounded-2xl border border-dashed border-line-strong bg-paper p-4 text-sm font-medium text-ink-2 transition-all hover:-translate-y-1 hover:border-brand hover:bg-brand-soft hover:text-brand"
             >
               Post yours
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
@@ -510,7 +631,28 @@ export default async function LandingPage() {
       {/* ── CTA ─────────────────────────────────────── */}
       <section className="px-4 pb-20 sm:px-6 lg:pb-28">
         <Reveal>
-          <div className="grain dots-light relative mx-auto max-w-6xl overflow-hidden rounded-[2.5rem] bg-night px-6 py-16 text-center sm:px-12 sm:py-24">
+          <div className="grain dots-light sheen relative mx-auto max-w-6xl overflow-hidden rounded-[2.5rem] bg-night px-6 py-16 text-center sm:px-12 sm:py-24">
+            {/* Photographic bed, dimmed hard so the cream type stays legible */}
+            <Image
+              src="/img/editorial-florals.jpg"
+              alt=""
+              aria-hidden
+              fill
+              sizes="(max-width: 1152px) 100vw, 1152px"
+              className="object-cover opacity-25"
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-gradient-to-br from-night/95 via-night/85 to-night-2/90"
+            />
+            <div
+              aria-hidden
+              className="animate-aura absolute inset-0 opacity-70"
+              style={{
+                background:
+                  "radial-gradient(40% 50% at 18% 20%, color-mix(in srgb, var(--color-brand) 30%, transparent), transparent 70%), radial-gradient(44% 46% at 84% 78%, color-mix(in srgb, var(--color-lilac) 26%, transparent), transparent 70%)",
+              }}
+            />
             <div className="relative">
               <h2 className="mx-auto max-w-2xl font-display text-4xl font-medium tracking-tight text-cream sm:text-5xl">
                 Ready when <span className="accent-italic">you</span> are.
