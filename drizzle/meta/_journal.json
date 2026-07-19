@@ -8,6 +8,13 @@
       "when": 1784485851468,
       "tag": "0000_add_platform_fee",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1784488500879,
+      "tag": "0001_add_admin_dashboard",
+      "breakpoints": true
     }
   ]
 }
