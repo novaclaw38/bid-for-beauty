@@ -26,7 +26,7 @@ export function toClientSummary(user: User): ClientSummary {
   };
 }
 
-export function toProSummary(user: User): ProSummary {
+export function toProSummary(user: User, photos: string[] = []): ProSummary {
   return {
     id: user.id,
     name: user.name,
@@ -35,6 +35,7 @@ export function toProSummary(user: User): ProSummary {
     rating: user.rating,
     jobsCompleted: user.jobsCompleted,
     specialties: user.specialties,
+    photos,
   };
 }
 

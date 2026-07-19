@@ -10,6 +10,7 @@ export interface ProSummary {
   rating: string | null;
   jobsCompleted: number;
   specialties: string[];
+  photos: string[];
 }
 
 export interface ClientSummary {
