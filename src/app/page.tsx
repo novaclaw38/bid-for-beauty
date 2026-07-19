@@ -26,47 +26,54 @@ import { cn, formatCurrency } from "@/lib/utils";
 export const dynamic = "force-dynamic";
 
 export default async function LandingPage() {
-  const openJobRows = await db
-    .select({ job: jobs, client: users })
-    .from(jobs)
-    .innerJoin(users, eq(jobs.clientId, users.id))
-    .where(eq(jobs.status, "open"))
-    .orderBy(desc(jobs.createdAt))
-    .limit(6);
+  const [
+    openJobRows,
+    counts,
+    [openStats],
+    [proStats],
+    [doneStats],
+    categoryCounts,
+    latestBidRows,
+  ] = await Promise.all([
+    db
+      .select({ job: jobs, client: users })
+      .from(jobs)
+      .innerJoin(users, eq(jobs.clientId, users.id))
+      .where(eq(jobs.status, "open"))
+      .orderBy(desc(jobs.createdAt))
+      .limit(6),
+    db
+      .select({ jobId: bids.jobId, count: sql<number>`count(*)::int` })
+      .from(bids)
+      .groupBy(bids.jobId),
+    db
+      .select({ count: sql<number>`count(*)::int` })
+      .from(jobs)
+      .where(eq(jobs.status, "open")),
+    db
+      .select({ count: sql<number>`count(*)::int` })
+      .from(users)
+      .where(eq(users.role, "professional")),
+    db
+      .select({ count: sql<number>`count(*)::int` })
+      .from(jobs)
+      .where(eq(jobs.status, "completed")),
+    db
+      .select({ category: jobs.category, count: sql<number>`count(*)::int` })
+      .from(jobs)
+      .where(eq(jobs.status, "open"))
+      .groupBy(jobs.category),
+    db
+      .select({ bid: bids, pro: users, job: jobs })
+      .from(bids)
+      .innerJoin(users, eq(bids.proId, users.id))
+      .innerJoin(jobs, eq(bids.jobId, jobs.id))
+      .orderBy(desc(bids.createdAt))
+      .limit(1),
+  ]);
 
-  const counts = await db
-    .select({ jobId: bids.jobId, count: sql<number>`count(*)::int` })
-    .from(bids)
-    .groupBy(bids.jobId);
   const countMap = new Map(counts.map((c) => [c.jobId, c.count]));
-
-  const [openStats] = await db
-    .select({ count: sql<number>`count(*)::int` })
-    .from(jobs)
-    .where(eq(jobs.status, "open"));
-  const [proStats] = await db
-    .select({ count: sql<number>`count(*)::int` })
-    .from(users)
-    .where(eq(users.role, "professional"));
-  const [doneStats] = await db
-    .select({ count: sql<number>`count(*)::int` })
-    .from(jobs)
-    .where(eq(jobs.status, "completed"));
-
-  const categoryCounts = await db
-    .select({ category: jobs.category, count: sql<number>`count(*)::int` })
-    .from(jobs)
-    .where(eq(jobs.status, "open"))
-    .groupBy(jobs.category);
   const catCountMap = new Map(categoryCounts.map((c) => [c.category, c.count]));
-
-  const latestBidRows = await db
-    .select({ bid: bids, pro: users, job: jobs })
-    .from(bids)
-    .innerJoin(users, eq(bids.proId, users.id))
-    .innerJoin(jobs, eq(bids.jobId, jobs.id))
-    .orderBy(desc(bids.createdAt))
-    .limit(1);
   const latestBid = latestBidRows[0];
 
   const heroJob = openJobRows[0];

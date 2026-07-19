@@ -2,7 +2,7 @@
 
 import { BadgeCheck, Gavel, PencilLine, PartyPopper, Undo2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
@@ -43,6 +43,11 @@ export function ProBidSection({
   const [busy, setBusy] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [withdrawOpen, setWithdrawOpen] = useState(false);
+  const errorRef = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    if (error) errorRef.current?.focus();
+  }, [error]);
 
   const suggestions = [
     budgetMin,
@@ -256,9 +261,11 @@ export function ProBidSection({
             </Field>
             {error && (
               <p
+                ref={errorRef}
                 role="alert"
                 aria-live="polite"
-                className="rounded-xl bg-danger-soft px-4 py-3 text-[13px] font-medium text-danger"
+                tabIndex={-1}
+                className="rounded-xl bg-danger-soft px-4 py-3 text-[13px] font-medium text-danger outline-none"
               >
                 {error}
               </p>

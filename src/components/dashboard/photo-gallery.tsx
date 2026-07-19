@@ -145,13 +145,13 @@ export function PhotoGallery({ photos: initialPhotos }: { photos: Photo[] }) {
               sizes="(max-width: 640px) 50vw, 220px"
               className="object-cover"
             />
-            <div className="absolute inset-0 flex items-center justify-center gap-1.5 bg-night/0 opacity-0 transition-all group-hover:bg-night/40 group-hover:opacity-100">
+            <div className="absolute inset-0 flex items-center justify-center gap-1.5 bg-night/35 opacity-100 transition-all [@media(hover:hover)]:bg-night/0 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:bg-night/40 [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-focus-within:bg-night/40 [@media(hover:hover)]:group-focus-within:opacity-100">
               <button
                 type="button"
                 aria-label="Move earlier"
                 disabled={i === 0 || busyId === photo.id}
                 onClick={() => void move(i, -1)}
-                className="flex size-8 items-center justify-center rounded-full bg-surface/90 text-ink transition-opacity hover:bg-surface disabled:opacity-40"
+                className="flex size-11 items-center justify-center rounded-full bg-surface/90 text-ink transition-opacity hover:bg-surface disabled:opacity-40"
               >
                 <ArrowUp className="size-4" />
               </button>
@@ -160,7 +160,7 @@ export function PhotoGallery({ photos: initialPhotos }: { photos: Photo[] }) {
                 aria-label="Move later"
                 disabled={i === photos.length - 1 || busyId === photo.id}
                 onClick={() => void move(i, 1)}
-                className="flex size-8 items-center justify-center rounded-full bg-surface/90 text-ink transition-opacity hover:bg-surface disabled:opacity-40"
+                className="flex size-11 items-center justify-center rounded-full bg-surface/90 text-ink transition-opacity hover:bg-surface disabled:opacity-40"
               >
                 <ArrowDown className="size-4" />
               </button>
@@ -169,7 +169,7 @@ export function PhotoGallery({ photos: initialPhotos }: { photos: Photo[] }) {
                 aria-label="Delete photo"
                 disabled={busyId === photo.id}
                 onClick={() => setPendingDeleteId(photo.id)}
-                className="flex size-8 items-center justify-center rounded-full bg-surface/90 text-danger transition-opacity hover:bg-danger-soft disabled:opacity-40"
+                className="flex size-11 items-center justify-center rounded-full bg-surface/90 text-danger transition-opacity hover:bg-danger-soft disabled:opacity-40"
               >
                 <Trash2 className="size-4" />
               </button>

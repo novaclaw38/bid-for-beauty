@@ -120,7 +120,7 @@ function SidebarContent({ user, onNavigate }: { user: SessionUser; onNavigate?: 
           </div>
           <button
             onClick={signOut}
-            className="rounded-lg p-2 text-cream/40 transition-colors hover:bg-cream/10 hover:text-cream"
+            className="flex size-11 shrink-0 items-center justify-center rounded-lg text-cream/40 transition-colors hover:bg-cream/10 hover:text-cream"
             aria-label="Sign out"
             title="Sign out"
           >
@@ -147,7 +147,7 @@ export function DashboardShell({ user, children }: { user: SessionUser; children
         <Logo dark />
         <button
           onClick={() => setMobileOpen(true)}
-          className="rounded-lg p-2 text-cream/70 transition-colors hover:bg-cream/10 hover:text-cream"
+          className="flex size-11 items-center justify-center rounded-lg text-cream/70 transition-colors hover:bg-cream/10 hover:text-cream"
           aria-label="Open menu"
         >
           <Menu className="size-5" />
@@ -174,7 +174,7 @@ export function DashboardShell({ user, children }: { user: SessionUser; children
             >
               <button
                 onClick={() => setMobileOpen(false)}
-                className="absolute -right-11 top-4 rounded-lg p-2 text-cream/80 hover:bg-cream/10"
+                className="absolute -right-11 top-4 flex size-11 items-center justify-center rounded-lg text-cream/80 hover:bg-cream/10"
                 aria-label="Close menu"
               >
                 <X className="size-5" />

@@ -2,7 +2,7 @@
 
 import { Check } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { toast } from "sonner";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,7 @@ import { Field, Input, Textarea } from "@/components/ui/field";
 import { toggleChipClasses } from "@/components/ui/toggle-chip";
 import { CATEGORIES } from "@/lib/constants";
 import type { SessionUser } from "@/lib/types";
+import { useUnsavedChangesGuard } from "@/lib/use-unsaved-changes-guard";
 import { cn } from "@/lib/utils";
 
 const HUES = [14, 40, 80, 120, 160, 195, 220, 250, 285, 320, 345, 0];
@@ -23,6 +24,7 @@ export function ProfileForm({ user }: { user: SessionUser }) {
   const [hue, setHue] = useState(user.avatarHue);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const errorRef = useRef<HTMLParagraphElement>(null);
 
   function toggleSpecialty(value: string) {
     setSpecialties((prev) =>
@@ -37,14 +39,11 @@ export function ProfileForm({ user }: { user: SessionUser }) {
     hue !== user.avatarHue ||
     JSON.stringify(specialties) !== JSON.stringify(user.specialties);
 
+  useUnsavedChangesGuard(dirty);
+
   useEffect(() => {
-    if (!dirty) return;
-    const handler = (e: BeforeUnloadEvent) => {
-      e.preventDefault();
-    };
-    window.addEventListener("beforeunload", handler);
-    return () => window.removeEventListener("beforeunload", handler);
-  }, [dirty]);
+    if (error) errorRef.current?.focus();
+  }, [error]);
 
   async function save(e: FormEvent) {
     e.preventDefault();
@@ -176,9 +175,11 @@ export function ProfileForm({ user }: { user: SessionUser }) {
 
       {error && (
         <p
+          ref={errorRef}
           role="alert"
           aria-live="polite"
-          className="rounded-xl bg-danger-soft px-4 py-3 text-[13px] font-medium text-danger"
+          tabIndex={-1}
+          className="rounded-xl bg-danger-soft px-4 py-3 text-[13px] font-medium text-danger outline-none"
         >
           {error}
         </p>

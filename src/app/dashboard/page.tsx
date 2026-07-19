@@ -42,26 +42,22 @@ export default async function DashboardOverview() {
 /* ─── Client ─────────────────────────────────────────── */
 
 async function ClientOverview({ userId, name }: { userId: string; name: string }) {
-  const myJobs = await db
-    .select()
-    .from(jobs)
-    .where(eq(jobs.clientId, userId))
-    .orderBy(desc(jobs.createdAt));
-
-  const counts = await db
-    .select({ jobId: bids.jobId, count: sql<number>`count(*)::int` })
-    .from(bids)
-    .groupBy(bids.jobId);
+  const [myJobs, counts, activity] = await Promise.all([
+    db.select().from(jobs).where(eq(jobs.clientId, userId)).orderBy(desc(jobs.createdAt)),
+    db
+      .select({ jobId: bids.jobId, count: sql<number>`count(*)::int` })
+      .from(bids)
+      .groupBy(bids.jobId),
+    db
+      .select({ bid: bids, job: jobs, pro: users })
+      .from(bids)
+      .innerJoin(jobs, eq(bids.jobId, jobs.id))
+      .innerJoin(users, eq(bids.proId, users.id))
+      .where(eq(jobs.clientId, userId))
+      .orderBy(desc(bids.createdAt))
+      .limit(6),
+  ]);
   const countMap = new Map(counts.map((c) => [c.jobId, c.count]));
-
-  const activity = await db
-    .select({ bid: bids, job: jobs, pro: users })
-    .from(bids)
-    .innerJoin(jobs, eq(bids.jobId, jobs.id))
-    .innerJoin(users, eq(bids.proId, users.id))
-    .where(eq(jobs.clientId, userId))
-    .orderBy(desc(bids.createdAt))
-    .limit(6);
 
   const openCount = myJobs.filter((j) => j.status === "open").length;
   const awardedCount = myJobs.filter((j) => j.status === "awarded").length;
@@ -213,25 +209,25 @@ async function ProOverview({
   name: string;
   specialties: string[];
 }) {
-  const myBids = await db
-    .select({ bid: bids, job: jobs })
-    .from(bids)
-    .innerJoin(jobs, eq(bids.jobId, jobs.id))
-    .where(eq(bids.proId, userId))
-    .orderBy(desc(bids.createdAt));
-
-  const matchingJobs = await db
-    .select({ job: jobs, client: users })
-    .from(jobs)
-    .innerJoin(users, eq(jobs.clientId, users.id))
-    .where(eq(jobs.status, "open"))
-    .orderBy(desc(jobs.createdAt))
-    .limit(24);
-
-  const counts = await db
-    .select({ jobId: bids.jobId, count: sql<number>`count(*)::int` })
-    .from(bids)
-    .groupBy(bids.jobId);
+  const [myBids, matchingJobs, counts] = await Promise.all([
+    db
+      .select({ bid: bids, job: jobs })
+      .from(bids)
+      .innerJoin(jobs, eq(bids.jobId, jobs.id))
+      .where(eq(bids.proId, userId))
+      .orderBy(desc(bids.createdAt)),
+    db
+      .select({ job: jobs, client: users })
+      .from(jobs)
+      .innerJoin(users, eq(jobs.clientId, users.id))
+      .where(eq(jobs.status, "open"))
+      .orderBy(desc(jobs.createdAt))
+      .limit(24),
+    db
+      .select({ jobId: bids.jobId, count: sql<number>`count(*)::int` })
+      .from(bids)
+      .groupBy(bids.jobId),
+  ]);
   const countMap = new Map(counts.map((c) => [c.jobId, c.count]));
   const myBidMap = new Map(myBids.map((b) => [b.bid.jobId, b.bid]));
 

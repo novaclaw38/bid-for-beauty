@@ -3,7 +3,7 @@
 import { Eye, EyeOff, Scissors, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Field, Input } from "@/components/ui/field";
@@ -29,6 +29,11 @@ export function AuthForm({
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const errorRef = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    if (error) errorRef.current?.focus();
+  }, [error]);
 
   function toggleSpecialty(value: string) {
     setSpecialties((prev) =>
@@ -174,7 +179,7 @@ export function AuthForm({
             <button
               type="button"
               onClick={() => setShowPassword((v) => !v)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-1 text-ink-3 transition-colors hover:text-ink"
+              className="absolute right-0 top-0 flex size-11 items-center justify-center rounded-full text-ink-3 transition-colors hover:text-ink"
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
               {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
@@ -223,9 +228,11 @@ export function AuthForm({
 
         {error && (
           <p
+            ref={errorRef}
             role="alert"
             aria-live="polite"
-            className="rounded-xl bg-danger-soft px-4 py-3 text-[13px] font-medium text-danger"
+            tabIndex={-1}
+            className="rounded-xl bg-danger-soft px-4 py-3 text-[13px] font-medium text-danger outline-none"
           >
             {error}
           </p>

@@ -1,12 +1,13 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { toast } from "sonner";
 import { CategoryTile } from "@/components/category-icon";
 import { Button } from "@/components/ui/button";
 import { Field, Input, Textarea } from "@/components/ui/field";
 import { CATEGORIES } from "@/lib/constants";
+import { useUnsavedChangesGuard } from "@/lib/use-unsaved-changes-guard";
 import { cn, toDateInput } from "@/lib/utils";
 
 export interface JobFormValues {
@@ -66,20 +67,18 @@ export function JobForm({
   const [values, setValues] = useState<JobFormValues>(initialValues);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const errorRef = useRef<HTMLParagraphElement>(null);
 
   const set = <K extends keyof JobFormValues>(key: K, value: JobFormValues[K]) =>
     setValues((v) => ({ ...v, [key]: value }));
 
   const dirty = JSON.stringify(values) !== JSON.stringify(initialValues);
 
+  useUnsavedChangesGuard(dirty);
+
   useEffect(() => {
-    if (!dirty) return;
-    const handler = (e: BeforeUnloadEvent) => {
-      e.preventDefault();
-    };
-    window.addEventListener("beforeunload", handler);
-    return () => window.removeEventListener("beforeunload", handler);
-  }, [dirty]);
+    if (error) errorRef.current?.focus();
+  }, [error]);
 
   function validate(): string | null {
     if (values.title.trim().length < 8)
@@ -237,9 +236,11 @@ export function JobForm({
 
       {error && (
         <p
+          ref={errorRef}
           role="alert"
           aria-live="polite"
-          className="rounded-xl bg-danger-soft px-4 py-3 text-[13px] font-medium text-danger"
+          tabIndex={-1}
+          className="rounded-xl bg-danger-soft px-4 py-3 text-[13px] font-medium text-danger outline-none"
         >
           {error}
         </p>
