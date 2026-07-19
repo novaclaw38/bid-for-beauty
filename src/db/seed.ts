@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { desc } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { db } from "./index";
 import { bids, jobs, sessions, users } from "./schema";
 import { hashPassword } from "../lib/password";
@@ -101,8 +101,19 @@ async function main() {
           location: "Parkhurst",
           avatarHue: 45,
         },
+        {
+          role: "admin" as const,
+          name: "Admin User",
+          email: "admin@glossdemo.com",
+          passwordHash: demoPassword,
+          location: "Sandton",
+          avatarHue: 0,
+        },
       ])
       .returning();
+
+  console.log("Suspending one demo user for testing…");
+  await db.update(users).set({ status: "suspended" }).where(eq(users.id, danielle.id));
 
   const [amara, sofia, jade, elena, maya, tiana, marcus, priya, chloe, isabella] =
     await db
@@ -803,7 +814,6 @@ async function main() {
   const insertedBids = await db.insert(bids).values(bidValues).returning();
 
   // Wire awarded jobs to their accepted bids
-  const { eq } = await import("drizzle-orm");
   for (const job of insertedJobs) {
     if (job.status === "awarded" || job.status === "completed") {
       const accepted = insertedBids.find(
@@ -821,7 +831,7 @@ async function main() {
   const jobCount = insertedJobs.length;
   const bidCount = insertedBids.length;
   console.log(
-    `Seeded ${18} users, ${jobCount} jobs, ${bidCount} bids. Demo login: ava@glossdemo.com / amara@glossdemo.com - password: demo1234`,
+    `Seeded 19 users, ${jobCount} jobs, ${bidCount} bids. Demo login: ava@glossdemo.com / amara@glossdemo.com - password: demo1234. Admin login: admin@glossdemo.com - password: demo1234. danielle@glossdemo.com is suspended for testing.`,
   );
 
   // Sanity: print latest job titles
