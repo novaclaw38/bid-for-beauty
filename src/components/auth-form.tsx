@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import { toast } from "sonner";
-import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Field, Input } from "@/components/ui/field";
 import { CATEGORIES } from "@/lib/constants";
@@ -68,12 +67,6 @@ export function AuthForm({
       setError("Network error. Please try again.");
       setLoading(false);
     }
-  }
-
-  function fillDemo(account: "ava" | "amara") {
-    setEmail(`${account}@glossdemo.com`);
-    setPassword("demo1234");
-    setError(null);
   }
 
   return (
@@ -242,41 +235,6 @@ export function AuthForm({
           {isLogin ? "Sign in" : role === "professional" ? "Join as professional" : "Create account"}
         </Button>
       </form>
-
-      {isLogin && (
-        <div className="mt-6 rounded-2xl border border-brand-soft bg-brand-soft/40 p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-deep">
-            Try a demo account
-          </p>
-          <div className="mt-3 grid grid-cols-2 gap-2">
-            <button
-              type="button"
-              onClick={() => fillDemo("ava")}
-              className="flex items-center gap-2.5 rounded-xl bg-surface px-3 py-2.5 text-left ring-1 ring-line transition-all hover:ring-brand"
-            >
-              <Avatar name="Ava Whitfield" hue={14} size="sm" />
-              <span>
-                <p className="text-xs font-semibold text-ink">Ava · Client</p>
-                <p className="text-[11px] text-ink-3">Posts jobs, picks bids</p>
-              </span>
-            </button>
-            <button
-              type="button"
-              onClick={() => fillDemo("amara")}
-              className="flex items-center gap-2.5 rounded-xl bg-surface px-3 py-2.5 text-left ring-1 ring-line transition-all hover:ring-brand"
-            >
-              <Avatar name="Amara Okafor" hue={20} size="sm" />
-              <span>
-                <p className="text-xs font-semibold text-ink">Amara · Pro</p>
-                <p className="text-[11px] text-ink-3">Bids on hair jobs</p>
-              </span>
-            </button>
-          </div>
-          <p className="mt-2.5 text-[11px] text-ink-3">
-            Both use password <span className="font-semibold text-ink-2">demo1234</span>. Tap to autofill.
-          </p>
-        </div>
-      )}
 
       <p className="mt-7 text-center text-sm text-ink-3">
         {isLogin ? "New to Bid for Beauty? " : "Already have an account? "}
