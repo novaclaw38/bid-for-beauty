@@ -1,5 +1,14 @@
-import type { Bid, Job, User } from "@/db/schema";
-import type { ClientSummary, JobCardData, ProSummary, SessionUser } from "@/lib/types";
+import type { AdminAction, Bid, Job, User } from "@/db/schema";
+import type {
+  AdminActionRow,
+  AdminFeeRow,
+  AdminJobRow,
+  AdminUserRow,
+  ClientSummary,
+  JobCardData,
+  ProSummary,
+  SessionUser,
+} from "@/lib/types";
 import { timeAgo } from "@/lib/utils";
 
 export function toSessionUser(user: User): SessionUser {
@@ -60,5 +69,63 @@ export function toJobCardData(
     bidCount,
     client: toClientSummary(client),
     myBid: myBid ?? null,
+  };
+}
+
+export function toAdminUserRow(user: User): AdminUserRow {
+  return {
+    id: user.id,
+    role: user.role,
+    status: user.status,
+    name: user.name,
+    email: user.email,
+    location: user.location,
+    rating: user.rating,
+    jobsCompleted: user.jobsCompleted,
+    createdAt: user.createdAt.toISOString(),
+  };
+}
+
+export function toAdminJobRow(job: Job, clientName: string): AdminJobRow {
+  return {
+    id: job.id,
+    title: job.title,
+    status: job.status,
+    category: job.category,
+    budgetMin: job.budgetMin,
+    budgetMax: job.budgetMax,
+    clientName,
+    createdAt: job.createdAt.toISOString(),
+  };
+}
+
+export function toAdminFeeRow(
+  bid: Bid,
+  jobTitle: string,
+  proName: string,
+): AdminFeeRow {
+  return {
+    bidId: bid.id,
+    jobId: bid.jobId,
+    jobTitle,
+    proName,
+    bidAmount: bid.amount,
+    feeAmount: bid.platformFeeAmount ?? 0,
+    feeStatus: (bid.platformFeeStatus ?? "pending") as "pending" | "paid" | "waived",
+    paidAt: bid.platformFeePaidAt?.toISOString() ?? null,
+    adminNote: bid.adminNote,
+  };
+}
+
+export function toAdminActionRow(action: AdminAction, adminName: string): AdminActionRow {
+  return {
+    id: action.id,
+    adminName,
+    actionType: action.actionType,
+    targetType: action.targetType,
+    targetId: action.targetId,
+    note: action.note,
+    createdAt: action.createdAt.toISOString(),
+    createdAgo: timeAgo(action.createdAt),
   };
 }

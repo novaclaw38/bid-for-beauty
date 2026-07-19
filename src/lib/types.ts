@@ -79,3 +79,57 @@ export interface SessionUser {
   jobsCompleted: number;
   avatarHue: number;
 }
+
+export interface AdminUserRow {
+  id: string;
+  role: UserRole;
+  status: "active" | "suspended";
+  name: string;
+  email: string;
+  location: string | null;
+  rating: string | null;
+  jobsCompleted: number;
+  createdAt: string;
+}
+
+export interface AdminJobRow {
+  id: string;
+  title: string;
+  status: JobStatus;
+  category: string;
+  budgetMin: number;
+  budgetMax: number;
+  clientName: string;
+  createdAt: string;
+}
+
+export interface AdminFeeRow {
+  bidId: string;
+  jobId: string;
+  jobTitle: string;
+  proName: string;
+  bidAmount: number;
+  feeAmount: number;
+  feeStatus: "pending" | "paid" | "waived";
+  paidAt: string | null;
+  adminNote: string | null;
+}
+
+export interface AdminActionRow {
+  id: string;
+  adminName: string;
+  actionType: string;
+  targetType: string;
+  targetId: string;
+  note: string | null;
+  createdAt: string;
+  createdAgo: string;
+}
+
+export interface AdminOverviewCounts {
+  openJobs: number;
+  pendingFees: number;
+  totalClients: number;
+  totalPros: number;
+  suspendedUsers: number;
+}
