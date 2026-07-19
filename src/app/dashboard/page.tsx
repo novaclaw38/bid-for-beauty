@@ -309,7 +309,7 @@ async function ProOverview({
               description="The board refreshes all day. Widen your specialties in your profile to catch more."
             />
           ) : (
-            <div className="grid gap-3.5 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
               {fresh.map((r) => (
                 <JobCard
                   key={r.job.id}

@@ -86,7 +86,7 @@ export default async function JobsPage({
                 description="Try a different status filter or clear your search."
               />
             ) : (
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {filtered.map((job) => (
                   <JobCard
                     key={job.id}
@@ -146,7 +146,7 @@ export default async function JobsPage({
               description="Try another category or clear your search. Jobs are posted every day."
             />
           ) : (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {filtered.map((r) => (
                 <JobCard
                   key={r.job.id}

@@ -11,7 +11,7 @@ export default function JobsLoading() {
           <Skeleton key={i} className="h-8 w-28 rounded-full" />
         ))}
       </div>
-      <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-7 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {Array.from({ length: 6 }).map((_, i) => (
           <JobCardSkeleton key={i} />
         ))}

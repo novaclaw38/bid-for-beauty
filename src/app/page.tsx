@@ -114,7 +114,7 @@ export default async function LandingPage() {
       {/* ── Hero ────────────────────────────────────── */}
       <section id="main-content" className="relative overflow-hidden">
         <div className="dots pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(60%_60%_at_50%_30%,black,transparent)]" />
-        <div className="relative mx-auto grid max-w-6xl gap-14 px-4 pb-20 pt-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:pb-28 lg:pt-24">
+        <div className="relative mx-auto grid max-w-6xl grid-cols-1 gap-14 px-4 pb-20 pt-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:pb-28 lg:pt-24">
           <div>
             <Reveal immediate>
               <span className="inline-flex items-center gap-2 rounded-full bg-surface px-3.5 py-1.5 text-xs font-medium text-ink-2 ring-1 ring-line">
@@ -346,7 +346,7 @@ export default async function LandingPage() {
             </Link>
           </div>
         </Reveal>
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {cards.slice(0, 6).map((job, i) => (
             <Reveal key={job.id} delay={0.05 * i}>
               <JobCard job={job} className="h-full" />
@@ -367,7 +367,7 @@ export default async function LandingPage() {
               <span className="accent-italic">best self</span>
             </h2>
           </Reveal>
-          <div className="mt-12 grid gap-4 md:grid-cols-2">
+          <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2">
             {[
               {
                 icon: MousePointerClick,
