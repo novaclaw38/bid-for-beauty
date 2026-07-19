@@ -112,10 +112,27 @@ export const bids = pgTable(
   ],
 );
 
+export const proPhotos = pgTable(
+  "pro_photos",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    proId: uuid("pro_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    url: text("url").notNull(),
+    position: integer("position").notNull().default(0),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (table) => [index("pro_photos_pro_idx").on(table.proId, table.position)],
+);
+
 export const usersRelations = relations(users, ({ many }) => ({
   jobs: many(jobs),
   bids: many(bids),
   sessions: many(sessions),
+  photos: many(proPhotos),
 }));
 
 export const jobsRelations = relations(jobs, ({ one, many }) => ({
@@ -128,6 +145,10 @@ export const bidsRelations = relations(bids, ({ one }) => ({
   pro: one(users, { fields: [bids.proId], references: [users.id] }),
 }));
 
+export const proPhotosRelations = relations(proPhotos, ({ one }) => ({
+  pro: one(users, { fields: [proPhotos.proId], references: [users.id] }),
+}));
+
 export const sessionsRelations = relations(sessions, ({ one }) => ({
   user: one(users, { fields: [sessions.userId], references: [users.id] }),
 }));
@@ -136,6 +157,7 @@ export type User = typeof users.$inferSelect;
 export type Job = typeof jobs.$inferSelect;
 export type Bid = typeof bids.$inferSelect;
 export type Session = typeof sessions.$inferSelect;
+export type ProPhoto = typeof proPhotos.$inferSelect;
 export type UserRole = User["role"];
 export type JobStatus = Job["status"];
 export type BidStatus = Bid["status"];
