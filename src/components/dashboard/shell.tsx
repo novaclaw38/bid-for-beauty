@@ -170,7 +170,7 @@ export function DashboardShell({ user, children }: { user: SessionUser; children
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
               transition={{ type: "spring", duration: 0.45, bounce: 0.12 }}
-              className="absolute inset-y-0 left-0 w-72"
+              className="absolute inset-y-0 left-0 w-72 overscroll-contain"
             >
               <button
                 onClick={() => setMobileOpen(false)}
@@ -187,7 +187,7 @@ export function DashboardShell({ user, children }: { user: SessionUser; children
 
       {/* Main */}
       <div className="lg:pl-64">
-        <main className="mx-auto w-full max-w-6xl px-4 py-7 sm:px-6 lg:px-10 lg:py-9">
+        <main id="main-content" className="mx-auto w-full max-w-6xl px-4 py-7 sm:px-6 lg:px-10 lg:py-9">
           {children}
         </main>
       </div>

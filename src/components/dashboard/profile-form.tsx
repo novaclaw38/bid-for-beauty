@@ -2,7 +2,7 @@
 
 import { Check } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { toast } from "sonner";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -29,6 +29,22 @@ export function ProfileForm({ user }: { user: SessionUser }) {
       prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value],
     );
   }
+
+  const dirty =
+    name !== user.name ||
+    location !== (user.location ?? "") ||
+    bio !== (user.bio ?? "") ||
+    hue !== user.avatarHue ||
+    JSON.stringify(specialties) !== JSON.stringify(user.specialties);
+
+  useEffect(() => {
+    if (!dirty) return;
+    const handler = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+    };
+    window.addEventListener("beforeunload", handler);
+    return () => window.removeEventListener("beforeunload", handler);
+  }, [dirty]);
 
   async function save(e: FormEvent) {
     e.preventDefault();
@@ -79,6 +95,7 @@ export function ProfileForm({ user }: { user: SessionUser }) {
               <button
                 key={h}
                 type="button"
+                aria-pressed={hue === h}
                 onClick={() => setHue(h)}
                 className={cn(
                   "flex size-8 items-center justify-center rounded-full transition-transform hover:scale-110",
@@ -145,6 +162,7 @@ export function ProfileForm({ user }: { user: SessionUser }) {
                 <button
                   key={cat.value}
                   type="button"
+                  aria-pressed={active}
                   onClick={() => toggleSpecialty(cat.value)}
                   className={toggleChipClasses(active)}
                 >
@@ -157,7 +175,11 @@ export function ProfileForm({ user }: { user: SessionUser }) {
       )}
 
       {error && (
-        <p className="rounded-xl bg-danger-soft px-4 py-3 text-[13px] font-medium text-danger">
+        <p
+          role="alert"
+          aria-live="polite"
+          className="rounded-xl bg-danger-soft px-4 py-3 text-[13px] font-medium text-danger"
+        >
           {error}
         </p>
       )}

@@ -13,25 +13,25 @@ export function StatCard({
   label: string;
   value: string | number;
   hint?: string;
-  tone?: "brand" | "sage" | "gold" | "ink";
+  tone?: "brand" | "success" | "gold" | "ink";
   /** Fills the whole card in the tone color, for the one stat that most needs a glance. */
   emphasize?: boolean;
 }) {
   const tones = {
     brand: "bg-brand-soft text-brand",
-    sage: "bg-success-soft text-success",
+    success: "bg-success-soft text-success",
     gold: "bg-warning-soft text-warning-ink",
     ink: "bg-ink/[0.07] text-ink",
   };
   const emphasizedCard = {
     brand: "border-brand/20 bg-brand-soft",
-    sage: "border-success/20 bg-success-soft",
+    success: "border-success/20 bg-success-soft",
     gold: "border-warning/20 bg-warning-soft",
     ink: "border-ink/15 bg-ink/[0.05]",
   };
   const emphasizedIcon = {
     brand: "bg-brand text-brand-ink",
-    sage: "bg-success text-success-soft",
+    success: "bg-success text-success-soft",
     gold: "bg-warning text-warning-soft",
     ink: "bg-ink text-cream",
   };
@@ -57,7 +57,7 @@ export function StatCard({
             emphasize ? emphasizedIcon[tone] : tones[tone],
           )}
         >
-          <Icon className="size-4" />
+          <Icon aria-hidden className="size-4" />
         </span>
       </div>
       <p className="mt-2.5 font-display text-[30px] font-semibold leading-none text-ink">

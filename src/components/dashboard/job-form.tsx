@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { toast } from "sonner";
 import { CategoryTile } from "@/components/category-icon";
 import { Button } from "@/components/ui/button";
@@ -69,6 +69,17 @@ export function JobForm({
 
   const set = <K extends keyof JobFormValues>(key: K, value: JobFormValues[K]) =>
     setValues((v) => ({ ...v, [key]: value }));
+
+  const dirty = JSON.stringify(values) !== JSON.stringify(initialValues);
+
+  useEffect(() => {
+    if (!dirty) return;
+    const handler = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+    };
+    window.addEventListener("beforeunload", handler);
+    return () => window.removeEventListener("beforeunload", handler);
+  }, [dirty]);
 
   function validate(): string | null {
     if (values.title.trim().length < 8)
@@ -142,6 +153,7 @@ export function JobForm({
               <button
                 key={cat.value}
                 type="button"
+                aria-pressed={active}
                 onClick={() => set("category", cat.value)}
                 className={cn(
                   "flex items-center gap-2.5 rounded-xl border p-3 text-left transition-all",
@@ -224,7 +236,11 @@ export function JobForm({
       </div>
 
       {error && (
-        <p className="rounded-xl bg-danger-soft px-4 py-3 text-[13px] font-medium text-danger">
+        <p
+          role="alert"
+          aria-live="polite"
+          className="rounded-xl bg-danger-soft px-4 py-3 text-[13px] font-medium text-danger"
+        >
           {error}
         </p>
       )}

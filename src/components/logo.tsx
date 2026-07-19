@@ -1,5 +1,9 @@
 import { cn } from "@/lib/utils";
 
+/**
+ * Paddle + mirror in one silhouette (a raised auction paddle reads the same
+ * as a hand mirror), with three ascending bars standing in for a bid climbing.
+ */
 function Mark() {
   return (
     <svg
@@ -8,15 +12,16 @@ function Mark() {
       aria-hidden
       fill="none"
     >
+      <circle cx="14" cy="13" r="8" stroke="currentColor" strokeWidth="2.3" />
       <path
-        d="M16 6.5c.55 3.9 1.6 4.95 5.5 5.5-3.9.55-4.95 1.6-5.5 5.5-.55-3.9-1.6-4.95-5.5-5.5 3.9-.55 4.95-1.6 5.5-5.5Z"
-        fill="currentColor"
+        d="M19.66 18.66 25.5 27"
+        stroke="currentColor"
+        strokeWidth="2.3"
+        strokeLinecap="round"
       />
-      <path
-        d="M23.5 18.5c.3 2.1.85 2.65 2.95 2.95-2.1.3-2.65.85-2.95 2.95-.3-2.1-.85-2.65-2.95-2.95 2.1-.3 2.65-.85 2.95-2.95Z"
-        fill="currentColor"
-        opacity="0.6"
-      />
+      <rect x="9.85" y="14" width="1.9" height="3" rx="0.95" fill="currentColor" opacity="0.5" />
+      <rect x="13.05" y="12" width="1.9" height="5" rx="0.95" fill="currentColor" opacity="0.75" />
+      <rect x="16.25" y="10" width="1.9" height="7" rx="0.95" fill="currentColor" />
     </svg>
   );
 }

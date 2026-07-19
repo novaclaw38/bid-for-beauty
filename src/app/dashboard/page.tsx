@@ -104,7 +104,7 @@ async function ClientOverview({ userId, name }: { userId: string; name: string }
       ) : (
         <>
           <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-            <StatCard icon={Briefcase} label="Open jobs" value={openCount} tone="sage" />
+            <StatCard icon={Briefcase} label="Open jobs" value={openCount} tone="success" />
             <StatCard
               icon={Gavel}
               label="Bids to review"
@@ -268,7 +268,7 @@ async function ProOverview({
           tone="gold"
           emphasize={pending > 0}
         />
-        <StatCard icon={Trophy} label="Won" value={won} tone="sage" />
+        <StatCard icon={Trophy} label="Won" value={won} tone="success" />
         <StatCard
           icon={Compass}
           label="Open in your lane"

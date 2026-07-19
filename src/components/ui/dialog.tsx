@@ -54,7 +54,7 @@ export function Dialog({
             exit={{ opacity: 0, y: 16, scale: 0.98 }}
             transition={{ type: "spring", duration: 0.45, bounce: 0.22 }}
             className={cn(
-              "relative max-h-[88vh] w-full overflow-y-auto rounded-2xl bg-surface p-6 shadow-[0_32px_80px_-24px_rgb(42_31_40/0.5)] ring-1 ring-line",
+              "relative max-h-[88vh] w-full overflow-y-auto overscroll-contain rounded-2xl bg-surface p-6 shadow-[0_32px_80px_-24px_rgb(42_31_40/0.5)] ring-1 ring-line",
               wide ? "max-w-2xl" : "max-w-md",
             )}
           >

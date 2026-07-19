@@ -119,7 +119,7 @@ export default async function MyBidsPage({
                 <Link
                   key={bid.id}
                   href={`/dashboard/jobs/${job.id}`}
-                  className="card-hover group flex flex-wrap items-center gap-4 rounded-2xl border border-line bg-surface p-5"
+                  className="card-hover virtual-row group flex flex-wrap items-center gap-4 rounded-2xl border border-line bg-surface p-5"
                 >
                   <div className="min-w-0 flex-1 basis-64">
                     <p className="truncate text-[15px] font-semibold text-ink group-hover:text-brand">

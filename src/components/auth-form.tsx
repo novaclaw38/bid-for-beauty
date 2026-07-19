@@ -109,6 +109,7 @@ export function AuthForm({
             <button
               key={option.value}
               type="button"
+              aria-pressed={role === option.value}
               onClick={() => setRole(option.value)}
               className={cn(
                 "rounded-2xl border p-4 text-left transition-all",
@@ -156,6 +157,7 @@ export function AuthForm({
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
             autoComplete="email"
+            spellCheck={false}
             required
           />
         </Field>
@@ -207,6 +209,7 @@ export function AuthForm({
                       <button
                         key={cat.value}
                         type="button"
+                        aria-pressed={active}
                         onClick={() => toggleSpecialty(cat.value)}
                         className={cn(
                           "rounded-full px-3.5 py-1.5 text-xs font-medium ring-1 ring-inset transition-all",
@@ -226,7 +229,11 @@ export function AuthForm({
         )}
 
         {error && (
-          <p className="rounded-xl bg-danger-soft px-4 py-3 text-[13px] font-medium text-danger">
+          <p
+            role="alert"
+            aria-live="polite"
+            className="rounded-xl bg-danger-soft px-4 py-3 text-[13px] font-medium text-danger"
+          >
             {error}
           </p>
         )}

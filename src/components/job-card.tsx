@@ -51,7 +51,7 @@ export function JobCard({
 
       <h3 className="mt-3.5 font-display text-[17px] font-semibold leading-snug text-ink transition-colors group-hover:text-brand">
         {job.title}
-        <ArrowUpRight className="mb-0.5 ml-1.5 inline size-4 text-ink-3 opacity-0 transition-opacity group-hover:text-brand group-hover:opacity-100" />
+        <ArrowUpRight aria-hidden className="mb-0.5 ml-1.5 inline size-4 text-ink-3 opacity-0 transition-opacity group-hover:text-brand group-hover:opacity-100" />
       </h3>
       <p className="mt-1.5 line-clamp-2 text-[13.5px] leading-relaxed text-ink-2">
         {job.description}
@@ -59,11 +59,11 @@ export function JobCard({
 
       <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-ink-3">
         <span className="inline-flex items-center gap-1.5">
-          <MapPin className="size-3.5" />
+          <MapPin aria-hidden className="size-3.5" />
           {job.location}
         </span>
         <span className="inline-flex items-center gap-1.5">
-          <Calendar className="size-3.5" />
+          <Calendar aria-hidden className="size-3.5" />
           {formatDate(job.preferredDate)}
         </span>
       </div>

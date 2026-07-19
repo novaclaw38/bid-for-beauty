@@ -112,7 +112,7 @@ export default async function LandingPage() {
       </header>
 
       {/* ── Hero ────────────────────────────────────── */}
-      <section className="relative overflow-hidden">
+      <section id="main-content" className="relative overflow-hidden">
         <div className="dots pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(60%_60%_at_50%_30%,black,transparent)]" />
         <div className="relative mx-auto grid max-w-6xl gap-14 px-4 pb-20 pt-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:pb-28 lg:pt-24">
           <div>
@@ -155,15 +155,15 @@ export default async function LandingPage() {
             <Reveal immediate delay={0.24}>
               <div className="mt-10 flex items-center gap-6 text-sm text-ink-3">
                 <span className="flex items-center gap-1.5">
-                  <BadgeCheck className="size-4 text-success" />
+                  <BadgeCheck aria-hidden className="size-4 text-success" />
                   Vetted pros
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <CircleDollarSign className="size-4 text-gold" />
+                  <CircleDollarSign aria-hidden className="size-4 text-gold" />
                   No platform fees
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <Star className="size-4 text-brand" />
+                  <Star aria-hidden className="size-4 text-brand" />
                   4.8 avg rating
                 </span>
               </div>
@@ -247,7 +247,13 @@ export default async function LandingPage() {
                 delay={0.24}
                 className="relative z-10 ml-auto mt-[-18px] w-[82%] animate-float-slow sm:w-[70%]"
               >
-                <div className="rounded-2xl border border-lilac/25 bg-night p-4 text-cream shadow-[0_24px_50px_-24px_rgb(36_24_38/0.6)]">
+                {/* Bid ticket: same rank-badge + "vs. lead" language as the dashboard's
+                    bid board, so the hero reads as the auction it's selling, not a
+                    generic activity card. */}
+                <div className="relative rounded-2xl border border-lilac/25 bg-night p-4 text-cream shadow-[0_24px_50px_-24px_rgb(36_24_38/0.6)]">
+                  <span className="absolute -left-2 -top-2 flex size-6 items-center justify-center rounded-full bg-success text-[11px] font-display font-semibold text-success-soft ring-2 ring-night">
+                    1
+                  </span>
                   <div className="flex items-center gap-3">
                     <Avatar
                       name={latestBid.pro.name}
@@ -259,27 +265,32 @@ export default async function LandingPage() {
                       <p className="truncate text-[13px] font-medium">
                         {latestBid.pro.name}{" "}
                         <span className="font-normal text-cream/60">
-                          placed a bid
+                          just placed the leading bid
                         </span>
                       </p>
                       <p className="truncate text-[11.5px] text-cream/65">
                         on “{latestBid.job.title}”
                       </p>
                     </div>
-                    <span className="font-display text-lg font-semibold text-cream">
-                      {formatCurrency(latestBid.bid.amount)}
-                    </span>
+                    <div className="text-right">
+                      <span className="block font-display text-lg font-semibold text-cream">
+                        {formatCurrency(latestBid.bid.amount)}
+                      </span>
+                      <span className="text-[10px] font-medium text-success">
+                        Leading bid
+                      </span>
+                    </div>
                   </div>
                   {(() => {
                     const pro = toProSummary(latestBid.pro);
                     return (
-                      <div className="mt-3 flex items-center gap-3 border-t border-lilac/15 pt-3 text-[11px] text-cream/60">
+                      <div className="mt-3 flex items-center gap-3 border-t border-dashed border-lilac/20 pt-3 text-[11px] text-cream/60">
                         <span className="inline-flex items-center gap-1">
                           <Star className="size-3 text-gold" />
                           {pro.rating ?? "New"}
                         </span>
                         <span>{pro.jobsCompleted} jobs done</span>
-                        <span className="truncate">
+                        <span className="min-w-0 flex-1 truncate">
                           {pro.specialties.map(categoryLabel).join(" · ")}
                         </span>
                       </div>
@@ -313,7 +324,7 @@ export default async function LandingPage() {
       </section>
 
       {/* ── Live jobs ───────────────────────────────── */}
-      <section id="jobs" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-28">
+      <section id="jobs" className="anchor-section mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-28">
         <Reveal>
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
@@ -343,7 +354,7 @@ export default async function LandingPage() {
       </section>
 
       {/* ── How it works ────────────────────────────── */}
-      <section id="how" className="border-y border-line bg-cream/60">
+      <section id="how" className="anchor-section border-y border-line bg-cream/60">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-28">
           <Reveal>
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
@@ -423,7 +434,7 @@ export default async function LandingPage() {
       </section>
 
       {/* ── Categories ──────────────────────────────── */}
-      <section id="categories" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-28">
+      <section id="categories" className="anchor-section mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-28">
         <Reveal>
           <h2 className="font-display text-3xl font-medium tracking-tight text-ink sm:text-[2.6rem]">
             Every kind of <span className="accent-italic">glow up</span>

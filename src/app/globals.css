@@ -125,11 +125,25 @@ body {
 
 /* Shared hoverable list-row lift, used across dashboard row cards */
 .card-hover {
-  transition: all 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 .card-hover:hover {
   border-color: var(--color-line-strong);
   box-shadow: 0 14px 30px -18px rgb(42 31 40 / 0.28);
+}
+
+/* Offsets in-page anchor jumps (#jobs, #how, #categories) so the heading
+   clears the sticky h-16 nav instead of landing underneath it. */
+.anchor-section {
+  scroll-margin-top: 4.5rem;
+}
+
+/* Skips layout/paint work for off-screen rows in long list pages. */
+.virtual-row {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 88px;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {

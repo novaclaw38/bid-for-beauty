@@ -254,7 +254,11 @@ export function ProBidSection({
               />
             </Field>
             {error && (
-              <p className="rounded-xl bg-danger-soft px-4 py-3 text-[13px] font-medium text-danger">
+              <p
+                role="alert"
+                aria-live="polite"
+                className="rounded-xl bg-danger-soft px-4 py-3 text-[13px] font-medium text-danger"
+              >
                 {error}
               </p>
             )}
@@ -307,6 +311,7 @@ export function ProBidSection({
               <button
                 key={s}
                 type="button"
+                aria-pressed={amount === String(s)}
                 onClick={() => setAmount(String(s))}
                 className={cn(
                   "rounded-full px-2.5 py-1 text-[11px] font-medium ring-1 ring-inset transition-all",
@@ -335,13 +340,17 @@ export function ProBidSection({
         </Field>
 
         {error && (
-          <p className="rounded-xl bg-danger-soft px-4 py-3 text-[13px] font-medium text-danger">
+          <p
+            role="alert"
+            aria-live="polite"
+            className="rounded-xl bg-danger-soft px-4 py-3 text-[13px] font-medium text-danger"
+          >
             {error}
           </p>
         )}
 
         <Button type="submit" loading={busy} className="w-full">
-          <BadgeCheck className="size-4" />
+          <BadgeCheck aria-hidden className="size-4" />
           Send bid to {clientName.split(" ")[0]}
         </Button>
       </form>
