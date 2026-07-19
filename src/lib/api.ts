@@ -1,4 +1,4 @@
-import { ApiAuthError } from "@/lib/auth";
+import { ApiAuthError, ApiForbiddenError } from "@/lib/auth";
 
 export function jsonError(message: string, status: number, extra?: Record<string, unknown>) {
   return Response.json({ error: message, ...extra }, { status });
@@ -12,7 +12,6 @@ export async function readJson<T = Record<string, unknown>>(req: Request): Promi
   }
 }
 
-/** Wrap an API handler, converting ApiAuthError into a 401 response. */
 export function withAuth<Args extends unknown[]>(
   handler: (...args: Args) => Promise<Response>,
 ) {
@@ -22,6 +21,9 @@ export function withAuth<Args extends unknown[]>(
     } catch (err) {
       if (err instanceof ApiAuthError) {
         return jsonError("You must be signed in to do that.", 401);
+      }
+      if (err instanceof ApiForbiddenError) {
+        return jsonError("You don't have permission to do that.", 403);
       }
       console.error(err);
       return jsonError("Something went wrong. Please try again.", 500);

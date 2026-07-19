@@ -57,7 +57,9 @@ export async function getCurrentUser(): Promise<User | null> {
     .where(and(eq(sessions.token, token), gt(sessions.expiresAt, new Date())))
     .limit(1);
 
-  return rows[0]?.user ?? null;
+  const user = rows[0]?.user ?? null;
+  if (user?.status === "suspended") return null;
+  return user;
 }
 
 /** For API routes: returns the user or throws a Response with 401. */
@@ -73,6 +75,21 @@ export class ApiAuthError extends Error {
   constructor() {
     super("Unauthorized");
   }
+}
+
+export class ApiForbiddenError extends Error {
+  constructor() {
+    super("Forbidden");
+  }
+}
+
+/** For admin API routes: returns the user or throws a Response with 401/403. */
+export async function requireAdmin(): Promise<User> {
+  const user = await requireUser();
+  if (user.role !== "admin") {
+    throw new ApiForbiddenError();
+  }
+  return user;
 }
 
 export function sessionExpiryDate(): Date {
