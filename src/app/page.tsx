@@ -153,7 +153,7 @@ export default async function LandingPage() {
               </div>
             </Reveal>
             <Reveal immediate delay={0.24}>
-              <div className="mt-10 flex items-center gap-6 text-sm text-ink-3">
+              <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2.5 text-sm text-ink-3">
                 <span className="flex items-center gap-1.5">
                   <BadgeCheck aria-hidden className="size-4 text-success" />
                   Vetted pros
