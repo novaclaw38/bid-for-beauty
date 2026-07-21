@@ -18,6 +18,7 @@ export const dynamic = "force-dynamic";
 export default async function ProfilePage() {
   const user = await getCurrentUser();
   if (!user) redirect("/auth/login");
+  if (user.role === "admin") redirect("/dashboard/admin");
 
   const photos =
     user.role === "professional"

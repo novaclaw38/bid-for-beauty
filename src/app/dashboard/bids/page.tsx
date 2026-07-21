@@ -32,6 +32,7 @@ export default async function MyBidsPage({
 }) {
   const user = await getCurrentUser();
   if (!user) redirect("/auth/login");
+  if (user.role === "admin") redirect("/dashboard/admin");
   if (user.role !== "professional") redirect("/dashboard");
 
   const { f = "all" } = await searchParams;

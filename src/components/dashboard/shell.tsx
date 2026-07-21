@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Briefcase,
+  CircleDollarSign,
   CirclePlus,
   Compass,
   Gavel,
@@ -10,6 +11,7 @@ import {
   LogOut,
   Menu,
   UserRound,
+  Users,
   X,
 } from "lucide-react";
 import Link from "next/link";
@@ -28,6 +30,14 @@ interface NavItem {
 }
 
 function navItems(role: SessionUser["role"]): NavItem[] {
+  if (role === "admin") {
+    return [
+      { href: "/dashboard/admin", label: "Overview", icon: LayoutDashboard, exact: true },
+      { href: "/dashboard/admin/users", label: "Users", icon: Users, exact: true },
+      { href: "/dashboard/admin/jobs", label: "Jobs", icon: Briefcase, exact: true },
+      { href: "/dashboard/admin/fees", label: "Fees", icon: CircleDollarSign, exact: true },
+    ];
+  }
   const base: NavItem[] = [
     { href: "/dashboard", label: "Overview", icon: LayoutDashboard, exact: true },
   ];
@@ -77,10 +87,12 @@ function SidebarContent({ user, onNavigate }: { user: SessionUser; onNavigate?: 
             "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10.5px] font-semibold uppercase tracking-[0.12em] ring-1 ring-inset",
             user.role === "professional"
               ? "bg-gold/10 text-gold ring-gold/25"
-              : "bg-brand/15 text-brand ring-brand/30",
+              : user.role === "admin"
+                ? "bg-ink/10 text-ink ring-ink/25"
+                : "bg-brand/15 text-brand ring-brand/30",
           )}
         >
-          {user.role === "professional" ? "Professional" : "Client"}
+          {user.role === "professional" ? "Professional" : user.role === "admin" ? "Admin" : "Client"}
         </span>
       </div>
 

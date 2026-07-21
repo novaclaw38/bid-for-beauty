@@ -12,7 +12,8 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 
-export const userRoleEnum = pgEnum("user_role", ["client", "professional"]);
+export const userRoleEnum = pgEnum("user_role", ["client", "professional", "admin"]);
+export const userStatusEnum = pgEnum("user_status", ["active", "suspended"]);
 export const jobStatusEnum = pgEnum("job_status", [
   "open",
   "awarded",
@@ -28,11 +29,21 @@ export const bidStatusEnum = pgEnum("bid_status", [
 export const platformFeeStatusEnum = pgEnum("platform_fee_status", [
   "pending",
   "paid",
+  "waived",
 ]);
+export const adminActionTypeEnum = pgEnum("admin_action_type", [
+  "suspend_user",
+  "reinstate_user",
+  "cancel_job",
+  "mark_fee_paid",
+  "waive_fee",
+]);
+export const adminTargetTypeEnum = pgEnum("admin_target_type", ["user", "job", "bid"]);
 
 export const users = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
   role: userRoleEnum("role").notNull(),
+  status: userStatusEnum("status").notNull().default("active"),
   name: varchar("name", { length: 120 }).notNull(),
   email: varchar("email", { length: 255 }).notNull().unique(),
   passwordHash: text("password_hash").notNull(),
@@ -108,6 +119,7 @@ export const bids = pgTable(
     platformFeeStatus: platformFeeStatusEnum("platform_fee_status"),
     payfastPaymentId: text("payfast_payment_id"),
     platformFeePaidAt: timestamp("platform_fee_paid_at", { withTimezone: true }),
+    adminNote: text("admin_note"),
     createdAt: timestamp("created_at", { withTimezone: true })
       .notNull()
       .defaultNow(),
@@ -138,11 +150,30 @@ export const proPhotos = pgTable(
   (table) => [index("pro_photos_pro_idx").on(table.proId, table.position)],
 );
 
+export const adminActions = pgTable(
+  "admin_actions",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    adminId: uuid("admin_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    actionType: adminActionTypeEnum("action_type").notNull(),
+    targetType: adminTargetTypeEnum("target_type").notNull(),
+    targetId: uuid("target_id").notNull(),
+    note: text("note"),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (table) => [index("admin_actions_created_idx").on(table.createdAt)],
+);
+
 export const usersRelations = relations(users, ({ many }) => ({
   jobs: many(jobs),
   bids: many(bids),
   sessions: many(sessions),
   photos: many(proPhotos),
+  adminActions: many(adminActions),
 }));
 
 export const jobsRelations = relations(jobs, ({ one, many }) => ({
@@ -163,11 +194,17 @@ export const sessionsRelations = relations(sessions, ({ one }) => ({
   user: one(users, { fields: [sessions.userId], references: [users.id] }),
 }));
 
+export const adminActionsRelations = relations(adminActions, ({ one }) => ({
+  admin: one(users, { fields: [adminActions.adminId], references: [users.id] }),
+}));
+
 export type User = typeof users.$inferSelect;
 export type Job = typeof jobs.$inferSelect;
 export type Bid = typeof bids.$inferSelect;
 export type Session = typeof sessions.$inferSelect;
 export type ProPhoto = typeof proPhotos.$inferSelect;
+export type AdminAction = typeof adminActions.$inferSelect;
 export type UserRole = User["role"];
 export type JobStatus = Job["status"];
 export type BidStatus = Bid["status"];
+export type UserStatus = User["status"];

@@ -53,7 +53,7 @@ export async function POST(req: Request) {
       return new Response("ok", { status: 200 });
     }
 
-    if (bid.platformFeeStatus !== "paid") {
+    if (bid.platformFeeStatus !== "paid" && bid.platformFeeStatus !== "waived") {
       await db
         .update(bids)
         .set({

@@ -31,6 +31,7 @@ export default async function JobDetailPage({
 }) {
   const user = await getCurrentUser();
   if (!user) redirect("/auth/login");
+  if (user.role === "admin") redirect("/dashboard/admin");
 
   const { id } = await params;
   const rows = await db

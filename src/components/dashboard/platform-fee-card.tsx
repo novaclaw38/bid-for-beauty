@@ -15,18 +15,22 @@ export async function PlatformFeeCard({
   jobId: string;
   jobTitle: string;
   feeAmount: number;
-  feeStatus: "pending" | "paid";
+  feeStatus: "pending" | "paid" | "waived";
   proName: string;
   proEmail: string;
 }) {
-  if (feeStatus === "paid") {
+  if (feeStatus === "paid" || feeStatus === "waived") {
     return (
       <div className="flex items-center gap-3 rounded-2xl border border-success/20 bg-success-soft p-4">
         <BadgeCheck className="size-5 shrink-0 text-success" />
         <div>
-          <p className="text-sm font-semibold text-success">Platform fee paid</p>
+          <p className="text-sm font-semibold text-success">
+            {feeStatus === "paid" ? "Platform fee paid" : "Platform fee waived"}
+          </p>
           <p className="mt-0.5 text-xs text-success/80">
-            {formatCurrency(feeAmount)} settled for this job.
+            {feeStatus === "paid"
+              ? `${formatCurrency(feeAmount)} settled for this job.`
+              : "No payment needed for this job."}
           </p>
         </div>
       </div>
